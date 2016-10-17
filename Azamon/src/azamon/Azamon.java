@@ -35,7 +35,7 @@ public class Azamon {
         Transporte transporte = new Transporte(paquetes, proporcion , semilla);
         System.out.println(transporte);
           
-        // Este es mi coment jeje
+        // Prueba 2 David
         
         System.out.println(paquetes);
     }
