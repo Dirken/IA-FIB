@@ -35,11 +35,8 @@ public class Azamon {
         double proporcion = 1.2;
         Transporte transporte = new Transporte(paquetes, proporcion , semilla);
         System.out.println(transporte);
-        
-        
-        
-        
-        
+          
+        // Este es mi coment jeje
         
         System.out.println(paquetes);
     }
