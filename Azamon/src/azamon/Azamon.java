@@ -1,3 +1,4 @@
+//David
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -20,8 +21,6 @@ public class Azamon {
     public static void main(String[] args) {
         // TODO code application logic here
         Oferta oferta = new Oferta(12, 12, 12);
-        //hola que tal
-        //Esta es la prueba dos
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         
         //System.out.println("Semilla: ");
@@ -35,11 +34,7 @@ public class Azamon {
         double proporcion = 1.2;
         Transporte transporte = new Transporte(paquetes, proporcion , semilla);
         System.out.println(transporte);
-          
-        // Prueba 2 David
-        
         System.out.println(paquetes);
-        //this is my commit:
     }
     
 }
