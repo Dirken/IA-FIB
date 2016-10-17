@@ -8,10 +8,6 @@ package azamon;
 import IA.Azamon.*;
 import java.util.Scanner; 
 
-/**
- *
- * @author Eironeia
- */
 public class Azamon {
 
     /**
