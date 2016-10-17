@@ -1,8 +1,9 @@
 package azamon;
+
 import IA.Azamon.*;
 import java.util.Scanner; 
 
-public class Azamon {
+public class Main {
 
     /**
      * @param args the command line arguments
