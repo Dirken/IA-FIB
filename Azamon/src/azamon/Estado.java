@@ -8,25 +8,32 @@ public class Estado {
     private double precio;
     private int felicidad;
     
-    //private ArrayList<Integer> paquetesAsignados;
-    //private ArrayList<Double> ofertasPeso; // Cambiar nombre (?)
-    
     private static Transporte ofertas;
     private static Paquetes paquetes;
     
-    private ArrayList<Paquetes> serviciosEscogidos; // resultat?
+    private ArrayList<Paquetes> serviciosEscogidos; // resultat
     private ArrayList<Double> pesoOfertaDisponible;
     private ArrayList<PaqueteOrdenado> paquetesOrdenados;
+    private ArrayList<OfertaOrdenada> ofertasOrdenadas;
     
+    /**
+     * Estado constructora
+     */
     public Estado() {
         pesoOfertaDisponible = new ArrayList<>();
         paquetesOrdenados = new ArrayList<>();
+        ofertasOrdenadas = new ArrayList<>();
         
         int indexPaquetes = 0;
         int indexOfertas = 0;
         
-        llenarArrays(pesoOfertaDisponible, paquetesOrdenados); // O(max(n,m))
+        llenarArrays(pesoOfertaDisponible, ofertasOrdenadas, paquetesOrdenados); // O(max(n,m))
+        System.out.println(ofertasOrdenadas);
         sortPaquetes(paquetesOrdenados);
+        sortOfertas(ofertasOrdenadas); // NOSE SI CAL (?)
+        
+        System.out.println(ofertasOrdenadas);
+        //Let the game begins -> moure
         
         
 
@@ -39,6 +46,7 @@ public class Estado {
      * @param paquetesOrdenados 
      */
     private void llenarArrays(ArrayList<Double>  pesoOfertaDisponible
+                            , ArrayList<OfertaOrdenada> ofertasOrdenadas
                             , ArrayList<PaqueteOrdenado> paquetesOrdenados) {
         
         
@@ -49,8 +57,11 @@ public class Estado {
             PaqueteOrdenado paqueteOrdenado = new PaqueteOrdenado(paquetes.get(indexPaquetes));
             paquetesOrdenados.add(indexPaquetes, paqueteOrdenado);
             
-            pesoOfertaDisponible.add(indexOfertas, 0.0);
+            OfertaOrdenada ofertaOrdenada = new OfertaOrdenada(ofertas.get(indexOfertas));
+            ofertasOrdenadas.add(indexOfertas, ofertaOrdenada);
             
+            pesoOfertaDisponible.add(indexOfertas, 0.0);
+  
             indexPaquetes += 1;
             indexOfertas += 1;
         }
@@ -62,12 +73,20 @@ public class Estado {
         }
         
         while(indexOfertas < ofertas.size()) {
+            OfertaOrdenada ofertaOrdenada = new OfertaOrdenada(ofertas.get(indexOfertas));
+            ofertasOrdenadas.add(indexOfertas, ofertaOrdenada);
+            
             pesoOfertaDisponible.add(indexOfertas, 0.0);
+            
             indexOfertas += 1;
         }
     }
     
-    
+    /**
+     * Ordena crecientemente todos los paquetes 
+     * que obtiene por el parametro implicito en función de la prioridad
+     * @param paquetesOrdenados 
+     */
     private void sortPaquetes(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
         paquetesOrdenados.sort((paqueteOrdenado1, paqueteOrdenado2) -> {
             return Integer.compare(paqueteOrdenado1.getPaquete().getPrioridad()
@@ -75,6 +94,18 @@ public class Estado {
         });
     }
     
+    
+    private void sortOfertas(ArrayList<OfertaOrdenada> ofertasOrdenadas) {
+        ofertasOrdenadas.sort((ofertaOrdenada1, ofertaOrdenada2) -> {
+            return Integer.compare(ofertaOrdenada1.getOferta().getDias()
+                                 , ofertaOrdenada2.getOferta().getDias());
+        });
+    }
+    
+    /**
+     * Printa la prioridad de los paquetes del parametro implícito
+     * @param paquetesOrdenados 
+     */
     private void printPaqueteOrdenadoPriority(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
         for (int i = 0; i < paquetesOrdenados.size(); ++i) {
             System.out.println(paquetesOrdenados.get(i).getPaquete().getPrioridad());
@@ -82,10 +113,18 @@ public class Estado {
         
     }
     
+    /**
+     * Define las ofertas del estado
+     * @param ofertas 
+     */
     public static void setOfertas(Transporte ofertas) {
         Estado.ofertas = ofertas;
     }
 
+    /**
+     * Define los paquetes del estado
+     * @param paquetes 
+     */
     public static void setPaquetes(Paquetes paquetes) {
         Estado.paquetes = paquetes;
     }
