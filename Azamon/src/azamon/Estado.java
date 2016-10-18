@@ -14,14 +14,101 @@ public class Estado {
     private static Transporte ofertas;
     private static Paquetes paquetes;
     
-    private ArrayList<Paquetes> servicioEscogido; // resultat?
+    private ArrayList<Paquetes> serviciosEscogidos; // resultat?
+    private ArrayList<Double> pesoOfertaDisponible;
+    private ArrayList<PaqueteOrdenado> paquetesOrdenados;
     
-    public Estado(ArrayList<Integer> paquetesAsignados, ArrayList<Double> ofertasPeso, int felicidad, double precio) {
-        //this.paquetesAsignados = paquetesAsignados;
-        //this.ofertasPeso = ofertasPeso;
-        this.felicidad = felicidad;
-        this.precio = precio;
+    public Estado() {
+        pesoOfertaDisponible = new ArrayList<>();
+        paquetesOrdenados = new ArrayList<>();
+        
+        int indexPaquetes = 0;
+        int indexOfertas = 0;
+        
+        llenarArrays(pesoOfertaDisponible, paquetesOrdenados); // O(max(n,m))
+        sortPaquetes(paquetesOrdenados);
+        
+        
+
     }
+    
+    /** Fill arrays with cost O(max(n,m)) 
+     * where n is paquetes.size() and m is ofertas.size()
+     * instead of O(n) + O(m)
+     * @param pesoOfertaDisponible
+     * @param paquetesOrdenados 
+     */
+    private void llenarArrays(ArrayList<Double>  pesoOfertaDisponible
+                            , ArrayList<PaqueteOrdenado> paquetesOrdenados) {
+        
+        
+        int indexPaquetes = 0;
+        int indexOfertas = 0;
+        
+        while(indexPaquetes < paquetes.size() && indexOfertas < ofertas.size()){
+            PaqueteOrdenado paqueteOrdenado = new PaqueteOrdenado(paquetes.get(indexPaquetes));
+            paquetesOrdenados.add(indexPaquetes, paqueteOrdenado);
+            
+            pesoOfertaDisponible.add(indexOfertas, 0.0);
+            
+            indexPaquetes += 1;
+            indexOfertas += 1;
+        }
+        
+        while(indexPaquetes < paquetes.size()) {
+            PaqueteOrdenado paqueteOrdenado = new PaqueteOrdenado(paquetes.get(indexPaquetes));
+            paquetesOrdenados.add(indexPaquetes, paqueteOrdenado);
+            indexPaquetes += 1;
+        }
+        
+        while(indexOfertas < ofertas.size()) {
+            pesoOfertaDisponible.add(indexOfertas, 0.0);
+            indexOfertas += 1;
+        }
+    }
+    
+    
+    private void sortPaquetes(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
+        paquetesOrdenados.sort((paqueteOrdenado1, paqueteOrdenado2) -> {
+            return Integer.compare(paqueteOrdenado1.getPaquete().getPrioridad()
+                                 , paqueteOrdenado2.getPaquete().getPrioridad());
+        });
+    }
+    
+    private void printPaqueteOrdenadoPriority(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
+        for (int i = 0; i < paquetesOrdenados.size(); ++i) {
+            System.out.println(paquetesOrdenados.get(i).getPaquete().getPrioridad());
+        }
+        
+    }
+    
+    public static void setOfertas(Transporte ofertas) {
+        Estado.ofertas = ofertas;
+    }
+
+    public static void setPaquetes(Paquetes paquetes) {
+        Estado.paquetes = paquetes;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * 
