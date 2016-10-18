@@ -11,7 +11,7 @@ public class Estado {
     private static Transporte ofertas;
     private static Paquetes paquetes;
     
-    private ArrayList<Paquetes> serviciosEscogidos; // resultat
+    private ArrayList<ArrayList<Paquete>> serviciosEscogidos; // resultat
     private ArrayList<Double> pesoOfertaDisponible;
     private ArrayList<PaqueteOrdenado> paquetesOrdenados;
     private ArrayList<OfertaOrdenada> ofertasOrdenadas;
@@ -20,23 +20,17 @@ public class Estado {
      * Estado constructora
      */
     public Estado() {
+        this.felicidad = 0;
+        this.precio = 0;
         pesoOfertaDisponible = new ArrayList<>();
         paquetesOrdenados = new ArrayList<>();
         ofertasOrdenadas = new ArrayList<>();
-        
-        int indexPaquetes = 0;
-        int indexOfertas = 0;
-        
-        llenarArrays(pesoOfertaDisponible, ofertasOrdenadas, paquetesOrdenados); // O(max(n,m))
-        System.out.println(ofertasOrdenadas);
-        sortPaquetes(paquetesOrdenados);
-        sortOfertas(ofertasOrdenadas); // NOSE SI CAL (?)
-        
-        System.out.println(ofertasOrdenadas);
-        //Let the game begins -> moure
-        
-        
+        serviciosEscogidos = new ArrayList<>(ofertas.size());
 
+        llenarArrays(); // O(max(n,m))
+        sortPaquetes();
+        sortOfertas(); // NOSE SI CAL (?)
+        boolean b = canGetASolution();
     }
     
     /** Fill arrays with cost O(max(n,m)) 
@@ -45,10 +39,7 @@ public class Estado {
      * @param pesoOfertaDisponible
      * @param paquetesOrdenados 
      */
-    private void llenarArrays(ArrayList<Double>  pesoOfertaDisponible
-                            , ArrayList<OfertaOrdenada> ofertasOrdenadas
-                            , ArrayList<PaqueteOrdenado> paquetesOrdenados) {
-        
+    private void llenarArrays() {
         
         int indexPaquetes = 0;
         int indexOfertas = 0;
@@ -87,15 +78,19 @@ public class Estado {
      * que obtiene por el parametro implicito en función de la prioridad
      * @param paquetesOrdenados 
      */
-    private void sortPaquetes(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
+    private void sortPaquetes() {
         paquetesOrdenados.sort((paqueteOrdenado1, paqueteOrdenado2) -> {
             return Integer.compare(paqueteOrdenado1.getPaquete().getPrioridad()
                                  , paqueteOrdenado2.getPaquete().getPrioridad());
         });
     }
     
-    
-    private void sortOfertas(ArrayList<OfertaOrdenada> ofertasOrdenadas) {
+    /**
+     * Ordena crecientemente todas las ofertas
+     * que obtiene por el parametro implícito en función de la prioridad
+     * @param ofertasOrdenadas 
+     */
+    private void sortOfertas() {
         ofertasOrdenadas.sort((ofertaOrdenada1, ofertaOrdenada2) -> {
             return Integer.compare(ofertaOrdenada1.getOferta().getDias()
                                  , ofertaOrdenada2.getOferta().getDias());
@@ -106,7 +101,7 @@ public class Estado {
      * Printa la prioridad de los paquetes del parametro implícito
      * @param paquetesOrdenados 
      */
-    private void printPaqueteOrdenadoPriority(ArrayList<PaqueteOrdenado> paquetesOrdenados) {
+    private void printPaqueteOrdenadoPriority() {
         for (int i = 0; i < paquetesOrdenados.size(); ++i) {
             System.out.println(paquetesOrdenados.get(i).getPaquete().getPrioridad());
         }
@@ -129,60 +124,104 @@ public class Estado {
         Estado.paquetes = paquetes;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * 
-     * Tenim:
-     * Paquetes -> Per cada paquete -> pes i una prioritat
-     * Oferta -> per cada oferta (camions?) -> pesoMax, preuXkg, dias 
-     * 
-     * 
-     * Volem:
-     * 
-     * Precio: Preu total que hem obtingut
-     * Felicitat: La felicitat total
-     * 
-     * 1r cas: Paquetes mas pequeñ
-     * 
-     * Resultat: Vector on index indica el número de la oferta 0 - X, 
-     * dintre de cada casella tens els paquets s'envien per aquella ofera
-     */
-    
-    /*
-    MaximitzarFelicitat
-    
-    if oferta.diasEnviament <= paquet.diesQueTarda 
-       & oferta.capacitatTotal <= (oferta.capacitatActual + paquet.pes) {
-        afegirPaquetALaOfertaQueEstiguemMirant
-    }
-    else {
-        nextOferta
+    private boolean canGetASolution() {
+        ArrayList<Boolean> packagesSaved = new ArrayList<>(Collections.nCopies(paquetesOrdenados.size(),false));
+        
+        for(int indexOferta = 0 ; indexOferta < ofertasOrdenadas.size(); ++indexOferta) {
+            ArrayList<Paquete> paquetesEscogidos = new ArrayList<>();
+            
+            for (int indexPaquete = 0; indexPaquete < paquetesOrdenados.size(); ++indexPaquete) {
+                
+                Oferta oferta = ofertasOrdenadas.get(indexOferta).getOferta();
+                Paquete paquete = paquetesOrdenados.get(indexPaquete).getPaquete();
+                
+                double currentCapacity = pesoOfertaDisponible.get(indexOferta);
+                double maxCapacity = oferta.getPesomax();
+                double packageWeight = paquete.getPeso();
+                
+                int offerPriority = oferta.getDias();
+                int deliveryDay = paquete.getPrioridad();
+                if (availableCapacityToAdd(currentCapacity, maxCapacity, packageWeight)
+                    && isValidPriority(offerPriority, deliveryDay)
+                    && !packagesSaved.get(indexPaquete)) {
+                    //Afegir i update de packagesSaved
+                    
+                    pesoOfertaDisponible.set(indexOferta, currentCapacity+packageWeight);
+                    packagesSaved.set(indexPaquete, true);
+                    this.felicidad += felicidadTotal(oferta, paquete);
+                    this.precio += costeTotal(oferta, paquete);
+                    paquetesEscogidos.add(paquete);
+                }
+            }
+            serviciosEscogidos.add(indexOferta, paquetesEscogidos);
+        }
+            
+        return allPackageSaved(packagesSaved);
     }
     
+    private boolean allPackageSaved(ArrayList<Boolean> packagesSaved) {
+        for(int indexPaquete = 0; indexPaquete < packagesSaved.size(); ++indexPaquete){
+            if(!packagesSaved.get(indexPaquete)) return false;
+        }
+        return true;
+    }
     
-    MinimitzarPreu
+    private boolean availableCapacityToAdd(double currentCapacity, double maxCapacity, double packageWeight) {
+        return currentCapacity+packageWeight <= maxCapacity;
+    }
     
-    if oferta.dias <= paquet.diesQueTarda
+    private boolean isValidPriority(int priority, int deliveryDay) {
+        //System.out.println("PRIORITY; "+priority+" DELIVERYDAY: "+deliveryDay);
+        switch (deliveryDay) {
+            case Paquete.PR1:
+                return priority == 1;
+            case Paquete.PR2:
+                return priority == 2 || priority == 3;
+            case Paquete.PR3:
+                return priority == 4 || priority == 5;
+            default:
+                System.out.println("Incorrecct priority");
+        }
+        return false;
+    }
     
+    public static double costeTotal(Oferta oferta, Paquete paquete) {
+        double costeTotal = oferta.getPrecio()*paquete.getPeso();
+        switch (oferta.getDias()) {
+            case 3:
+                costeTotal += 0.25*paquete.getPeso();
+            case 4:
+                costeTotal += 0.25*paquete.getPeso();
+            case 5:
+                costeTotal += 0.5*paquete.getPeso();
+            default:
+        }
+        return costeTotal;
+    }
     
-    */
+    public static int felicidadTotal(Oferta oferta, Paquete paquete) {
+        switch (paquete.getPrioridad()) {
+            case Paquete.PR2:
+                return 3-oferta.getDias();
+            case Paquete.PR3:
+                return 5-oferta.getDias();
+            default:
+                return 0;
+        }
+    }
+    
+    @Override
+    public String toString() {
+        String s = "";
+        s += "Número de ofertas de transporte: " + ofertas.size() + " || Felicidad: " + felicidad + " || Precio: " + precio + "\n";
+        for (int i = 0; i < pesoOfertaDisponible.size(); ++i) {
+            s += "Oferta número " + i + " con peso " + pesoOfertaDisponible.get(i) + "/" + ofertas.get(i).getPesomax() + ", con dias de entrega " + ofertas.get(i).getDias() +  " y con precio: " + ofertas.get(i).getPrecio() + ":\n";
+            ArrayList<Paquete> paquetesEscogidos = serviciosEscogidos.get(i);
+            for (int p = 0; p < paquetesEscogidos.size(); ++p) {
+                s += "\tIndice: " + p + " " +  paquetesEscogidos.get(p) + "\n";
+            }
+        }
+        return s;
+    }
+    
 }

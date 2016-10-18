@@ -10,9 +10,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Oferta oferta = new Oferta(12, 12, 12);        
         //System.out.println("Semilla: ");
-        int semilla = 4; //reader.nextInt();
+        int semilla = 7; //reader.nextInt();
         
         //System.out.println("Número de paquetes: ");
         int numeroPaquetes = 10; //reader.nextInt(); // Scans the next token of the input as an int.
@@ -25,6 +24,8 @@ public class Main {
         Estado.setOfertas(transporte);
         Estado.setPaquetes(paquetes);
         Estado estado = new Estado();
+        
+        System.out.println(estado);
     }
     
 }
