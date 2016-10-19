@@ -1,7 +1,7 @@
 package azamon;
 
 import IA.Azamon.*;
-import java.util.Scanner; 
+import java.util.*; 
 
 public class Main {
 
@@ -10,9 +10,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //System.out.println("Semilla: ");
-        int semilla = 7; //reader.nextInt();
-        
+        int semilla = Integer.valueOf(""+new Date().getTime()%100000); //reader.nextInt();
+        System.out.println("Semilla: "+semilla);
         //System.out.println("Número de paquetes: ");
         int numeroPaquetes = 10; //reader.nextInt(); // Scans the next token of the input as an int.
         Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
