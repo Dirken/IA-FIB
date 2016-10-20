@@ -55,37 +55,48 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
      * Acepta o no un movimiento dependiendo de si el cambio de ese paquete por otro, nos es permitido
      * en caso de que se exceda el peso máximo o que el paquete no llegue, no se considerará válido
      */
-    private boolean validMovement(Paquete paquete, Oferta oferta){
-        return parent.availableCapacityToAdd(, oferta.getPesomax(), paquete.getPeso()) 
+    private boolean validMovement(int numberPackage, int numberOffer){
+        Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, numberPackage);
+        Oferta oferta = parent.getOfferFromSelectedServices(numberOffer);
+        
+        return parent.availableCapacityToAdd(numberOffer, oferta.getPesomax(), paquete.getPeso()) 
                 && parent.isValidPriority(oferta.getDias(),paquete.getPrioridad());
     }
     
-    private boolean movePackage(Paquete paquete, Oferta oferta) {
-        boolean valido = validMovement(paquete, oferta);
-        if (valido) {
-            pesoOfertas.set(indiceOfertaActual, pesoOfertas.get(indiceOfertaActual) - paquete.getPeso());
-            pesoOfertas.set(indiceOferta, pesoOfertas.get(indiceOferta) + paquete.getPeso());
-            asignacionPaquetes.set(indicePaquete, indiceOferta);
-            updateHappiness();
+    private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {
+
+        Paquete paquete = parent.getPackageFromSelectedServices(oldNumberOffer, numberPackage);
+        //boolean valido = validMovement(paquete, newNumberOffer);
+        //if (valido) {
+            parent.updateWeightFromAvailableOfferWeight(newNumberOffer, paquete.getPeso());
+            ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
+            paquetesOrdenados.add(paquete);
+            selectedServices.set(newNumberOffer, paquetesOrdenados);
+            
+            parent.updateWeightFromAvailableOfferWeight(oldNumberOffer, -paquete.getPeso());
+            ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
+            oldPaquetesOrdenados.remove(numberPackage);
+            selectedServices.set(oldNumberOffer, oldPaquetesOrdenados);
+            
+            updateHappiness(); 
             updatePrice();
-        }
-        return valido;
+        //}
+        //return valido;
     }
           
-    private boolean swapPackages(Paquete paquete, Oferta oferta, Paquete paquete2, Oferta oferta2) {
-        boolean valido, valido2;
-        valido = validMovement(paquete,oferta2);
-        valido2 = validMovement(paquete2,oferta);
+    private boolean validSwap(int numberPackage, int numberOffer, int numberPackage2, int numberOffer2) {
+        Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, numberPackage);
+        Paquete paquete2 = parent.getPackageFromSelectedServices(numberOffer2, numberPackage2);
+                
+        return false;
+    }
+    
+    private void swapPackages(int numberPackage, int numberOffer, int numberPackage2, int numberOffer2) {
 
-        if (valido && valido2){
-            pesoOfertas.set(indiceOferta1, pesoOfertas.get(indiceOferta1) - paquete1.getPeso() + paquete2.getPeso());
-            pesoOfertas.set(indiceOferta2, pesoOfertas.get(indiceOferta2) + paquete1.getPeso() - paquete2.getPeso());
-            asignacionPaquetes.set(indicePaquete1, indiceOferta2);
-            asignacionPaquetes.set(indicePaquete2, indiceOferta1);
-            updateHappiness();
-            updatePrice();
-        }
-        return (valido && valido2);
+        movePackage(numberPackage,numberOffer, numberOffer2);
+        movePackage(numberPackage2,numberOffer2, numberOffer);
+        updateHappiness();
+        updatePrice();
     }
 
     /*
@@ -103,46 +114,44 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         
         //escogemos un paquete y una oferta aleatorias
         int numberOffer = random.nextInt(selectedServices.size());
-        Oferta oferta = parent.getOfferFromSelectedServices(numberOffer);
+        int numberOffer2 = random.nextInt(selectedServices.size()); //TODO comprovar que numberOffer != numberOffer2
+        int numberPackage = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer));
+        int numberPackage2 = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer2)); //TODO comprovar que numberPackage != numberPackage2
+        
         Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, 
                         parent.getPackagesSizeFromSelectedServices(numberOffer));
         
         //escogemos al azar el operador:
-        if (random.nextInt(2) == 0){
+        if (random.nextInt(2) == 0){ // OJO a lo que han fet
             //while the movement we want to do is not valid, we "backtrack" 
             //with another package and transport. If it's valid we just move.
-            while (!validMovement(paquete,oferta)) {
-                paquete = parent.getPackageFromSelectedServices(numberOffer, 
-                        parent.getPackagesSizeFromSelectedServices(numberOffer));
-                oferta = parent.getOfferFromSelectedServices(numberOffer);
+            while (!validMovement(numberPackage,numberOffer2)) { //TODO tenir en compte que passa si no trobem solució
+                numberOffer = random.nextInt(selectedServices.size());
+                numberPackage = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer));
             }
-            movements += "Paquete -> " + paquete + " Oferta " + oferta + "\n";
-            movePackage(paquete, oferta);  
+            movements += "Paquete -> " + paquete + " Oferta " + parent.getOfferFromSelectedServices(numberOffer) + "\n";
+            movePackage(numberPackage, numberOffer, numberOffer2);  
         } 
         else {
             Paquete paquete2 = parent.getPackageFromSelectedServices(numberOffer, 
                         parent.getPackagesSizeFromSelectedServices(numberOffer));
-            Oferta oferta2 = parent.getOfferFromSelectedServices(numberOffer);
             //while the movement we want to do is not valid, we "backtrack" 
             //with another pair of packages and transports. If it's valid we just move.
-            while ( (!validMovement(paquete,oferta2) && validMovement(paquete2,oferta))
-                    ||(validMovement(paquete,oferta2) && !validMovement(paquete2,oferta))){
-                paquete = parent.getPackageFromSelectedServices(numberOffer, 
-                        parent.getPackagesSizeFromSelectedServices(numberOffer));
-                paquete2 = parent.getPackageFromSelectedServices(numberOffer, 
-                        parent.getPackagesSizeFromSelectedServices(numberOffer));
-                oferta = parent.getOfferFromSelectedServices(numberOffer);
-                oferta2 = parent.getOfferFromSelectedServices(numberOffer);
+            while (!validSwap(numberPackage,numberOffer,numberPackage2,numberOffer2)){
+                numberOffer = random.nextInt(selectedServices.size());
+                numberOffer2 = random.nextInt(selectedServices.size()); //TODO comprovar que numberOffer != numberOffer2
+                numberPackage = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer));
+                numberPackage2 = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer2));
             }
-            movements += "( " + paquete + "," + oferta +" )" 
+            movements += "( " + paquete + "," + parent.getOfferFromSelectedServices(numberOffer) +" )" 
                                     + "<-> " +
-                                     "( " + paquete2 + "," + oferta2 +" )" + "\n";
+                                     "( " + paquete2 + "," + parent.getOfferFromSelectedServices(numberOffer2) +" )" + "\n";
 
-            swapPackages(paquete, oferta, paquete2, oferta2);
+            swapPackages(numberPackage, numberOffer, numberPackage2, numberOffer2);
             
         }
-        listaEstadosSucesores.add(new Successor(movements, 
-                new Estado(selectedServices)));
-        return listaEstadosSucesores;
+        //listaEstadosSucesores.add(new Successor(movements, 
+                //new Estado(selectedServices)));
+        //return listaEstadosSucesores;
     }
 }
