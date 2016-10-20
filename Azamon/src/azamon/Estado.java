@@ -5,22 +5,19 @@ import java.util.*;
 
 public class Estado {
 
-    private double price;
-    private int hapiness;
+    private static double price;
+    private static int happiness;
     
     private static Transporte offers;
     private static Paquetes packages;
     
-    private ArrayList<ArrayList<Paquete>> selectedServices; // resultat
-    private ArrayList<Double> availableOfferWeight;
-    private ArrayList<PaqueteOrdenado> sortedPackages;
-    private ArrayList<OfertaOrdenada> sortedOffers;
+    private static ArrayList<ArrayList<Paquete>> selectedServices; // resultat
+    private static ArrayList<Double> availableOfferWeight;
+    private static ArrayList<PaqueteOrdenado> sortedPackages;
+    private static ArrayList<OfertaOrdenada> sortedOffers;
     
-    /**
-     * Estado constructora
-     */
     public Estado() {
-        this.hapiness = 0;
+        this.happiness = 0;
         this.price = 0;
         availableOfferWeight = new ArrayList<>();
         sortedPackages = new ArrayList<>();
@@ -33,16 +30,38 @@ public class Estado {
         canGetASolution();
     }
 
-    public ArrayList<ArrayList<Paquete>> getSelectedServices() {
+    public static double getPrice() {
+        return price;
+    }
+
+    public static int getHappiness() {
+        return happiness;
+    }
+
+    public static Transporte getOffers() {
+        return offers;
+    }
+
+    public static Paquetes getPackages() {
+        return packages;
+    }
+
+    public static ArrayList<ArrayList<Paquete>> getSelectedServices() {
         return selectedServices;
     }
-    
-    /** Fill arrays with cost O(max(n,m)) 
-     * where n is paquetes.size() and m is offers.size()
-     * instead of O(n) + O(m)
-     * @param availableOfferWeight
-     * @param sortedPackages 
-     */
+
+    public static ArrayList<Double> getAvailableOfferWeight() {
+        return availableOfferWeight;
+    }
+
+    public static ArrayList<PaqueteOrdenado> getSortedPackages() {
+        return sortedPackages;
+    }
+
+    public static ArrayList<OfertaOrdenada> getSortedOffers() {
+        return sortedOffers;
+    }
+
     private void fillArrays() {
         
         int packageIndex = 0;
@@ -76,12 +95,7 @@ public class Estado {
             offerIndex += 1;
         }
     }
-    
-    /**
-     * Ordena crecientemente todos los paquetes 
-     * que obtiene por el parametro implicito en función de la prioridad
-     * @param sortedPackages 
-     */
+
     private void sortPackages() {
         sortedPackages.sort((sortedPackage1, sortedPackage2) -> {
             return Integer.compare(sortedPackage1.getPaquete().getPrioridad()
@@ -89,11 +103,6 @@ public class Estado {
         });
     }
     
-    /**
-     * Ordena crecientemente todas las ofertas
-     * que obtiene por el parametro implícito en función de la prioridad
-     * @param sortedOffers 
-     */
     private void sortOffers() {
         sortedOffers.sort((sortedOffer1, sortedOffer2) -> {
             return Integer.compare(sortedOffer1.getOferta().getDias()
@@ -101,57 +110,34 @@ public class Estado {
         });
     }
     
-    /**
-     * Printa la prioridad de los paquetes del parametro implícito
-     * @param sortedPackages 
-     */
+
     private void printPaqueteOrdenadoPriority() {
         for (int i = 0; i < sortedPackages.size(); ++i) {
             System.out.println(sortedPackages.get(i).getPaquete().getPrioridad());
         }
         
     }
-    
-    public static Transporte getOffers() {
-        return offers;
-    }
-    
-    /**
-     * Define las ofertas del estado
-     * @param ofertas 
-     */
+
     public static void setOfertas(Transporte offers) {
         Estado.offers = offers;
     }
 
-    
-    public static Paquetes getPackages() {
-        return packages;
-    }
-    /**
-     * Define los paquetes del estado
-     * @param paquetes 
-     */
     public static void setPaquetes(Paquetes packages) {
         Estado.packages = packages;
     }
-    
-    /**
-     * Comprueba si se puede obtener una solución válida
-     * @return 
-     */
-    private boolean canGetASolution() {
+  
+    public boolean canGetASolution() {
         ArrayList<Boolean> packagesSaved = new ArrayList<>(Collections.nCopies(sortedPackages.size(),false));
         
-        for(int indexOferta = 0 ; indexOferta < sortedOffers.size(); ++indexOferta) {
+        for(int offerIndex = 0 ; offerIndex < sortedOffers.size(); ++offerIndex) {
             ArrayList<Paquete> selectedPackages = new ArrayList<>();
             
-            for (int indexPaquete = 0; indexPaquete < sortedPackages.size(); ++indexPaquete) {
+            for (int packageIndex = 0; packageIndex < sortedPackages.size(); ++packageIndex) {
                 
-                Oferta oferta = sortedOffers.get(indexOferta).getOferta();
-                Paquete paquete = sortedPackages.get(indexPaquete).getPaquete();
+                Oferta oferta = sortedOffers.get(offerIndex).getOferta();
+                Paquete paquete = sortedPackages.get(packageIndex).getPaquete();
                 
-                double currentCapacity = availableOfferWeight.get(indexOferta);
+                double currentCapacity = currentWeightFromAvailableOfferWeight(offerIndex);
                 double maxCapacity = oferta.getPesomax();
                 double packageWeight = paquete.getPeso();
                 
@@ -159,55 +145,35 @@ public class Estado {
                 int deliveryDay = paquete.getPrioridad();
                 if (availableCapacityToAdd(currentCapacity, maxCapacity, packageWeight)
                     && isValidPriority(offerPriority, deliveryDay)
-                    && !packagesSaved.get(indexPaquete)) {
+                    && !packagesSaved.get(packageIndex)) {
                     //Afegir i update de packagesSaved
                     
-                    availableOfferWeight.set(indexOferta, currentCapacity+packageWeight);
-                    packagesSaved.set(indexPaquete, true);
-                    this.hapiness += hapinessTotal(oferta, paquete);
-                    this.price += costeTotal(oferta, paquete);
+                    updateWeightFromAvailableOfferWeight(offerIndex,packageWeight);
+                    packagesSaved.set(packageIndex, true);
+                    updateTotalHappiness(happiness(oferta, paquete));
+                    updateTotalPrice(cost(oferta, paquete));
                     selectedPackages.add(paquete);
                 }
             }
-            selectedServices.add(indexOferta, selectedPackages);
+            selectedServices.add(offerIndex, selectedPackages);
         }
             
         return allPackageSaved(packagesSaved);
     }
     
-    /**
-     * Comprueba que todos los paquetes hayans ido assignados
-     * y por lo tanto que se haya podido llegar a una solución
-     * @param packagesSaved
-     * @return 
-     */
-    private boolean allPackageSaved(ArrayList<Boolean> packagesSaved) {
-        for(int indexPaquete = 0; indexPaquete < packagesSaved.size(); ++indexPaquete){
-            if(!packagesSaved.get(indexPaquete)) return false;
+    public boolean allPackageSaved(ArrayList<Boolean> packagesSaved) {
+        for(int offerIndex = 0; offerIndex < packagesSaved.size(); ++offerIndex){
+            if(!packagesSaved.get(offerIndex)) return false;
         }
         return true;
     }
     
     
-    /**
-     * Comprueba si hay suficiente espacio en una oferta determinada en función del peso del paquete
-     * @param currentCapacity
-     * @param maxCapacity
-     * @param packageWeight
-     * @return 
-     */
-    private boolean availableCapacityToAdd(double currentCapacity, double maxCapacity, double packageWeight) {
+    public boolean availableCapacityToAdd(double currentCapacity, double maxCapacity, double packageWeight) {
         return currentCapacity+packageWeight <= maxCapacity;
     }
     
-    /**
-     * Comprueba si la prioridad del paquete es menor o igual 
-     * que los dias que tardan en enviar la oferta seleccionada
-     * @param priority
-     * @param deliveryDay
-     * @return 
-     */
-    private boolean isValidPriority(int priority, int deliveryDay) {
+    public boolean isValidPriority(int priority, int deliveryDay) {
         //System.out.println("PRIORITY; "+priority+" DELIVERYDAY: "+deliveryDay);
         switch (deliveryDay) {
             case Paquete.PR1:
@@ -222,14 +188,7 @@ public class Estado {
         return false;
     }
     
-    /**
-     * Devuelve el coste total de añadir un paquete en función 
-     * del peso del paquete y el precio por kg de la oferta
-     * @param oferta
-     * @param paquete
-     * @return 
-     */
-    public static double costeTotal(Oferta oferta, Paquete paquete) {
+    public static double cost(Oferta oferta, Paquete paquete) {
         double costeTotal = oferta.getPrecio()*paquete.getPeso();
         switch (oferta.getDias()) {
             case 3:
@@ -243,15 +202,7 @@ public class Estado {
         return costeTotal;
     }
     
-    /**
-     * Devuelve la felicidad total de añadir un paquete en función
-     * de la prioridad del paquete y la antelación con la que se envía 
-     * en función de los dias de la oferta
-     * @param oferta
-     * @param paquete
-     * @return 
-     */
-    public static int hapinessTotal(Oferta oferta, Paquete paquete) {
+    public static int happiness(Oferta oferta, Paquete paquete) {
         switch (paquete.getPrioridad()) {
             case Paquete.PR2:
                 return 3-oferta.getDias();
@@ -265,7 +216,7 @@ public class Estado {
     public Oferta getOfferFromSelectedServices(int offerIndex) {
         return sortedOffers.get(offerIndex).getOferta();
     }
-    
+
     public Paquete getPackageFromSelectedServices(int offerIndex, int packageIndex) {
         return selectedServices.get(offerIndex).get(packageIndex);
     }
@@ -274,17 +225,26 @@ public class Estado {
         return selectedServices.get(offerIndex).size();
     }
     
-
+    public void updateWeightFromAvailableOfferWeight(int offerIndex, double packageWeight) {
+        availableOfferWeight.set(offerIndex, currentWeightFromAvailableOfferWeight(offerIndex)+packageWeight);
+    }
     
-    /**
-     * Nos genera una salida con un string costumizado 
-     * para facilitar la capacidad de entender y gestionar la respuesta
-     * @return 
-     */
+    public double currentWeightFromAvailableOfferWeight(int offerIndex) {
+        return availableOfferWeight.get(offerIndex);
+    }
+    
+    public void updateTotalPrice(double price) {
+        this.price += price;
+    }
+    
+    public void updateTotalHappiness(int happiness) {
+        this.happiness += happiness;
+    }
+
     @Override
     public String toString() {
         String s = "";
-        s += "Número de ofertas de transporte: " + offers.size() + " || Felicidad: " + hapiness + " || Precio: " + price + "\n";
+        s += "Número de ofertas de transporte: " + offers.size() + " || Felicidad: " + happiness + " || Precio: " + price + "\n";
         for (int i = 0; i < availableOfferWeight.size(); ++i) {
             s += "Oferta número " + i + " con peso " + availableOfferWeight.get(i) + "/" + offers.get(i).getPesomax() + ", con dias de entrega " + offers.get(i).getDias() +  " y con price: " + offers.get(i).getPrecio() + ":\n";
             ArrayList<Paquete> selectedPackages = selectedServices.get(i);
