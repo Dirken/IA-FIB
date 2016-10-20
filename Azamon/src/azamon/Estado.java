@@ -33,6 +33,22 @@ public class Estado {
         canGetASolution();
     }
 
+    public static double getPrice() {
+        return price;
+    }
+
+    public static int getHappiness() {
+        return happiness;
+    }
+
+    public static Transporte getOffers() {
+        return offers;
+    }
+
+    public static Paquetes getPackages() {
+        return packages;
+    }
+
     public static ArrayList<ArrayList<Paquete>> getSelectedServices() {
         return selectedServices;
     }
@@ -144,7 +160,7 @@ public class Estado {
      * Comprueba si se puede obtener una solución válida
      * @return 
      */
-    private boolean canGetASolution() {
+    public boolean canGetASolution() {
         ArrayList<Boolean> packagesSaved = new ArrayList<>(Collections.nCopies(sortedPackages.size(),false));
         
         for(int indexOferta = 0 ; indexOferta < sortedOffers.size(); ++indexOferta) {
@@ -185,7 +201,7 @@ public class Estado {
      * @param packagesSaved
      * @return 
      */
-    private boolean allPackageSaved(ArrayList<Boolean> packagesSaved) {
+    public boolean allPackageSaved(ArrayList<Boolean> packagesSaved) {
         for(int indexPaquete = 0; indexPaquete < packagesSaved.size(); ++indexPaquete){
             if(!packagesSaved.get(indexPaquete)) return false;
         }
@@ -200,7 +216,7 @@ public class Estado {
      * @param packageWeight
      * @return 
      */
-    private boolean availableCapacityToAdd(double currentCapacity, double maxCapacity, double packageWeight) {
+    public boolean availableCapacityToAdd(double currentCapacity, double maxCapacity, double packageWeight) {
         return currentCapacity+packageWeight <= maxCapacity;
     }
     
@@ -211,7 +227,7 @@ public class Estado {
      * @param deliveryDay
      * @return 
      */
-    private boolean isValidPriority(int priority, int deliveryDay) {
+    public boolean isValidPriority(int priority, int deliveryDay) {
         //System.out.println("PRIORITY; "+priority+" DELIVERYDAY: "+deliveryDay);
         switch (deliveryDay) {
             case Paquete.PR1:
@@ -233,7 +249,7 @@ public class Estado {
      * @param paquete
      * @return 
      */
-    public static double costeTotal(Oferta oferta, Paquete paquete) {
+    public static double cost(Oferta oferta, Paquete paquete) {
         double costeTotal = oferta.getPrecio()*paquete.getPeso();
         switch (oferta.getDias()) {
             case 3:
@@ -255,7 +271,7 @@ public class Estado {
      * @param paquete
      * @return 
      */
-    public static int happinessTotal(Oferta oferta, Paquete paquete) {
+    public static int happiness(Oferta oferta, Paquete paquete) {
         switch (paquete.getPrioridad()) {
             case Paquete.PR2:
                 return 3-oferta.getDias();
@@ -296,6 +312,22 @@ public class Estado {
      */
     public int getPackagesSizeFromSelectedServices(int offerIndex) {
         return selectedServices.get(offerIndex).size();
+    }
+    
+    public void updateWeightFromAvailableOfferWeight(int offerIndex, double packageWeight) {
+        availableOfferWeight.set(offerIndex, currentWeightFromAvailableOfferWeight(offerIndex)+packageWeight);
+    }
+    
+    public double currentWeightFromAvailableOfferWeight(int offerIndex) {
+        return availableOfferWeight.get(offerIndex);
+    }
+    
+    public void updateTotalPrice(int price) {
+        this.price += price;
+    }
+    
+    public void updateTotalHappiness(int happiness) {
+        this.happiness += happiness;
     }
     
 
