@@ -11,6 +11,6 @@ public class HeuristicFunctionCost implements HeuristicFunction{
      */
     @Override
     public double getHeuristicValue(Object state) {
-        return ((Estado)state).getPrecio();
+        return ((Estado)state).getPrice ();
     }
 }
