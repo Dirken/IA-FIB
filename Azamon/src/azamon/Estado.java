@@ -5,22 +5,22 @@ import java.util.*;
 
 public class Estado {
 
-    private double price;
-    private int hapiness;
+    private static double price;
+    private static int happiness;
     
     private static Transporte offers;
     private static Paquetes packages;
     
-    private ArrayList<ArrayList<Paquete>> selectedServices; // resultat
-    private ArrayList<Double> availableOfferWeight;
-    private ArrayList<PaqueteOrdenado> sortedPackages;
-    private ArrayList<OfertaOrdenada> sortedOffers;
+    private static ArrayList<ArrayList<Paquete>> selectedServices; // resultat
+    private static ArrayList<Double> availableOfferWeight;
+    private static ArrayList<PaqueteOrdenado> sortedPackages;
+    private static ArrayList<OfertaOrdenada> sortedOffers;
     
     /**
      * Estado constructora
      */
     public Estado() {
-        this.hapiness = 0;
+        this.happiness = 0;
         this.price = 0;
         availableOfferWeight = new ArrayList<>();
         sortedPackages = new ArrayList<>();
@@ -31,6 +31,22 @@ public class Estado {
         sortPackages();
         sortOffers(); // NOSE SI CAL (?)
         canGetASolution();
+    }
+
+    public static ArrayList<ArrayList<Paquete>> getSelectedServices() {
+        return selectedServices;
+    }
+
+    public static ArrayList<Double> getAvailableOfferWeight() {
+        return availableOfferWeight;
+    }
+
+    public static ArrayList<PaqueteOrdenado> getSortedPackages() {
+        return sortedPackages;
+    }
+
+    public static ArrayList<OfertaOrdenada> getSortedOffers() {
+        return sortedOffers;
     }
     
     /** Fill arrays with cost O(max(n,m)) 
@@ -152,7 +168,7 @@ public class Estado {
                     
                     availableOfferWeight.set(indexOferta, currentCapacity+packageWeight);
                     packagesSaved.set(indexPaquete, true);
-                    this.hapiness += hapinessTotal(oferta, paquete);
+                    this.happiness += happinessTotal(oferta, paquete);
                     this.price += costeTotal(oferta, paquete);
                     selectedPackages.add(paquete);
                 }
@@ -239,7 +255,7 @@ public class Estado {
      * @param paquete
      * @return 
      */
-    public static int hapinessTotal(Oferta oferta, Paquete paquete) {
+    public static int happinessTotal(Oferta oferta, Paquete paquete) {
         switch (paquete.getPrioridad()) {
             case Paquete.PR2:
                 return 3-oferta.getDias();
@@ -250,14 +266,34 @@ public class Estado {
         }
     }
     
+    /**
+     * Devuelve la oferta de sortedOffers con indice
+     * indicado en el parametro implícito
+     * 
+     * @param offerIndex
+     * @return 
+     */
     public Oferta getOfferFromSelectedServices(int offerIndex) {
         return sortedOffers.get(offerIndex).getOferta();
     }
     
+    /**
+     * Devuelve el paquete de sortedPackage con indice del paquete i indice 
+     * de oferta indicado en el parámetro implícito
+     * @param offerIndex
+     * @param packageIndex
+     * @return 
+     */
     public Paquete getPackageFromSelectedServices(int offerIndex, int packageIndex) {
         return selectedServices.get(offerIndex).get(packageIndex);
     }
     
+    /**
+     * Devuelve el size de paquetes que tiene una oferta 
+     * selectedServices indicada con el parámetro implicito 
+     * @param offerIndex
+     * @return 
+     */
     public int getPackagesSizeFromSelectedServices(int offerIndex) {
         return selectedServices.get(offerIndex).size();
     }
@@ -272,7 +308,7 @@ public class Estado {
     @Override
     public String toString() {
         String s = "";
-        s += "Número de ofertas de transporte: " + offers.size() + " || Felicidad: " + hapiness + " || Precio: " + price + "\n";
+        s += "Número de ofertas de transporte: " + offers.size() + " || Felicidad: " + happiness + " || Precio: " + price + "\n";
         for (int i = 0; i < availableOfferWeight.size(); ++i) {
             s += "Oferta número " + i + " con peso " + availableOfferWeight.get(i) + "/" + offers.get(i).getPesomax() + ", con dias de entrega " + offers.get(i).getDias() +  " y con price: " + offers.get(i).getPrecio() + ":\n";
             ArrayList<Paquete> selectedPackages = selectedServices.get(i);
