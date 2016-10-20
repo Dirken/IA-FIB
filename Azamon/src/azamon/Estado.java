@@ -32,6 +32,10 @@ public class Estado {
         sortOffers(); // NOSE SI CAL (?)
         canGetASolution();
     }
+
+    public ArrayList<ArrayList<Paquete>> getSelectedServices() {
+        return selectedServices;
+    }
     
     /** Fill arrays with cost O(max(n,m)) 
      * where n is paquetes.size() and m is offers.size()
@@ -108,6 +112,10 @@ public class Estado {
         
     }
     
+    public static Transporte getOffers() {
+        return offers;
+    }
+    
     /**
      * Define las ofertas del estado
      * @param ofertas 
@@ -116,6 +124,10 @@ public class Estado {
         Estado.offers = offers;
     }
 
+    
+    public static Paquetes getPackages() {
+        return packages;
+    }
     /**
      * Define los paquetes del estado
      * @param paquetes 
@@ -248,7 +260,7 @@ public class Estado {
             default:
                 return 0;
         }
-    }
+    }            
     
     public Oferta getOfferFromSelectedServices(int offerIndex) {
         return sortedOffers.get(offerIndex).getOferta();
