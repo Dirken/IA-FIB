@@ -211,7 +211,7 @@ public class Estado {
             default:
                 return 0;
         }
-    }
+    }            
     
     public Oferta getOfferFromSelectedServices(int offerIndex) {
         return sortedOffers.get(offerIndex).getOferta();
