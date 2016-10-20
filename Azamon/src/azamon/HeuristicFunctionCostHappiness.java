@@ -13,7 +13,9 @@ public class HeuristicFunctionCostHappiness implements HeuristicFunction{
     @Override
     public double getHeuristicValue(Object state) {
         double price = ((Estado)state).getPrice();
+        //double price = Estado.getPrice ();
         int happiness = ((Estado)state).getHappiness();
+        //int happiness = Estado.getHappiness();
         return (happiness*10)/price;
     }
 }
