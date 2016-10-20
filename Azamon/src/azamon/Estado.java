@@ -250,6 +250,20 @@ public class Estado {
         }
     }
     
+    public Oferta getOfferFromSelectedServices(int offerIndex) {
+        return sortedOffers.get(offerIndex).getOferta();
+    }
+    
+    public Paquete getPackageFromSelectedServices(int offerIndex, int packageIndex) {
+        return selectedServices.get(offerIndex).get(packageIndex);
+    }
+    
+    public int getPackagesSizeFromSelectedServices(int offerIndex) {
+        return selectedServices.get(offerIndex).size();
+    }
+    
+
+    
     /**
      * Nos genera una salida con un string costumizado 
      * para facilitar la capacidad de entender y gestionar la respuesta
@@ -268,5 +282,7 @@ public class Estado {
         }
         return s;
     }
+    
+    
     
 }
