@@ -136,32 +136,39 @@ public class GeneradorHillClimbing implements SuccessorFunction{
         selectedServices = parent.getSelectedServices();        
         PaqueteOrdenado paquete;
         OfertaOrdenada offer;
-        //per cada oferta
-        for (int i = 0; i < selectedServices.size(); ++i){
+        
+        //SWAP
+        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex){
             //per tots els paquets de cada oferta,
-            for (int j = 0; j < parent.getPackagesSizeFromSelectedServices(i); ++j){
-                if (validMovement(j,i)) {
-                    movements += "Paquete -> " + paquete + " Oferta " + parent.getOfferFromSelectedServices(numberOffer) + "\n";
-                    movePackage(j, j, i); 
-                    listaEstadosSucesores.add(new Successor(movements,parent));
-                    movePackage(i, i, j);
-                }
-            }
-        }    
-        for (int i = 0; i < selectedServices.size(); ++i){
-            for (int j = i+1; j < parent.getPackagesSizeFromSelectedServices(i); ++j){
-                if (validSwap(numberPackage,numberOffer,numberPackage2,numberOffer2)){
-                    movements += "( " + paquete + "," + parent.getOfferFromSelectedServices(numberOffer) + " )" 
-                                        + "<-> " +
-                                         "( " + paquete2 + "," + parent.getOfferFromSelectedServices(numberOffer2) +" )" + "\n";
-                    swapPackages(numberPackage, numberOffer, numberPackage2, numberOffer2);
-                    listaEstadosSucesores.add(new Successor(movements,parent));
-                    swapPackages(numberPackage2, numberOffer2, numberPackage, numberOffer);
+            for (int packageIndex = 0; packageIndex < parent.getPackagesSizeFromSelectedServices(offerIndex); ++packageIndex){
+                for (int offerIndex2 = offerIndex+1; offerIndex2 < selectedServices.size(); ++offerIndex2 ) { //Buscarem els altres paquets
+                    for (int packageIndex2 = 0; packageIndex2 < parent.getPackagesSizeFromSelectedServices(offerIndex2); ++packageIndex2){
+                        if (validSwap(packageIndex,offerIndex,packageIndex2,offerIndex2)){
+//                                movements += "( " + paquete + "," + parent.getOfferFromSelectedServices(numberOffer) + " )" 
+//                                                    + "<-> " +
+//                                                     "( " + paquete2 + "," + parent.getOfferFromSelectedServices(numberOffer2) +" )" + "\n";
+                            swapPackages(packageIndex, offerIndex, packageIndex2, offerIndex2);
+                            listaEstadosSucesores.add(new Successor(movements,parent));
+                            swapPackages(packageIndex2, offerIndex2, packageIndex, offerIndex);
+                        }
+                    }
                 }
             }
         }
-
-        
-        return listaEstadosSucesores;
-    }
+        //MOVE
+        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex){
+            //per tots els paquets de cada oferta,
+            for (int packageIndex = 0; packageIndex < parent.getPackagesSizeFromSelectedServices(offerIndex); ++packageIndex){
+                for (int offerIndex2 = offerIndex+1; offerIndex2 < selectedServices.size(); ++offerIndex2 ) { //Buscarem els altres paquets
+                    if (validMovement(packageIndex,offerIndex2)) {
+//                        movements += "Paquete -> " + paquete + " Oferta " + parent.getOfferFromSelectedServices(numberOffer) + "\n";
+                        movePackage(packageIndex, offerIndex, offerIndex2);
+                        listaEstadosSucesores.add(new Successor(movements,parent));
+                        movePackage(packageIndex, offerIndex2, offerIndex);
+                    }
+                }
+            }
+        }
+        return listaEstadosSucesores; 
+    }  
 }
