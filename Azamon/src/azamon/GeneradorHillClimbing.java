@@ -24,82 +24,124 @@ import java.util.Random;
 public class GeneradorHillClimbing implements SuccessorFunction{
 
     private Random random;
-    
-    private static Transporte offers;
-    private static Paquetes packages;
-    
+
     private ArrayList<ArrayList<Paquete>> selectedServices; // resultat
     private ArrayList<Double> availableOfferWeight;
-    private ArrayList<PaqueteOrdenado> sortedPackages;
-    private ArrayList<OfertaOrdenada> sortedOffers;
     
     Estado parent;
+    
+    private int happiness;
+    private double price;
 
     /**
      * Acepta o no un movimiento dependiendo de si el cambio de ese paquete por otro, nos es permitido
      * en caso de que se exceda el peso máximo o que el paquete no llegue, no se considerará válido
-     */
-    private boolean validMovement(int numberPackage, int numberOffer){
-        Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, numberPackage);
-        Oferta oferta = parent.getOfferFromSelectedServices(numberOffer);
+    */
+    private boolean validMovement(int numberPackage, int oldNumberOffer, int newNumberOffer){
+        Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
+        Oferta oferta = Estado.getSortedOffers().get(newNumberOffer).getOferta();    
         
-        return parent.availableCapacityToAdd(numberOffer, oferta.getPesomax(), paquete.getPeso()) 
-                && parent.isValidPriority(oferta.getDias(),paquete.getPrioridad());
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        boolean packageFits = currentCapacity + paquete.getPeso() <= oferta.getPesomax();
+        boolean validPriority = parent.isValidPriority(oferta.getDias(), paquete.getPrioridad());
+        
+        return packageFits && validPriority;
+    }
+    private boolean validMovement2(Paquete paquete, int newNumberOffer){
+//        System.out.println("fuck this bullshit omfg");
+        Oferta oferta = Estado.getSortedOffers().get(newNumberOffer).getOferta();    
+        
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        boolean packageFits = currentCapacity + paquete.getPeso() <= oferta.getPesomax();
+        boolean validPriority = parent.isValidPriority(oferta.getDias(), paquete.getPrioridad());
+        System.out.println("AND HIS NAME IS...." + (packageFits && validPriority));
+        
+        return packageFits && validPriority;
     }
         
     private boolean validSwap(int numberPackage, int numberOffer, int numberPackage2, int numberOffer2) {
-        Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, numberPackage);
-        Paquete paquete2 = parent.getPackageFromSelectedServices(numberOffer2, numberPackage2);
-        Oferta oferta = parent.getOfferFromSelectedServices(numberOffer);
-        Oferta oferta2 = parent.getOfferFromSelectedServices(numberOffer2);
-        return parent.availableCapacityToAdd(numberOffer, oferta.getPesomax()-paquete.getPeso(), paquete2.getPeso())
-                && parent.isValidPriority(oferta.getDias(),paquete2.getPrioridad())
-                
-                && parent.availableCapacityToAdd(numberOffer2, oferta2.getPesomax()-paquete2.getPeso(), paquete.getPeso())
-                && parent.isValidPriority(oferta2.getDias(),paquete.getPrioridad());
+        Paquete paquete = selectedServices.get(numberOffer).get(numberPackage);
+        Paquete paquete2 = selectedServices.get(numberOffer2).get(numberPackage2);
+        Oferta oferta = Estado.getSortedOffers().get(numberOffer).getOferta();  
+        Oferta oferta2 = Estado.getSortedOffers().get(numberOffer2).getOferta();
+        
+        
+        double currentCapacityOnOffer = availableOfferWeight.get(numberOffer);
+        double currentCapacityOnOffer2 = availableOfferWeight.get(numberOffer2);
+        boolean packageFitsOnOffer2 = currentCapacityOnOffer2 - paquete2.getPeso() + paquete.getPeso() <= oferta2.getPesomax();
+        boolean packageFitsOnOffer = currentCapacityOnOffer - paquete.getPeso() + paquete2.getPeso() <= oferta.getPesomax();
+        boolean validPriorityOnOffer = parent.isValidPriority(oferta.getDias(), paquete2.getPrioridad());
+        boolean validPriorityOnOffer2 = parent.isValidPriority(oferta2.getDias(), paquete.getPrioridad());
+        
+        return packageFitsOnOffer && packageFitsOnOffer2 && validPriorityOnOffer && validPriorityOnOffer2;
     }
     
-    private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {
-        Paquete paquete = parent.getPackageFromSelectedServices(oldNumberOffer, numberPackage);
-        parent.updateWeightFromAvailableOfferWeight(newNumberOffer, paquete.getPeso());
+    private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {  
+        
+        Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
+        
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        double currentCapacityOld = availableOfferWeight.get(oldNumberOffer);
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld - paquete.getPeso());
+        availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
+        
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
         paquetesOrdenados.add(paquete);
         selectedServices.set(newNumberOffer, paquetesOrdenados);
-        parent.updateWeightFromAvailableOfferWeight(oldNumberOffer, -paquete.getPeso());
+       
         ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
         oldPaquetesOrdenados.remove(numberPackage);
         selectedServices.set(oldNumberOffer, oldPaquetesOrdenados);
         
-        //We get the old happiness that the package gives us and the new happiness
-        // and we add the difference of happiness so if we get less happiness we're adding
-        //something < 0 and otherwise we're adding a positive happiness
-        Oferta oldOffer =  parent.getOfferFromSelectedServices(oldNumberOffer);
-        Oferta newOffer =  parent.getOfferFromSelectedServices(newNumberOffer);
-        int oldHappiness = parent.happiness(oldOffer,paquete);
-        int newHappiness = parent.happiness(newOffer,paquete);
-        parent.updateTotalHappiness(newHappiness-oldHappiness);
+        Oferta oldOffer =  Estado.getSortedOffers().get(oldNumberOffer).getOferta();
+        Oferta newOffer =   Estado.getSortedOffers().get(newNumberOffer).getOferta();
+        System.out.println("INFELIS "+happiness);
+        happiness = happiness + Estado.happiness(newOffer, paquete) - Estado.happiness(oldOffer, paquete);  
+        price += Estado.cost(newOffer,paquete) - Estado.cost(oldOffer,paquete);
+    }
+    private void movePackage2(Paquete paquete, int newNumberOffer) {  
+        int oldNumberOffer = Estado.getIndexPackage(paquete);
         
-        //we do something similar as with happiness but with price
-        double oldPrice = parent.cost(oldOffer,paquete);
-        double newPrice = parent.cost(newOffer,paquete);
-        parent.updateTotalPrice(newPrice-oldPrice);
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        double currentCapacityOld = availableOfferWeight.get(oldNumberOffer);
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld - paquete.getPeso());
+        availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
+        
+        ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
+        paquetesOrdenados.add(paquete);
+        selectedServices.set(newNumberOffer, paquetesOrdenados);
+       
+        ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
+        oldPaquetesOrdenados.remove(paquete);
+        selectedServices.set(oldNumberOffer, oldPaquetesOrdenados);
+        
+        Oferta oldOffer =  Estado.getSortedOffers().get(oldNumberOffer).getOferta();
+        Oferta newOffer =   Estado.getSortedOffers().get(newNumberOffer).getOferta();
+
+        happiness = happiness + Estado.happiness(newOffer, paquete) - Estado.happiness(oldOffer, paquete);  
+        price += Estado.cost(newOffer,paquete) - Estado.cost(oldOffer,paquete);
     }
     
     private void swapPackages(int numberPackage, int oldNumberOffer, int numberPackage2, int newNumberOffer) {  
         //we get both packages..
-        Paquete paquete = parent.getPackageFromSelectedServices(oldNumberOffer, numberPackage);
-        Paquete paquete2 = parent.getPackageFromSelectedServices(newNumberOffer, numberPackage2);
+        Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
+        Paquete paquete2 = selectedServices.get(newNumberOffer).get(numberPackage2);
         
         //update weights from one add package and remove the other..
-        parent.updateWeightFromAvailableOfferWeight(newNumberOffer, paquete.getPeso() - paquete2.getPeso());
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        double currentCapacityOld = availableOfferWeight.get(oldNumberOffer);
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld - paquete.getPeso());
+        availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
+        
+        availableOfferWeight.set(newNumberOffer, currentCapacity - paquete2.getPeso());
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld + paquete2.getPeso());
+        
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
         paquetesOrdenados.add(paquete);
         paquetesOrdenados.remove(numberPackage2);
-        //assign changes
         selectedServices.set(newNumberOffer, paquetesOrdenados);
         
         //update weights from one add package and remove the other..
-        parent.updateWeightFromAvailableOfferWeight(oldNumberOffer, -paquete.getPeso()+ paquete2.getPeso());
         ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
         oldPaquetesOrdenados.remove(numberPackage);
         oldPaquetesOrdenados.add(paquete2);
@@ -110,19 +152,12 @@ public class GeneradorHillClimbing implements SuccessorFunction{
         //something < 0 and otherwise we're adding a positive happiness
         Oferta oldOffer =  parent.getOfferFromSelectedServices(oldNumberOffer);
         Oferta newOffer =  parent.getOfferFromSelectedServices(newNumberOffer);
-        int oldHappiness = parent.happiness(oldOffer,paquete);
-        int newHappiness = parent.happiness(newOffer,paquete);
-        int oldHappiness2 = parent.happiness(oldOffer,paquete2);
-        int newHappiness2 = parent.happiness(newOffer,paquete2);
-        parent.updateTotalHappiness((newHappiness-oldHappiness)+(newHappiness2-oldHappiness2));
-        
-        //we do something similar as with happiness but with price
-        double oldPrice = parent.cost(oldOffer,paquete);
-        double newPrice = parent.cost(newOffer,paquete);
-        double oldPrice2 = parent.cost(oldOffer,paquete2);
-        double newPrice2 = parent.cost(newOffer,paquete2);
-        parent.updateTotalPrice( (newPrice-oldPrice) + (newPrice2-oldPrice2) );
+        happiness = happiness + (Estado.happiness(newOffer,paquete)-Estado.happiness(oldOffer,paquete))
+                    +(Estado.happiness(newOffer,paquete2)-Estado.happiness(oldOffer,paquete2));
+        price += (Estado.cost(newOffer,paquete)-Estado.cost(oldOffer,paquete)) 
+               + (Estado.cost(newOffer,paquete2)-Estado.cost(oldOffer,paquete2));
     }
+
 
     /*
     Para Hill Climbing tendréis que generar todas las posibles aplicaciones de los operadores al
@@ -130,45 +165,52 @@ public class GeneradorHillClimbing implements SuccessorFunction{
     */
     public List getSuccessors(Object state) {
         //data structures needed in the function:
-        String movements = "";
-        LinkedList<Successor>listaEstadosSucesores = new LinkedList();
         parent = (Estado)state;
-        selectedServices = parent.getSelectedServices();        
-        PaqueteOrdenado paquete;
-        OfertaOrdenada offer;
-        
+        selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
+        availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
+        happiness = parent.getHappiness();
+        //System.out.println("Inicial: "+happiness);
+        price = parent.getPrice();
+        LinkedList<Successor> sucesores = new LinkedList<>(); //rename
+        boolean success = false; //rename
+        Estado nextEstado = parent;
+        String action = "";
+        int contador = 0;
         //SWAP
-        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex){
-            //per tots els paquets de cada oferta,
-            for (int packageIndex = 0; packageIndex < parent.getPackagesSizeFromSelectedServices(offerIndex); ++packageIndex){
-                for (int offerIndex2 = offerIndex+1; offerIndex2 < selectedServices.size(); ++offerIndex2 ) { //Buscarem els altres paquets
-                    for (int packageIndex2 = 0; packageIndex2 < parent.getPackagesSizeFromSelectedServices(offerIndex2); ++packageIndex2){
-                        if (validSwap(packageIndex,offerIndex,packageIndex2,offerIndex2)){
-//                                movements += "( " + paquete + "," + parent.getOfferFromSelectedServices(numberOffer) + " )" 
-//                                                    + "<-> " +
-//                                                     "( " + paquete2 + "," + parent.getOfferFromSelectedServices(numberOffer2) +" )" + "\n";
-                            swapPackages(packageIndex, offerIndex, packageIndex2, offerIndex2);
-                            listaEstadosSucesores.add(new Successor(movements,parent));
-                            swapPackages(packageIndex2, offerIndex2, packageIndex, offerIndex);
-                        }
-                    }
+//        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex){
+//            //per tots els paquets de cada oferta,
+//            for (int packageIndex = 0; packageIndex < parent.getPackagesSizeFromSelectedServices(offerIndex); ++packageIndex){
+//                for (int offerIndex2 = offerIndex+1; offerIndex2 < selectedServices.size(); ++offerIndex2 ) { //Buscarem els altres paquets
+//                    for (int packageIndex2 = 0; packageIndex2 < parent.getPackagesSizeFromSelectedServices(offerIndex2); ++packageIndex2){
+//                        if (validSwap(packageIndex,offerIndex,packageIndex2,offerIndex2)){
+//                            swapPackages(packageIndex, offerIndex, packageIndex2, offerIndex2);
+//                            nextEstado = new Estado(price,happiness, selectedServices, 
+//                                availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
+//                            sucesores.add(new Successor(action,nextEstado));
+////                            swapPackages(packageIndex2, offerIndex2, packageIndex, offerIndex);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        for (ArrayList<Paquete> s : selectedServices){
+            for (Paquete  p : s){
+                for(int indiceServicio = 0; indiceServicio < selectedServices.size() 
+                        && s != selectedServices.get(indiceServicio); ++indiceServicio){
+                      if (validMovement2(p,indiceServicio)){
+                          System.out.println("fuck this bullshit omfg");
+                          int oldNumberOffer = Estado.getIndexPackage(p);
+                          movePackage2(p, indiceServicio);
+
+                          nextEstado = new Estado(price,happiness, selectedServices, 
+                                  availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
+                          sucesores.add(new Successor(action,nextEstado));
+                          movePackage2(p, oldNumberOffer);
+                      }
                 }
             }
         }
-        //MOVE
-        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex){
-            //per tots els paquets de cada oferta,
-            for (int packageIndex = 0; packageIndex < parent.getPackagesSizeFromSelectedServices(offerIndex); ++packageIndex){
-                for (int offerIndex2 = offerIndex+1; offerIndex2 < selectedServices.size(); ++offerIndex2 ) { //Buscarem els altres paquets
-                    if (validMovement(packageIndex,offerIndex2)) {
-//                        movements += "Paquete -> " + paquete + " Oferta " + parent.getOfferFromSelectedServices(numberOffer) + "\n";
-                        movePackage(packageIndex, offerIndex, offerIndex2);
-                        listaEstadosSucesores.add(new Successor(movements,parent));
-                        movePackage(packageIndex, offerIndex2, offerIndex);
-                    }
-                }
-            }
-        }
-        return listaEstadosSucesores; 
+        System.out.println(sucesores);
+        return sucesores; 
     }  
 }

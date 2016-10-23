@@ -11,7 +11,7 @@ public class Estado {
     private static Transporte offers;
     private static Paquetes packages;
     
-    private  ArrayList<ArrayList<Paquete>> selectedServices; // resultat
+    private  static ArrayList<ArrayList<Paquete>> selectedServices; // resultat
     private  ArrayList<Double> availableOfferWeight;
     private  static ArrayList<PaqueteOrdenado> sortedPackages;
     private  static ArrayList<OfertaOrdenada> sortedOffers;
@@ -39,6 +39,14 @@ public class Estado {
         this.sortedOffers = sortedOffers;
     }
 
+    
+    public static int getIndexPackage(Paquete p){
+        for (int i = 0; i < selectedServices.size(); ++i){
+            if (selectedServices.get(i).contains(p)) return i;
+        }
+        System.out.println("JOHN CENA");
+        return 999;
+    }
     
     
 
@@ -206,12 +214,16 @@ public class Estado {
         switch (oferta.getDias()) {
             case 3:
                 costeTotal += 0.25*paquete.getPeso();
+                break;
             case 4:
                 costeTotal += 0.25*paquete.getPeso();
+                break;
             case 5:
                 costeTotal += 0.5*paquete.getPeso();
+                break;
             default:
         }
+        costeTotal += oferta.getPrecio()*paquete.getPeso();
         return costeTotal;
     }
     

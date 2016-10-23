@@ -89,7 +89,8 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         
         Oferta oldOffer =  Estado.getSortedOffers().get(oldNumberOffer).getOferta();
         Oferta newOffer =   Estado.getSortedOffers().get(newNumberOffer).getOferta();
-        happiness += Estado.happiness(newOffer, paquete) - Estado.happiness(oldOffer, paquete);        
+        System.out.println("INFELIS "+happiness);
+        happiness = happiness + Estado.happiness(newOffer, paquete) - Estado.happiness(oldOffer, paquete);  
         price += Estado.cost(newOffer,paquete) - Estado.cost(oldOffer,paquete);
     }
     
@@ -123,7 +124,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         //something < 0 and otherwise we're adding a positive happiness
         Oferta oldOffer =  parent.getOfferFromSelectedServices(oldNumberOffer);
         Oferta newOffer =  parent.getOfferFromSelectedServices(newNumberOffer);
-        happiness += (Estado.happiness(newOffer,paquete)-Estado.happiness(oldOffer,paquete))
+        happiness = happiness + (Estado.happiness(newOffer,paquete)-Estado.happiness(oldOffer,paquete))
                     +(Estado.happiness(newOffer,paquete2)-Estado.happiness(oldOffer,paquete2));
         price += (Estado.cost(newOffer,paquete)-Estado.cost(oldOffer,paquete)) 
                + (Estado.cost(newOffer,paquete2)-Estado.cost(oldOffer,paquete2));
