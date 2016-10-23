@@ -53,14 +53,14 @@ public class Main {
                 case "3": //Por defecto se usa la 3
                 default:  problemaSA = new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCostHappiness()); break; 
             }
-            System.out.println("\033[33mEmpezando Simulated Annealing\033[30m");
             try{
                 // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
                 SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch();
+                System.out.println("\033[33mEmpezando Simulated Annealing\033[30m");
                 SearchAgent agent = new SearchAgent(problemaSA, SASearch);
-                // 4 - "Pedimos" el estado final resultante de usar la estrategia determinada.
-                Estado estadoSA = (Estado) SASearch.getGoalState();
                 System.out.println("Simulated Annealing terminado");
+                // 4 - "Pedimos" el estado final resultante de usar la estrategia determinada
+                Estado estadoSA = (Estado) SASearch.getGoalState();
                 // 5 - Printamos la solución
                 System.out.println("Simulated Annealing: felicidad: " + estadoSA.getHappiness() + ", precio " + estadoSA.getPrice());
                 System.out.print("¿Printar solucion de Simulate Annealing? (s/n) ");
@@ -83,7 +83,9 @@ public class Main {
         System.out.print("¿Ejecutar Hill Climbing? (s/n) ");
         answer = scanner.next();
         if (answer.equals("s")||answer.equals("S")){
+            // 1 - Declaramos el generador
             GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
+            // 2 - Elegimos la Heurística
             System.out.print("Función Heurística:\n  1 - Coste\n  2 - Felicidad\n  3 - Coste + Felicidad\nSelección: ");
             answer = scanner.next();
             Problem problemaHC;
@@ -93,12 +95,15 @@ public class Main {
                 case "3": //Por defecto se usa la 3
                 default:  problemaHC = new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCostHappiness()); break; 
             }
-            System.out.println("\033[33mEmpezando Hill Climbing\033[30m");
             try{
+                // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
                 SimulatedAnnealingSearch HCSearch = new SimulatedAnnealingSearch();
+                System.out.println("\033[33mEmpezando Hill Climbing\033[30m");
                 SearchAgent agent = new SearchAgent(problemaHC, HCSearch);
-                Estado estadoHC = (Estado) HCSearch.getGoalState();
                 System.out.println("Hill Climbing terminado");
+                // 4 - "Pedimos" el estado final resultante de usar la estrategia determinada
+                Estado estadoHC = (Estado) HCSearch.getGoalState();
+                // 5 - Printamos la solución
                 System.out.println("Hill Climbing: felicidad: " + estadoHC.getHappiness() + ", precio " + estadoHC.getPrice());
                 System.out.print("¿Printar solucion de Hill Climbing? (s/n) ");
                 answer = scanner.next();
