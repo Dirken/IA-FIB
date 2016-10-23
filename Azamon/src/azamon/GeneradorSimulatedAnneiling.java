@@ -75,7 +75,8 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
         
         double currentCapacity = availableOfferWeight.get(newNumberOffer);
-        availableOfferWeight.set(oldNumberOffer, currentCapacity - paquete.getPeso());
+        double currentCapacityOld = availableOfferWeight.get(oldNumberOffer);
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld - paquete.getPeso());
         availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
         
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
@@ -101,10 +102,10 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         //update weights from one add package and remove the other..
         double currentCapacity = availableOfferWeight.get(newNumberOffer);
         double currentCapacityOld = availableOfferWeight.get(oldNumberOffer);
-        availableOfferWeight.set(oldNumberOffer, currentCapacity - paquete.getPeso());
+        availableOfferWeight.set(oldNumberOffer, currentCapacityOld - paquete.getPeso());
         availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
         
-        availableOfferWeight.set(newNumberOffer, currentCapacityOld - paquete2.getPeso());
+        availableOfferWeight.set(newNumberOffer, currentCapacity - paquete2.getPeso());
         availableOfferWeight.set(oldNumberOffer, currentCapacityOld + paquete2.getPeso());
         
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
@@ -142,6 +143,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
         availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
         happiness = parent.getHappiness();
+        System.out.println("Inicial: "+happiness);
         price = parent.getPrice();
         LinkedList<Successor> sucesores = new LinkedList<>(); //rename
         boolean success = false; //rename
@@ -150,18 +152,17 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         int contador = 0;
         while (!success) {
             ++contador;
-            int offerIndex = random.nextInt(Estado.getOffers().size());
+            int offerIndex=  random.nextInt(Estado.getOffers().size());
             int offerIndex2 = random.nextInt(Estado.getOffers().size());
-            System.out.println("Again... "+contador);
+            //System.out.println("Again... "+contador);
             if (random.nextInt(2) == 0) {
                 if (!selectedServices.get(offerIndex).isEmpty() && offerIndex != offerIndex2) {
                     int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
                     if (validMovement(packageIndex, offerIndex, offerIndex2)) {
-                        System.out.println("MOVE");
+                        //System.out.println("MOVE");
                         movePackage(packageIndex, offerIndex, offerIndex2);
                         nextEstado = new Estado(price,happiness, selectedServices, 
-                                availableOfferWeight, Estado.getSortedPackages(), parent.getSortedOffers());
-                        //sucesores.add(new Successor(action, nextEstado));
+                                availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
                         success = true;
                     }
                 }
@@ -171,12 +172,10 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                     int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
                     int packageIndex2 = random.nextInt(selectedServices.get(offerIndex2).size());
                     if (validSwap(packageIndex,offerIndex,packageIndex2,offerIndex2)) {
-                        System.out.println("SWAP");
+                        //System.out.println("SWAP");
                         swapPackages(packageIndex,offerIndex,packageIndex2,offerIndex2);
                         nextEstado = new Estado(price,happiness, selectedServices, 
                                 availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
-                        //sucesores.add(new Successor(action, nextEstado));
-                        //return sucesores;
                         success = true;
                     }
                 }
@@ -185,67 +184,8 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         
         
         //action += new HeuristicFunctionCost().getHeuristicValue(nextEstado);
+        System.out.println("Final: "+happiness);
         sucesores.add(new Successor(action, nextEstado));
         return sucesores;
     }
-    
-    
-//    @Override
-//    public List getSuccessors(Object state) {
-//        //data structures needed in the function:
-//        parent = (Estado)state;
-//        selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
-//       
-//        availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
-//        happiness = parent.getHappiness();
-//        price = parent.getPrice();
-//        LinkedList<Successor> sucesores = new LinkedList<>(); //rename
-//        boolean success = false; //rename
-//        Estado nextEstado = parent;
-//        
-//        String action = "";
-//        int contador = 0;
-//        while (!success) {
-//            ++contador;
-//            
-//            //System.out.println("Bucle" + contador);
-//            if (random.nextInt(2) == 0) {
-//                //move
-//                int offerIndex = random.nextInt(Estado.getOffers().size());
-//                int offerIndex2 = random.nextInt(Estado.getOffers().size());
-//                if (!selectedServices.get(offerIndex).isEmpty() && offerIndex != offerIndex2) {
-//                    int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
-//                    if (validMovement(packageIndex, offerIndex, offerIndex2)) {
-//                        //System.out.println("MOOOOVE");
-//                        movePackage(packageIndex, offerIndex, offerIndex2);
-//                        nextEstado = new Estado(price,happiness, selectedServices, 
-//                                availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
-//                        sucesores.add(new Successor(action, nextEstado));
-//                        return sucesores;
-//                    }
-//                }
-//            }
-//            else {
-//                int offerIndex = random.nextInt(Estado.getOffers().size());
-//                int offerIndex2 = random.nextInt(Estado.getOffers().size());
-//                if (!selectedServices.get(offerIndex).isEmpty() && !selectedServices.get(offerIndex2).isEmpty() && offerIndex != offerIndex2) {
-//                    int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
-//                    int packageIndex2 = random.nextInt(selectedServices.get(offerIndex2).size());
-//                    if (validSwap(packageIndex,offerIndex,packageIndex2,offerIndex2)) {
-//                        //System.out.println("MOOOOVE");
-//                        swapPackages(packageIndex,offerIndex,packageIndex2,offerIndex2);
-//                        nextEstado = new Estado(price,happiness, selectedServices, 
-//                                availableOfferWeight, Estado.getSortedPackages(), Estado.getSortedOffers());
-//                        sucesores.add(new Successor(action, nextEstado));
-//                        return sucesores;
-//                    }
-//                }
-//            }
-//        }    
-//        
-//        
-//        //action += new HeuristicFunctionCost().getHeuristicValue(nextEstado);
-//        sucesores.add(new Successor(action, nextEstado));
-//        return sucesores;
-//    }
 }
