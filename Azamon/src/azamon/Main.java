@@ -1,30 +1,125 @@
 package azamon;
 
 import IA.Azamon.*;
-import java.util.*; 
+import aima.search.framework.Problem;
+import aima.search.framework.SearchAgent;
+import aima.search.informed.SimulatedAnnealingSearch;
+import static java.lang.System.exit;
+import java.util.Scanner;
+//import aima.search.*;
 
 public class Main {
 
     /**
      * @param args the command line arguments
      */
+    static final int semilla = 1234; //Integer.valueOf(""+new Date().getTime()%100000);
+    static int numeroPaquetes = 100;
+    static double proporcion = 1.2;
+    
     public static void main(String[] args) {
-        // TODO code application logic here
-        int semilla = Integer.valueOf(""+new Date().getTime()%100000); //reader.nextInt();
-        System.out.println("Semilla: "+semilla);
-        //System.out.println("Número de paquetes: ");
-        int numeroPaquetes = 10; //reader.nextInt(); // Scans the next token of the input as an int.
         Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
-        
-        //System.out.println("Número de paquetes: ");
-        double proporcion = 1.2;
-        Transporte transporte = new Transporte(paquetes, proporcion , semilla);
-        
-        Estado.setOfertas(transporte);
         Estado.setPaquetes(paquetes);
-        Estado estado = new Estado();
+        Transporte transporte = new Transporte(paquetes, proporcion , semilla);
+        Estado.setOfertas(transporte);
+        Estado estadoInicial = new Estado();
         
-        System.out.println(estado);
+        Scanner scanner = new Scanner (System.in); //Creación de un objeto Scanner
+        String answer = "";
+        
+        System.out.print("¿Printar solucion inicial? (s/n) ");
+        answer = scanner.next();
+        if (answer.equals("s")||answer.equals("S")){
+            System.out.println("+---------------------------------------------------------------------------------+\n"+
+                               "|                                SOLUCION INICIAL                                 |\n"+
+                               "+---------------------------------------------------------------------------------+");
+            System.out.println(estadoInicial);
+            System.out.println("+---------------------------------------------------------------------------------+\n"+
+                               "+---------------------------------------------------------------------------------+");
+        }
+        
+        System.out.print("¿Ejecutar Simulate Annealing? (s/n) ");
+        answer = scanner.next();
+        if (answer.equals("s")||answer.equals("S")){
+            // 1 - Declaramos el generador
+            GeneradorSimulatedAnneiling generadorSA = new GeneradorSimulatedAnneiling(semilla);
+            // 2 - Elegimos la Heurística
+            System.out.print("Función Heurística:\n 1 - Coste\n 2 - Felicidad\n 3 - Coste + Felicidad\nSelección: ");
+            answer = scanner.next();
+            Problem problemaSA;
+            switch (answer) {
+                case "1": problemaSA = new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCost()); break;
+                case "2": problemaSA = new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionHappiness()); break;
+                case "3": //Por defecto se usa la 3
+                default:  problemaSA = new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCostHappiness()); break; 
+            }
+            System.out.println("\033[33mEmpezando Simulated Annealing\033[30m");
+            try{
+                // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
+                SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch();
+                SearchAgent agent = new SearchAgent(problemaSA, SASearch);
+                // 4 - "Pedimos" el estado final resultante de usar la estrategia determinada.
+                Estado estadoSA = (Estado) SASearch.getGoalState();
+                System.out.println("Simulated Annealing terminado");
+                // 5 - Printamos la solución
+                System.out.println("Simulated Annealing: felicidad: " + estadoSA.getHappiness() + ", precio " + estadoSA.getPrice());
+                System.out.print("¿Printar solucion de Simulate Annealing? (s/n) ");
+                answer = scanner.next();
+                if (answer.equals("s")||answer.equals("S")){
+                System.out.println("+---------------------------------------------------------------------------------+"+"\n"+
+                                   "|                              SIMULATED ANNEALING                                |"+"\n"+
+                                   "+---------------------------------------------------------------------------------+");
+                System.out.println(estadoSA);
+                System.out.println("+---------------------------------------------------------------------------------+\n"+
+                                   "+---------------------------------------------------------------------------------+");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Simulated Annealing no terminado con éxito");
+                exit(1);
+            }
+        }
+        
+        System.out.print("¿Ejecutar Hill Climbing? (s/n) ");
+        answer = scanner.next();
+        if (answer.equals("s")||answer.equals("S")){
+            GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
+            System.out.print("Función Heurística:\n 1 - Coste\n 2 - Felicidad\n 3 - Coste + Felicidad\nSelección: ");
+            answer = scanner.next();
+            Problem problemaHC;
+            switch (answer) {
+                case "1": problemaHC = new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCost()); break;
+                case "2": problemaHC = new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionHappiness()); break;
+                case "3": //Por defecto se usa la 3
+                default:  problemaHC = new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCostHappiness()); break; 
+            }
+            System.out.println("\033[33mEmpezando Hill Climbing\033[30m");
+            try{
+                SimulatedAnnealingSearch HCSearch = new SimulatedAnnealingSearch();
+                SearchAgent agent = new SearchAgent(problemaHC, HCSearch);
+                Estado estadoHC = (Estado) HCSearch.getGoalState();
+                System.out.println("Hill Climbing terminado");
+                System.out.println("Hill Climbing: felicidad: " + estadoHC.getHappiness() + ", precio " + estadoHC.getPrice());
+                System.out.print("¿Printar solucion de Hill Climbing? (s/n) ");
+                answer = scanner.next();
+                if (answer.equals("s")||answer.equals("S")){
+                System.out.println("+---------------------------------------------------------------------------------+"+"\n"+
+                                   "|                                 HILL CLIMBING                                   |"+"\n"+
+                                   "+---------------------------------------------------------------------------------+");
+                System.out.println(estadoHC);
+                System.out.println("+---------------------------------------------------------------------------------+\n"+
+                                   "+---------------------------------------------------------------------------------+");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Hill Climbing no terminado con éxito");
+                exit(1);
+            }
+            
+        }
+        
+        
+        
     }
     
 }
