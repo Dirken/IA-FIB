@@ -25,7 +25,7 @@ public class SearchAgent extends Agent {
 		if (actionIterator.hasNext()) {
 			return (String) actionIterator.next();
 		} else {
-			return "NoOp";
+			return "error";
 		}
 	}
 

@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     static final int semilla = 1234; //Integer.valueOf(""+new Date().getTime()%100000);
-    static int numeroPaquetes = 100;
+    static int numeroPaquetes = 10;
     static double proporcion = 1.2;
     
     public static void main(String[] args) {

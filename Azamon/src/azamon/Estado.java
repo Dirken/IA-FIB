@@ -11,10 +11,10 @@ public class Estado {
     private static Transporte offers;
     private static Paquetes packages;
     
-    private static ArrayList<ArrayList<Paquete>> selectedServices; // resultat
-    private static ArrayList<Double> availableOfferWeight;
-    private static ArrayList<PaqueteOrdenado> sortedPackages;
-    private static ArrayList<OfertaOrdenada> sortedOffers;
+    private  ArrayList<ArrayList<Paquete>> selectedServices; // resultat
+    private  ArrayList<Double> availableOfferWeight;
+    private  ArrayList<PaqueteOrdenado> sortedPackages;
+    private  ArrayList<OfertaOrdenada> sortedOffers;
     
     public Estado() {
         this.happiness = 0;
@@ -46,19 +46,19 @@ public class Estado {
         return packages;
     }
 
-    public static ArrayList<ArrayList<Paquete>> getSelectedServices() {
+    public ArrayList<ArrayList<Paquete>> getSelectedServices() {
         return selectedServices;
     }
 
-    public static ArrayList<Double> getAvailableOfferWeight() {
+    public ArrayList<Double> getAvailableOfferWeight() {
         return availableOfferWeight;
     }
 
-    public static ArrayList<PaqueteOrdenado> getSortedPackages() {
+    public ArrayList<PaqueteOrdenado> getSortedPackages() {
         return sortedPackages;
     }
 
-    public static ArrayList<OfertaOrdenada> getSortedOffers() {
+    public ArrayList<OfertaOrdenada> getSortedOffers() {
         return sortedOffers;
     }
 
@@ -244,12 +244,12 @@ public class Estado {
     @Override
     public String toString() {
         String s = "";
-        s += "Número de ofertas de transporte: " + offers.size() + " || Felicidad: " + happiness + " || Precio: " + price + "\n";
+        s += "#Ofertas Totales: " + offers.size() + " || Felicidad total: " + happiness + " || Precio Total: " + price + "\n";
         for (int i = 0; i < availableOfferWeight.size(); ++i) {
-            s += "Oferta número " + i + " con peso " + availableOfferWeight.get(i) + "/" + offers.get(i).getPesomax() + ", con dias de entrega " + offers.get(i).getDias() +  " y con price: " + offers.get(i).getPrecio() + ":\n";
+            s += "#Oferta " + i + " con peso " + availableOfferWeight.get(i) + "/" + offers.get(i).getPesomax() + ", con dias de entrega " + offers.get(i).getDias() +  " y con precio: " + offers.get(i).getPrecio() + ":\n";
             ArrayList<Paquete> selectedPackages = selectedServices.get(i);
             for (int p = 0; p < selectedPackages.size(); ++p) {
-                s += "\tIndice: " + p + " " +  selectedPackages.get(p) + "\n";
+                s += "\t" + p + " " +  selectedPackages.get(p) + "\n";
             }
         }
         return s;
