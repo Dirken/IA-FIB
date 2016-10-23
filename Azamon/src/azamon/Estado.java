@@ -13,8 +13,8 @@ public class Estado {
     
     private  ArrayList<ArrayList<Paquete>> selectedServices; // resultat
     private  ArrayList<Double> availableOfferWeight;
-    private  ArrayList<PaqueteOrdenado> sortedPackages;
-    private  ArrayList<OfertaOrdenada> sortedOffers;
+    private  static ArrayList<PaqueteOrdenado> sortedPackages;
+    private  static ArrayList<OfertaOrdenada> sortedOffers;
     
     public Estado() {
         this.happiness = 0;
@@ -68,11 +68,11 @@ public class Estado {
         return availableOfferWeight;
     }
 
-    public ArrayList<PaqueteOrdenado> getSortedPackages() {
+    public static ArrayList<PaqueteOrdenado> getSortedPackages() {
         return sortedPackages;
     }
 
-    public ArrayList<OfertaOrdenada> getSortedOffers() {
+    public static ArrayList<OfertaOrdenada> getSortedOffers() {
         return sortedOffers;
     }
 
@@ -188,14 +188,13 @@ public class Estado {
     }
     
     public boolean isValidPriority(int priority, int deliveryDay) {
-        //System.out.println("PRIORITY; "+priority+" DELIVERYDAY: "+deliveryDay);
         switch (deliveryDay) {
             case Paquete.PR1:
                 return priority == 1;
             case Paquete.PR2:
-                return priority == 2 || priority == 3;
+                return priority <= 3;
             case Paquete.PR3:
-                return priority == 4 || priority == 5;
+                return priority <= 5;
             default:
                 System.out.println("Incorrecct priority");
         }
