@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     static final int semilla = 1234; //Integer.valueOf(""+new Date().getTime()%100000);
-    static int numeroPaquetes = 10;
+    static int numeroPaquetes = 100;
     static double proporcion = 1.2;
     
     public static void main(String[] args) {
@@ -55,7 +55,7 @@ public class Main {
             }
             try{
                 // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
-                SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch(1000, 20, 5, 0.001);
+                SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch(10, 20, 5, 0.001);
                 System.out.println("\033[33mEmpezando Simulated Annealing\033[30m");
                 SearchAgent agent = new SearchAgent(problemaSA, SASearch);
                 System.out.println("Simulated Annealing terminado");

@@ -89,7 +89,6 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         
         Oferta oldOffer =  Estado.getSortedOffers().get(oldNumberOffer).getOferta();
         Oferta newOffer =   Estado.getSortedOffers().get(newNumberOffer).getOferta();
-        
         happiness += Estado.happiness(newOffer, paquete) - Estado.happiness(oldOffer, paquete);        
         price += Estado.cost(newOffer,paquete) - Estado.cost(oldOffer,paquete);
     }
@@ -143,7 +142,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
         availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
         happiness = parent.getHappiness();
-        System.out.println("Inicial: "+happiness);
+        //System.out.println("Inicial: "+happiness);
         price = parent.getPrice();
         LinkedList<Successor> sucesores = new LinkedList<>(); //rename
         boolean success = false; //rename
@@ -155,6 +154,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
             int offerIndex=  random.nextInt(Estado.getOffers().size());
             int offerIndex2 = random.nextInt(Estado.getOffers().size());
             //System.out.println("Again... "+contador);
+            
             if (random.nextInt(2) == 0) {
                 if (!selectedServices.get(offerIndex).isEmpty() && offerIndex != offerIndex2) {
                     int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
@@ -184,7 +184,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         
         
         //action += new HeuristicFunctionCost().getHeuristicValue(nextEstado);
-        System.out.println("Final: "+happiness);
+        //System.out.println("Final: "+happiness);
         sucesores.add(new Successor(action, nextEstado));
         return sucesores;
     }
