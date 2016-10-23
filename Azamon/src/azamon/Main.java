@@ -55,7 +55,7 @@ public class Main {
             }
             try{
                 // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
-                SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch(1000, 20, 5, 0.001);
+                SimulatedAnnealingSearch SASearch = new SimulatedAnnealingSearch(100, 20, 5, 0.001);
                 System.out.println("\033[33mEmpezando Simulated Annealing\033[30m");
                 SearchAgent agent = new SearchAgent(problemaSA, SASearch);
                 System.out.println("Simulated Annealing terminado");
@@ -97,7 +97,7 @@ public class Main {
             }
             try{
                 // 3 - Declaramos las cosas necesarias: El "Search y el "Agent"
-                SimulatedAnnealingSearch HCSearch = new SimulatedAnnealingSearch();
+                SimulatedAnnealingSearch HCSearch = new SimulatedAnnealingSearch(100, 20, 5, 0.001);
                 System.out.println("\033[33mEmpezando Hill Climbing\033[30m");
                 SearchAgent agent = new SearchAgent(problemaHC, HCSearch);
                 System.out.println("Hill Climbing terminado");
