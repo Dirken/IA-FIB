@@ -5,8 +5,8 @@ import java.util.*;
 
 public class Estado {
 
-    private static double price;
-    private static int happiness;
+    private double price;
+    private int happiness;
     
     private static Transporte offers;
     private static Paquetes packages;
@@ -30,13 +30,27 @@ public class Estado {
         canGetASolution();
     }
 
-    public static double getPrice() {
+    public Estado(double price, int happiness, ArrayList<ArrayList<Paquete>> selectedServices, ArrayList<Double> availableOfferWeight, ArrayList<PaqueteOrdenado> sortedPackages, ArrayList<OfertaOrdenada> sortedOffers) {
+        this.price = price;
+        this.happiness = happiness;
+        this.selectedServices = selectedServices;
+        this.availableOfferWeight = availableOfferWeight;
+        this.sortedPackages = sortedPackages;
+        this.sortedOffers = sortedOffers;
+    }
+
+    
+    
+
+    public double getPrice() {
         return price;
     }
 
-    public static int getHappiness() {
+    public int getHappiness() {
         return happiness;
     }
+
+    
 
     public static Transporte getOffers() {
         return offers;

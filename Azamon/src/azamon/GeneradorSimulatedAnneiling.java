@@ -26,14 +26,14 @@ import java.util.Random;
 public class GeneradorSimulatedAnneiling implements SuccessorFunction{
 
     private Random random;
-   
-    private static Transporte offers;
-    private static Paquetes packages;
-    
+
     private ArrayList<ArrayList<Paquete>> selectedServices; // resultat
     private ArrayList<Double> availableOfferWeight;
     
     Estado parent;
+    
+    private int happiness;
+    private double price;
 
     public GeneradorSimulatedAnneiling(int seed) {
         random = new Random(seed);
@@ -42,12 +42,15 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
      * Acepta o no un movimiento dependiendo de si el cambio de ese paquete por otro, nos es permitido
      * en caso de que se exceda el peso máximo o que el paquete no llegue, no se considerará válido
      */
-    private boolean validMovement(int numberPackage, int oldNumberOffer, int newNumberOffer ){
-        Paquete paquete = parent.getPackageFromSelectedServices(oldNumberOffer, numberPackage);
-        Oferta oferta = parent.getOfferFromSelectedServices(newNumberOffer);
+    private boolean validMovement(int numberPackage, int oldNumberOffer, int newNumberOffer){
+        Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
+        Oferta oferta = parent.getSortedOffers().get(newNumberOffer).getOferta();    
         
-        return parent.availableCapacityToAdd(newNumberOffer, oferta.getPesomax(), paquete.getPeso()) 
-                && parent.isValidPriority(oferta.getDias(),paquete.getPrioridad());
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        boolean packageFits = currentCapacity + paquete.getPeso() <= oferta.getPesomax();
+        boolean validPriority = parent.isValidPriority(oferta.getDias(), paquete.getPrioridad());
+        
+        return packageFits && validPriority;
     }
         
     private boolean validSwap(int numberPackage, int numberOffer, int numberPackage2, int numberOffer2) {
@@ -63,19 +66,32 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
     }
     
     private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {
-        Paquete paquete = parent.getPackageFromSelectedServices(oldNumberOffer, numberPackage);
-        parent.updateWeightFromAvailableOfferWeight(newNumberOffer, paquete.getPeso());
+        
+//            pesoOfertas.set(indiceOfertaActual, pesoOfertas.get(indiceOfertaActual) - paquete.getPeso());
+//            pesoOfertas.set(indiceOferta, pesoOfertas.get(indiceOferta) + paquete.getPeso());
+//            asignacionPaquetes.set(indicePaquete, indiceOferta);
+//            //ACTUALIZA FELICIDAD
+//            felicidad = estadoPadre.getFelicidad() - Estado.calculaFelicidad(indiceOfertaActual,paquete) + Estado.calculaFelicidad(indiceOferta,paquete);
+//            //ACTUALIZA PRECIO
+//            precio = estadoPadre.getPrecio() - Estado.calculaPrecio(indiceOfertaActual,paquete) + Estado.calculaPrecio(indiceOferta,paquete);
+//            return true;
+        
+        
+        Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
+        
+        double currentCapacity = availableOfferWeight.get(newNumberOffer);
+        availableOfferWeight.set(oldNumberOffer, currentCapacity - paquete.getPeso());
+        availableOfferWeight.set(newNumberOffer, currentCapacity + paquete.getPeso());
+        
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
         paquetesOrdenados.add(paquete);
         selectedServices.set(newNumberOffer, paquetesOrdenados);
-        parent.updateWeightFromAvailableOfferWeight(oldNumberOffer, -paquete.getPeso());
-        ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
+        
+        ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer); //OJO QUE VOL DIR ULL
         oldPaquetesOrdenados.remove(numberPackage);
         selectedServices.set(oldNumberOffer, oldPaquetesOrdenados);
         
-        //We get the old happiness that the package gives us and the new happiness
-        // and we add the difference of happiness so if we get less happiness we're adding
-        //something < 0 and otherwise we're adding a positive happiness
+        
         Oferta oldOffer =  parent.getOfferFromSelectedServices(oldNumberOffer);
         Oferta newOffer =  parent.getOfferFromSelectedServices(newNumberOffer);
         int oldHappiness = parent.happiness(oldOffer,paquete);
@@ -134,60 +150,34 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
     @Override
     public List getSuccessors(Object state) {
         //data structures needed in the function:
-        String movements = "";
-        LinkedList<Successor>listaEstadosSucesores = new LinkedList();
         parent = (Estado)state;
-        selectedServices = parent.getSelectedServices();
-        boolean nextStateCreated = false;
-        Integer numberOffer, numberOffer2, numberPackage, numberPackage2, operator;
+        selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
+        availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
+        happiness = parent.getHappiness();
+        price = parent.getPrice();
+        LinkedList<Successor> sucesores = new LinkedList<>(); //rename
+        boolean success = false; //rename
+        Estado nextEstado = null;
+        String action = "";
         
-        while (!nextStateCreated) {
-            //we select a package and an offer at random (but with some restrictions as we'll see later)
-            numberOffer = random.nextInt(selectedServices.size());
-            numberOffer2 = random.nextInt(selectedServices.size());
-            //we check if package is the same or not and in case of same, we keep throwing random:
-            while (numberOffer.equals(numberOffer2)){ numberOffer2 = random.nextInt(selectedServices.size()); }
-            while (parent.getPackagesSizeFromSelectedServices(numberOffer) == 0) { numberOffer = random.nextInt(selectedServices.size()); }
-            while (parent.getPackagesSizeFromSelectedServices(numberOffer2) == 0 || numberOffer2.equals(numberOffer)) { 
-                numberOffer2 = random.nextInt(selectedServices.size()); }
+        while (!success) {
             
-            numberPackage = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer));
-            numberPackage2 = random.nextInt(parent.getPackagesSizeFromSelectedServices(numberOffer2));  
-
-//            Paquete paquete = parent.getPackageFromSelectedServices(numberOffer, 
-//                            parent.getPackagesSizeFromSelectedServices(numberOffer));
-
-            //We chose at random an operator:
-            
-            //System.out.println("Oferta1: "+numberOffer+ " Paquete1: "+numberPackage);
-            //System.out.println("Oferta2: "+numberOffer2+ " Paquete2: "+numberPackage2);
-            //operator = random.nextInt(2);
-            operator = 0;
-            
-            if (operator.equals(0)){ //Move operator
-                if (validMovement(numberPackage,numberOffer,numberOffer2)) {
-//                    movements += "Paquete -> " + paquete + " Oferta " + parent.getOfferFromSelectedServices(numberOffer) + "\n";
-                    movePackage(numberPackage, numberOffer, numberOffer2);  
-                    nextStateCreated = true;
-                }
-            } 
-            else { //Swap operator
-//                Paquete paquete2 = parent.getPackageFromSelectedServices(numberOffer, 
-//                            parent.getPackagesSizeFromSelectedServices(numberOffer));
-                if (validSwap(numberPackage,numberOffer,numberPackage2,numberOffer2)){
-//                    movements += "( " + paquete + "," + parent.getOfferFromSelectedServices(numberOffer) + " )" 
-//                                        + "<-> " +
-//                                         "( " + paquete2 + "," + parent.getOfferFromSelectedServices(numberOffer2) +" )" + "\n";
-                    swapPackages(numberPackage, numberOffer, numberPackage2, numberOffer2);
-                    nextStateCreated = true;
+            if (random.nextInt(2) == 0) {
+                //move
+                int offerIndex = random.nextInt(Estado.getOffers().size());
+                int offerIndex2 = random.nextInt(Estado.getOffers().size());
+                if (!selectedServices.get(offerIndex).isEmpty() && offerIndex != offerIndex2) {
+                    int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
+                    if (validMovement(packageIndex, offerIndex, offerIndex2)) {
+                        movePackage(packageIndex, offerIndex, offerIndex2);
+                        nextEstado = new Estado(price,happiness, selectedServices, availableOfferWeight, parent.getSortedPackages(), parent.getSortedOffers());
+                        success = true;
+                    }
                 }
             }
- 
-            //we check that packages are not the same, in case of being the same package we generate another one:
-            
-        }
-        //We reuse our parent modified because we just need next State:
-        listaEstadosSucesores.add(new Successor(movements,parent));
-        return listaEstadosSucesores;
+        }        
+        //action += new HeuristicFunctionCost().getHeuristicValue(nextEstado);
+        sucesores.add(new Successor(action, nextEstado));
+        return sucesores;
     }
 }
