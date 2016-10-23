@@ -38,10 +38,10 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
     public GeneradorSimulatedAnneiling(int seed) {
         random = new Random(seed);
     }
-        /**
+    /**
      * Acepta o no un movimiento dependiendo de si el cambio de ese paquete por otro, nos es permitido
      * en caso de que se exceda el peso máximo o que el paquete no llegue, no se considerará válido
-     */
+    */
     private boolean validMovement(int numberPackage, int oldNumberOffer, int newNumberOffer){
         Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
         Oferta oferta = parent.getSortedOffers().get(newNumberOffer).getOferta();    
@@ -65,17 +65,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                 && parent.isValidPriority(oferta2.getDias(),paquete.getPrioridad());
     }
     
-    private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {
-        
-//            pesoOfertas.set(indiceOfertaActual, pesoOfertas.get(indiceOfertaActual) - paquete.getPeso());
-//            pesoOfertas.set(indiceOferta, pesoOfertas.get(indiceOferta) + paquete.getPeso());
-//            asignacionPaquetes.set(indicePaquete, indiceOferta);
-//            //ACTUALIZA FELICIDAD
-//            felicidad = estadoPadre.getFelicidad() - Estado.calculaFelicidad(indiceOfertaActual,paquete) + Estado.calculaFelicidad(indiceOferta,paquete);
-//            //ACTUALIZA PRECIO
-//            precio = estadoPadre.getPrecio() - Estado.calculaPrecio(indiceOfertaActual,paquete) + Estado.calculaPrecio(indiceOferta,paquete);
-//            return true;
-        
+    private void movePackage(int numberPackage, int oldNumberOffer, int newNumberOffer) {  
         
         Paquete paquete = selectedServices.get(oldNumberOffer).get(numberPackage);
         
@@ -86,9 +76,10 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         ArrayList<Paquete> paquetesOrdenados = selectedServices.get(newNumberOffer);
         paquetesOrdenados.add(paquete);
         selectedServices.set(newNumberOffer, paquetesOrdenados);
-        
-        ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer); //OJO QUE VOL DIR ULL
+       
+        ArrayList<Paquete> oldPaquetesOrdenados = selectedServices.get(oldNumberOffer);
         oldPaquetesOrdenados.remove(numberPackage);
+        //modificació:
         selectedServices.set(oldNumberOffer, oldPaquetesOrdenados);
         
         
@@ -96,6 +87,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         Oferta newOffer =  parent.getOfferFromSelectedServices(newNumberOffer);
         int oldHappiness = parent.happiness(oldOffer,paquete);
         int newHappiness = parent.happiness(newOffer,paquete);
+        System.out.println(happiness);
         parent.updateTotalHappiness(newHappiness-oldHappiness);
         
         //we do something similar as with happiness but with price
@@ -152,16 +144,20 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
         //data structures needed in the function:
         parent = (Estado)state;
         selectedServices = (ArrayList<ArrayList<Paquete>>) parent.getSelectedServices().clone();
+       
         availableOfferWeight = (ArrayList<Double>) parent.getAvailableOfferWeight().clone();
         happiness = parent.getHappiness();
         price = parent.getPrice();
         LinkedList<Successor> sucesores = new LinkedList<>(); //rename
         boolean success = false; //rename
-        Estado nextEstado = null;
+        Estado nextEstado = new Estado(price,happiness, selectedServices, 
+                                availableOfferWeight, parent.getSortedPackages(), parent.getSortedOffers());
         String action = "";
-        
+        int contador = 0;
         while (!success) {
+            ++contador;
             
+            System.out.println("Bucle" + contador);
             if (random.nextInt(2) == 0) {
                 //move
                 int offerIndex = random.nextInt(Estado.getOffers().size());
@@ -169,13 +165,24 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                 if (!selectedServices.get(offerIndex).isEmpty() && offerIndex != offerIndex2) {
                     int packageIndex = random.nextInt(selectedServices.get(offerIndex).size());
                     if (validMovement(packageIndex, offerIndex, offerIndex2)) {
+                        System.out.println("MOOOOVE");
                         movePackage(packageIndex, offerIndex, offerIndex2);
-                        nextEstado = new Estado(price,happiness, selectedServices, availableOfferWeight, parent.getSortedPackages(), parent.getSortedOffers());
-                        success = true;
+                        nextEstado = new Estado(price,happiness, selectedServices, 
+                                availableOfferWeight, parent.getSortedPackages(), parent.getSortedOffers());
+//                        System.out.println(selectedServices.equals(selectedServices2));
+//                        System.out.println(selectedServices);
+//                        System.out.println(selectedServices2);
+                        sucesores.add(new Successor(action, nextEstado));
+                        return sucesores;
+                    }
+                    else {
+                        
                     }
                 }
             }
-        }        
+        }    
+        
+        
         //action += new HeuristicFunctionCost().getHeuristicValue(nextEstado);
         sucesores.add(new Successor(action, nextEstado));
         return sucesores;
