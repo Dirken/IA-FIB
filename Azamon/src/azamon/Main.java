@@ -35,7 +35,7 @@ public class Main {
                                "+---------------------------------------------------------------------------------+");
             System.out.println(estadoInicial);
             System.out.println("+---------------------------------------------------------------------------------+\n"+
-                               "+---------------------------------------------------------------------------------+");
+                               "+---------------------------------------------------------------------------------+\n");
         }
         
         System.out.print("¿Ejecutar Simulate Annealing? (s/n) ");
@@ -44,7 +44,7 @@ public class Main {
             // 1 - Declaramos el generador
             GeneradorSimulatedAnneiling generadorSA = new GeneradorSimulatedAnneiling(semilla);
             // 2 - Elegimos la Heurística
-            System.out.print("Función Heurística:\n 1 - Coste\n 2 - Felicidad\n 3 - Coste + Felicidad\nSelección: ");
+            System.out.print("Función Heurística:\n  1 - Coste\n  2 - Felicidad\n  3 - Coste + Felicidad\nSelección: ");
             answer = scanner.next();
             Problem problemaSA;
             switch (answer) {
@@ -71,7 +71,7 @@ public class Main {
                                    "+---------------------------------------------------------------------------------+");
                 System.out.println(estadoSA);
                 System.out.println("+---------------------------------------------------------------------------------+\n"+
-                                   "+---------------------------------------------------------------------------------+");
+                                   "+---------------------------------------------------------------------------------+\n");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -84,7 +84,7 @@ public class Main {
         answer = scanner.next();
         if (answer.equals("s")||answer.equals("S")){
             GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
-            System.out.print("Función Heurística:\n 1 - Coste\n 2 - Felicidad\n 3 - Coste + Felicidad\nSelección: ");
+            System.out.print("Función Heurística:\n  1 - Coste\n  2 - Felicidad\n  3 - Coste + Felicidad\nSelección: ");
             answer = scanner.next();
             Problem problemaHC;
             switch (answer) {
@@ -108,7 +108,7 @@ public class Main {
                                    "+---------------------------------------------------------------------------------+");
                 System.out.println(estadoHC);
                 System.out.println("+---------------------------------------------------------------------------------+\n"+
-                                   "+---------------------------------------------------------------------------------+");
+                                   "+---------------------------------------------------------------------------------+\n");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
