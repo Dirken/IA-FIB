@@ -51,6 +51,21 @@ public class Estado {
     public static void setPackages(Paquetes packages) {
         Estado.packages = packages;
     }
+    public ArrayList<Integer> getSortedPackages(int offerIndex) {
+        return this.selectedServices.get(offerIndex);
+    }
+    public int sSpackagesSize(int offerIndex) {
+        return this.selectedServices.get(offerIndex).size();
+    }
+
+    public ArrayList<Double> getAvailableWeight() {
+        return availableWeight;
+    }
+    public void setAvailableWeight(ArrayList<Double> availableWeight) {
+        this.availableWeight = availableWeight;
+    }
+    
+
     
     public Estado() {
         this.happiness = 0;
@@ -72,8 +87,8 @@ public class Estado {
             sortPackagesCost();
             if (!canGetACostSolution()) System.out.println("Not a possible solution");
         }   
-        
     }
+    
     
     public Estado(double price, int happiness, ArrayList<ArrayList<Integer>> selectedServices) {
         this.price = price;
@@ -155,6 +170,9 @@ public class Estado {
     private double currentWeight(int offerIndex) {
         return this.availableWeight.get(offerIndex);
     }
+    public int getPackage(int offerIndex, int position) {
+        return this.selectedServices.get(offerIndex).get(position);
+    }
     
     private int getPackagePriority(int packageIndex) {
         return this.sortedPackages.get(packageIndex).getPaquete().getPrioridad();
@@ -169,23 +187,6 @@ public class Estado {
     private void updateWeight(int packageIndex, int offerIndex) {
         double newWeight = currentWeight(offerIndex) + getWeight(packageIndex);
         this.availableWeight.set(offerIndex, newWeight);
-    }
-    private void updatePrice(int packageIndex, int offerIndex) {
-        double packagePrice = 0;
-        switch (getOfferPriority(offerIndex)) {
-            case 3:
-                packagePrice += 0.25*getWeight(packageIndex);
-                break;
-            case 4:
-                packagePrice += 0.25*getWeight(packageIndex);
-                break;
-            case 5:
-                packagePrice += 0.5*getWeight(packageIndex);
-                break;
-            default:
-        }
-        packagePrice += getOfferPrice(offerIndex)*getWeight(packageIndex);
-        this.price += packagePrice;
     }
     private void updateHappiness(int packageIndex, int offerIndex) {
         int packagePriority = getPackagePriority(packageIndex);
@@ -202,6 +203,23 @@ public class Estado {
                 return 0;
         }
     }
+    private double priceGains(int packageIndex, int offerIndex) {
+        double packagePrice = 0;
+        switch (getOfferPriority(offerIndex)) {
+            case 3:
+                packagePrice += 0.25*getWeight(packageIndex);
+                break;
+            case 4:
+                packagePrice += 0.25*getWeight(packageIndex);
+                break;
+            case 5:
+                packagePrice += 0.5*getWeight(packageIndex);
+                break;
+            default:
+        }
+        packagePrice += getOfferPrice(offerIndex)*getWeight(packageIndex);
+        return packagePrice;
+    }
     
     private boolean canGetAHappinessSolution() {
         ArrayList<Boolean> packagesSaved = new ArrayList<>(Collections.nCopies(sortedPackages.size(),false));
@@ -216,7 +234,8 @@ public class Estado {
                     
                     updateWeight(packageIndex,offerIndex);
                     packagesSaved.set(packageIndex, true);
-                    updateHappiness(packageIndex, offerIndex); updatePrice(packageIndex, offerIndex); // Del total
+                    updateHappiness(packageIndex, offerIndex); 
+                    double priceGains = priceGains(packageIndex, offerIndex); this.price += priceGains;
                     selectedPackages.add(packageIndex);
                 }
             }
@@ -238,7 +257,8 @@ public class Estado {
                     
                     updateWeight(packageIndex,offerIndex);
                     packagesSaved.set(packageIndex, true);
-                    updateHappiness(packageIndex, offerIndex); updatePrice(packageIndex, offerIndex); // Del total
+                    updateHappiness(packageIndex, offerIndex); 
+                    double priceGains = priceGains(packageIndex, offerIndex); this.price += priceGains;
                     selectedPackages.add(packageIndex);
                 }
             }
@@ -302,6 +322,46 @@ public class Estado {
         
         return validPriority2 && validPriority2;
     }
+    
+    private void updateCurrentWeight(double packageWeight, int offerIndex) {
+        
+        double currentWeight = currentWeight(offerIndex);
+        this.availableWeight.set(offerIndex, currentWeight + packageWeight);
+    }
+    
+    public void movePackage(int packageIndex1, int offerIndex1, int offerIndex2, int position) {
+        
+        double packageWeight = getWeight(packageIndex1);
+        updateCurrentWeight(-packageWeight, offerIndex1);
+        updateCurrentWeight(+packageWeight, offerIndex2);
+        
+        updateSelectedServices(packageIndex1, offerIndex2);
+        removeSelectedServices(offerIndex1, position);
+        
+        int happinessGains1 = happinessGains(packageIndex1, offerIndex1);
+        int happinessGains2 = happinessGains(packageIndex1, offerIndex2);
+        this.happiness += happinessGains2 - happinessGains1;  
+        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
+       
+        double priceGains1 = priceGains(packageIndex1, offerIndex1);
+        double priceGains2 = priceGains(packageIndex1, offerIndex2);
+        price += priceGains2 - priceGains1;
+        if (this.price < 0) System.out.println("Errorako: price < 0");
+    }
+    
+    private void updateSelectedServices(int packageIndex, int offerIndex) {
+        ArrayList<Integer> sortedPackages = getSortedPackages(offerIndex);
+        sortedPackages.add(packageIndex);
+        this.selectedServices.set(offerIndex, sortedPackages);
+    }
+    private void removeSelectedServices(int offerIndex, int position) {
+        
+        ArrayList<Integer> savedPackages = this.selectedServices.get(offerIndex);
+        savedPackages.remove(position);
+        this.selectedServices.set(offerIndex, savedPackages);
+    }
+    
+    
     
     
     
