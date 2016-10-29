@@ -5,6 +5,9 @@
  */
 package azamonv2;
 
+import IA.Azamon.*;
+import azamonv2.Estado;
+
 /**
  *
  * @author Eironeia
@@ -16,6 +19,12 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Paquetes paquetes = new Paquetes(10,1234);
+        Transporte transporte = new Transporte(paquetes, 1.2 , 1234);
+        Estado.setPackages(paquetes);
+        Estado.setOffers(transporte);
+        Estado inicial = new Estado();
+        System.out.println(inicial);
     }
     
 }
