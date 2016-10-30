@@ -33,11 +33,13 @@ public class GeneradorHillClimbing implements SuccessorFunction{
     Para Hill Climbing tendréis que generar todas las posibles aplicaciones de los operadores al
     estado actual
     */
+    
+    Estado parent;
+    
     public List getSuccessors(Object state) {
         //data structures needed in the function:
-        Estado oldParent = (Estado)state; //?????
-        Estado parent = new Estado(oldParent.getPrice(), oldParent.getHappiness(), oldParent.getSelectedServices());
-        
+        parent = (Estado)state; //?????
+
         LinkedList<Successor> successors = new LinkedList<>();
         String action = "";
         
@@ -50,7 +52,7 @@ public class GeneradorHillClimbing implements SuccessorFunction{
 //                        if(parent.validSwap(packageIndex, offerIndex1, packageIndex, offerIndex2)) {
 //                            parent.swapPackage(packageIndex, offerIndex1, packageIndex, offerIndex2);
 //                            successors.add(0, new Successor(action, parent));
-//                            parent = new Estado(oldParent.getPrice(), oldParent.getHappiness(), oldParent.getSelectedServices());
+//                            parent = new Estado(parent.getPrice(), parent.getHappiness(), parent.getSelectedServices());
 //                        }
 //                    }
 //                }
@@ -63,9 +65,15 @@ public class GeneradorHillClimbing implements SuccessorFunction{
                     for(int position = 0; position < parent.sSpackagesSize(offerIndex1); ++position) {
                         int packageIndex = parent.getPackage(offerIndex1, position);
                         if(parent.validMovement(packageIndex, offerIndex2)) {
-                            parent.movePackage(packageIndex, offerIndex1, offerIndex2, position);
-                            successors.add(0, new Successor(action, parent));
-                            parent = new Estado(oldParent.getPrice(), oldParent.getHappiness(), oldParent.getSelectedServices());
+                            //parent.movePackage(packageIndex, offerIndex1, offerIndex2, position);
+                            
+                            Estado newState = new Estado();
+                            newState.selectedServices = (ArrayList<ArrayList<Integer>>)parent.selectedServices.clone();
+                            newState.availableWeight = ( ArrayList<Double>) parent.getAvailableWeight();
+                            newState.happiness = parent.happiness;
+                            newState.price = parent.price;
+                            newState.movePackage(packageIndex, offerIndex1, offerIndex2, position);
+                            successors.add(0, new Successor(action, newState));
                         }
                     }
                 }

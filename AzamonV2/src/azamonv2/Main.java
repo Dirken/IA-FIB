@@ -49,12 +49,12 @@ public class Main {
 //            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
 //            System.out.println("Finished Simulated Annealing");
 //            System.out.println("Simulated Annealing: felicidad: " + estadoFinal.getHappiness() + ", precio " + estadoFinal.getPrice());
-            System.out.println("Starting Hill Climbing");
-            agent = new SearchAgent(problemH, hillClimbingSearch);
-            estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            System.out.println("Finished Hill Climbing");
-            System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio " + estadoFinal.getPrice());
-            //System.out.println(estadoFinal);
+//            System.out.println("Starting Hill Climbing");
+//            agent = new SearchAgent(problemH, hillClimbingSearch);
+//            estadoFinal = (Estado)hillClimbingSearch.getGoalState();
+//            System.out.println("Finished Hill Climbing");
+//            System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio " + estadoFinal.getPrice());
+//            //System.out.println(estadoFinal);
 
             System.out.println("HEURISTICO PRECIO");
 //            System.out.println("Starting Simulated Annealing");
@@ -67,6 +67,7 @@ public class Main {
             agent = new SearchAgent(problemHP, hillClimbingSearch);
             time = System.nanoTime()-time;
             estadoFinal = (Estado)hillClimbingSearch.getGoalState();
+            System.out.println(estadoFinal);
             System.out.println("Finished Hill Climbing");
             System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio " + estadoFinal.getPrice() + ", tiempo " + Math.round(time/1000000));
             //System.out.println(estadoFinal);

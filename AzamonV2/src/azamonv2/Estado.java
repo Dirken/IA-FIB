@@ -16,14 +16,14 @@ public class Estado implements Cloneable {
 
     
     
-    private double price;
-    private int happiness;
+    public double price;
+    public int happiness;
     
     private static Transporte offers;
     private static Paquetes packages;
     
-    private  ArrayList<ArrayList<Integer>> selectedServices;// resultat
-    private  ArrayList<Double> availableWeight;
+    public  ArrayList<ArrayList<Integer>> selectedServices;// resultat
+    public  ArrayList<Double> availableWeight;
     private static ArrayList<PaqueteOrdenado> sortedPackages;
     private static ArrayList<OfertaOrdenada> sortedOffers;
     
@@ -59,7 +59,20 @@ public class Estado implements Cloneable {
     }
 
     public ArrayList<Double> getAvailableWeight() {
-        return availableWeight;
+        
+        ArrayList<Double> newAvailableWeight = new ArrayList<> ();
+        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex) {
+            int savedPackagesSize = this.sSpackagesSize(offerIndex);
+            if (savedPackagesSize == 0) newAvailableWeight.add(offerIndex, 0.0);
+            else {
+                double currentWeight = 0.0;
+                for (int packageIndex = 0; packageIndex < savedPackagesSize; ++packageIndex) {
+                    currentWeight += getWeight(packageIndex);
+                }
+                newAvailableWeight.add(offerIndex, currentWeight);
+            }
+        }
+        return newAvailableWeight;
     }
     public void setAvailableWeight(ArrayList<Double> availableWeight) {
         this.availableWeight = availableWeight;
@@ -88,15 +101,8 @@ public class Estado implements Cloneable {
             if (!canGetACostSolution()) System.out.println("Not a possible solution");
         }   
     }
+
     
-    
-    public Estado(double price, int happiness, ArrayList<ArrayList<Integer>> selectedServices) {
-        
-        this.price = price;
-        this.happiness = happiness;
-        this.selectedServices = selectedServices;
-        fillAvailableWeight();
-    }
 
     private void fillArrays() {
         
@@ -131,19 +137,6 @@ public class Estado implements Cloneable {
             offerIndex += 1;
         }
     }
-    private void fillAvailableWeight() {
-       
-       ArrayList<Double> weight = new ArrayList<>();
-       for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex) {
-           double currentWeight = 0;
-           for (int position = 0; position < selectedServices.get(offerIndex).size(); ++position) {
-               currentWeight += getWeight(getPackage(offerIndex, position)); 
-           }
-           weight.add(offerIndex, currentWeight);
-       }
-       this.availableWeight = weight;
-       System.out.println(availableWeight);
-   }
     private void fillResult() {
         for (int offerIndex = 0; offerIndex < sortedOffers.size(); ++offerIndex) {
             ArrayList<Integer> selectedPackages = new ArrayList<>();
@@ -306,6 +299,7 @@ public class Estado implements Cloneable {
         double maxWeight = getMaxWeight(offerIndex);
         boolean packageFits = currentWeight + packageWeight <= maxWeight;
         boolean validPriority = isValidPriority(packageIndex, offerIndex);
+        
         return packageFits && validPriority;
     }   
     
@@ -330,17 +324,32 @@ public class Estado implements Cloneable {
         
         double currentWeight = currentWeight(offerIndex);
         this.availableWeight.set(offerIndex, currentWeight + packageWeight);
+        
+        
     }
     
     public void movePackage(int packageIndex1, int offerIndex1, int offerIndex2, int position) {
-        
+      
         double packageWeight = getWeight(packageIndex1);
-        updateCurrentWeight(-packageWeight, offerIndex1);
-        updateCurrentWeight(+packageWeight, offerIndex2);
+        System.out.println("SelectedServices: " + this.selectedServices);
+        System.out.println("AvailableWeight: " + this.availableWeight);
+        System.out.println("packageWeight: "+packageWeight);
+        System.out.println("packageIndex1: " + packageIndex1);
+        System.out.println("offerIndex1: " + offerIndex1);
+        System.out.println("offerIndex2: " + offerIndex2);
+        System.out.println("position: " + position);
+        
+        
+        
+        
         
         updateSelectedServices(packageIndex1, offerIndex2);
         removeSelectedServices(offerIndex1, position);
         
+        this.availableWeight = this.getAvailableWeight();
+        System.out.println("AvailableWeight: " + this.availableWeight);
+        System.out.println("SelectedServices: " + this.selectedServices);
+        System.out.println("_________________");
         int happinessGains1 = happinessGains(packageIndex1, offerIndex1);
         int happinessGains2 = happinessGains(packageIndex1, offerIndex2);
         this.happiness += happinessGains2 - happinessGains1;  
@@ -404,8 +413,6 @@ public class Estado implements Cloneable {
     
     
     
-    
-    
     @Override
     public String toString() {
         String s = "";
@@ -425,4 +432,6 @@ public class Estado implements Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+    
+    
 }
