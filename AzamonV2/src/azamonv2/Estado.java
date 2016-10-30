@@ -57,6 +57,12 @@ public class Estado implements Cloneable {
     public int sSpackagesSize(int offerIndex) {
         return this.selectedServices.get(offerIndex).size();
     }
+    public static ArrayList<PaqueteOrdenado> getSortedPackages() {
+        return sortedPackages;
+    }
+    public static ArrayList<OfertaOrdenada> getSortedOffers() {
+        return sortedOffers;
+    }
 
     public ArrayList<Double> getAvailableWeight() {
         
