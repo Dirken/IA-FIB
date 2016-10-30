@@ -7,20 +7,11 @@
 package azamonv2.Generadores;
 
 import azamonv2.*;
-import azamonv2.Generadores.*;
-import azamonv2.SortedClasses.*;
-import IA.Azamon.Oferta;
-import IA.Azamon.Paquete;
-import IA.Azamon.Paquetes;
-import IA.Azamon.Transporte;
 import aima.search.framework.Successor;
 import aima.search.framework.SuccessorFunction;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -43,44 +34,44 @@ public class GeneradorHillClimbing implements SuccessorFunction{
         LinkedList<Successor> successors = new LinkedList<>();
         String action = "";
         
-        //SWAP
-//        for (int offerIndex1 = 0; offerIndex1 < parent.getSelectedServices().size(); ++offerIndex1) {
-//            for (int offerIndex2 = 0; offerIndex2 < parent.getSelectedServices().size(); ++offerIndex2) {
-//                if (offerIndex1 != offerIndex2) {
-//                    for(int position = 0; position < parent.sSpackagesSize(offerIndex1); ++position) {
-//                        int packageIndex = parent.getPackage(offerIndex1, position);
-//                        if(parent.validSwap(packageIndex, offerIndex1, packageIndex, offerIndex2)) {
-//                            parent.swapPackage(packageIndex, offerIndex1, packageIndex, offerIndex2);
-//                            successors.add(0, new Successor(action, parent));
-//                            parent = new Estado(parent.getPrice(), parent.getHappiness(), parent.getSelectedServices());
-//                        }
-//                    }
-//                }
-//            }
-//        }  
-        //MOVEMENT
         for (int offerIndex1 = 0; offerIndex1 < parent.getSelectedServices().size(); ++offerIndex1) {
             for (int offerIndex2 = 0; offerIndex2 < parent.getSelectedServices().size(); ++offerIndex2) {
                 if (offerIndex1 != offerIndex2) {
-                    for(int position = 0; position < parent.sSpackagesSize(offerIndex1); ++position) {
-                        int packageIndex = parent.getPackage(offerIndex1, position);
-                        if(parent.validMovement(packageIndex, offerIndex2)) {
-                            //parent.movePackage(packageIndex, offerIndex1, offerIndex2, position);
+                    for(int position1 = 0; position1 < parent.sSpackagesSize(offerIndex1); ++position1) {
+                        int packageIndex1 = parent.getPackage(offerIndex1, position1);
+                        //SWAP
+                        for (int position2 = 0; position2 < parent.sSpackagesSize(offerIndex2); ++position2) {
+                            
+                            int packageIndex2 = parent.getPackage(offerIndex2, position2);
+                            if(parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
+                                
+                                Estado newState = new Estado();
+                                newState.selectedServices = (ArrayList<ArrayList<Integer>>)parent.selectedServices.clone();
+                                newState.availableWeight = ( ArrayList<Double>) parent.getAvailableWeight();
+                                newState.happiness = parent.happiness;
+                                newState.price = parent.price;
+                                newState.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
+                                
+                                successors.add(0, new Successor(action, newState));
+                            }
+                            
+                        }
+                        //MOVE
+                        if(parent.validMovement(packageIndex1, offerIndex2)) {
                             
                             Estado newState = new Estado();
                             newState.selectedServices = (ArrayList<ArrayList<Integer>>)parent.selectedServices.clone();
                             newState.availableWeight = ( ArrayList<Double>) parent.getAvailableWeight();
                             newState.happiness = parent.happiness;
                             newState.price = parent.price;
-                            newState.movePackage(packageIndex, offerIndex1, offerIndex2, position);
+                            newState.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);
+                            
                             successors.add(0, new Successor(action, newState));
                         }
                     }
                 }
             }
         }  
-        
-        
         return successors; 
     }  
 }

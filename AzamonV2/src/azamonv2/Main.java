@@ -24,7 +24,7 @@ public class Main {
         Estado.setPackages(paquetes);
         System.out.println("Creando estado inicial. :D:D:D");
         Estado estadoInicial = new Estado();
-        System.out.println(estadoInicial);
+        //System.out.println(estadoInicial);
 
         GeneradorHillClimbing generadorSucesoresHillClimbing = new GeneradorHillClimbing();
         //GeneradorSimulatedAnnealing generadorSucesoresSimulatedAnnealing = new GeneradorSucesoresSimulatedAnnealing(1234);
@@ -38,7 +38,7 @@ public class Main {
 //        Problem problemAF = new Problem(estadoInicial, generadorSucesoresSimulatedAnnealing, state -> true, new FuncionHeuristicaFelicidad());
 
         HillClimbingSearch hillClimbingSearch = new HillClimbingSearch();
-        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(100, 20, 5, 0.001);
+        //SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(100, 20, 5, 0.001);
         System.out.println("Estado inicial: felicidad " + estadoInicial.getHappiness() + ", precio " + estadoInicial.getPrice());
         try {
             SearchAgent agent;
@@ -67,7 +67,7 @@ public class Main {
             agent = new SearchAgent(problemHP, hillClimbingSearch);
             time = System.nanoTime()-time;
             estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            System.out.println(estadoFinal);
+            //System.out.println(estadoFinal);
             System.out.println("Finished Hill Climbing");
             System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio " + estadoFinal.getPrice() + ", tiempo " + Math.round(time/1000000));
             //System.out.println(estadoFinal);

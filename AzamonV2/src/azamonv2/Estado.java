@@ -90,7 +90,7 @@ public class Estado implements Cloneable {
 
         fillArrays(); // O(max(n,m))
         
-        boolean happiness = true; //Per cambiar el tipus de estado inicial prioritat
+        boolean happiness = false; //Per cambiar el tipus de estado inicial prioritat
         
         if (happiness) {
             sortPackagesHappiness();
@@ -233,7 +233,7 @@ public class Estado implements Cloneable {
             for (int packageIndex = 0; packageIndex < savedPackagesSize; ++ packageIndex) {
                 int packagePriority = getPackagePriority(packageIndex);
                 int offerPriority = getOfferPriority(offerIndex);
-                this.price += happinessGains(packagePriority, offerPriority);
+                this.happiness += happinessGains(packagePriority, offerPriority);
             }
         }
     }
@@ -350,77 +350,28 @@ public class Estado implements Cloneable {
     }
     
     public void movePackage(int packageIndex1, int offerIndex1, int offerIndex2, int position) {
-      
-        double packageWeight = getWeight(packageIndex1);
-//        System.out.println("SelectedServices: " + this.selectedServices);
-//        System.out.println("AvailableWeight: " + this.availableWeight);
-//        System.out.println("packageWeight: "+packageWeight);
-//        System.out.println("packageIndex1: " + packageIndex1);
-//        System.out.println("offerIndex1: " + offerIndex1);
-//        System.out.println("offerIndex2: " + offerIndex2);
-//        System.out.println("position: " + position);
-        
-        
-        
-        
-        
+
         updateSelectedServices(packageIndex1, offerIndex2);
         removeSelectedServices(offerIndex1, position);
         
         this.availableWeight = this.getAvailableWeight();
-//        System.out.println("AvailableWeight: " + this.availableWeight);
-//        System.out.println("SelectedServices: " + this.selectedServices);
-//        System.out.println("_________________");
-        
-        
-                
-//        int happinessGains1 = happinessGains(packageIndex, offerPriority1);
-//        int happinessGains2 = happinessGains(packagePriority, offerPriority2);
-//        this.happiness += happinessGains2 - happinessGains1;  
-//        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
-        
-        
+
         updateTotalHappiness();
-       
         updateTotalPrice();
     }
     
-    public void swapPackage(int packageIndex1, int offerIndex1, int packageIndex2, int offerIndex2) {
+    public void swapPackage(int packageIndex1, int offerIndex1, int packageIndex2, int offerIndex2, int position1, int position2) {
         
-        double packageWeight1 = getWeight(packageIndex1);
-        updateCurrentWeight(-packageWeight1, offerIndex1);
-        updateCurrentWeight(+packageWeight1, offerIndex2);
-        
-        double packageWeight2 = getWeight(packageIndex2);
-        updateCurrentWeight(+packageWeight2, offerIndex1);
-        updateCurrentWeight(-packageWeight2, offerIndex2);
-        
-        removeSelectedServices(packageIndex2, offerIndex2);
         updateSelectedServices(packageIndex1, offerIndex2);
-        
-        removeSelectedServices(packageIndex1, offerIndex1);
         updateSelectedServices(packageIndex2, offerIndex1);
+        removeSelectedServices(offerIndex1, position1);
+        removeSelectedServices(offerIndex2, position2);
         
-        int happinessGains1_1 = happinessGains(packageIndex1, offerIndex2);
-        int happinessGains1_2 = happinessGains(packageIndex1, offerIndex1);
-        this.happiness += happinessGains1_1 - happinessGains1_2;
-        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
         
-        int happinessGains2_1 = happinessGains(packageIndex2, offerIndex1);
-        int happinessGains2_2 = happinessGains(packageIndex2, offerIndex2);
-        this.happiness += happinessGains2_1 - happinessGains2_2;
-        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
-        
-        double priceGains1_2 = priceGains(packageIndex1, offerIndex1);
-        double priceGains1_1 = priceGains(packageIndex1, offerIndex2);
-        price += priceGains1_1 - priceGains1_2;
-        if (this.price < 0) System.out.println("Errorako: price < 0");
-        
-        double priceGains2_2 = priceGains(packageIndex2, offerIndex2);
-        double priceGains2_1 = priceGains(packageIndex2, offerIndex1);
-        price += priceGains2_1 - priceGains2_2;
-        if (this.price < 0) System.out.println("Errorako: price < 0");
-        
+        this.availableWeight = this.getAvailableWeight();
+
+        updateTotalHappiness();
+        updateTotalPrice(); 
     }
     
     private void updateSelectedServices(int packageIndex, int offerIndex) {
@@ -439,8 +390,9 @@ public class Estado implements Cloneable {
     
     @Override
     public String toString() {
+        
         String s = "";
-        s += "#Ofertas Totales: " + offers.size() + " || Felicidad total: " + happiness + " || Precio Total: " + price + "\n";
+        s += "#Ofertas Totales: " + offers.size() + " || Felicidad total: " + happiness + " || Precio Total: " + price + "";
         for (int i = 0; i < availableWeight.size(); ++i) {
             s += "#Oferta " + i + " con peso " + availableWeight.get(i) + "/" + getMaxWeight(i) + ", con dias de entrega " + getOfferPriority(i) +  " y con precio: " + getOfferPrice(i) + ":\n";
             ArrayList<Integer> selectedPackages = selectedServices.get(i);
