@@ -216,6 +216,27 @@ public class Estado implements Cloneable {
         packagePrice += getOfferPrice(offerIndex)*getWeight(packageIndex);
         return packagePrice;
     }
+    private void updateTotalPrice() {
+        this.price = 0;
+        for (int offerIndex = 0; offerIndex < this.selectedServices.size(); ++offerIndex) {
+            int savedPackagesSize = this.sSpackagesSize(offerIndex);
+            for (int packageIndex = 0; packageIndex < savedPackagesSize; ++ packageIndex) {
+                this.price += priceGains(packageIndex, offerIndex);
+            }
+        }
+    
+    }
+    private void updateTotalHappiness() {
+        this.happiness = 0;
+        for (int offerIndex = 0; offerIndex < this.selectedServices.size(); ++offerIndex) {
+            int savedPackagesSize = this.sSpackagesSize(offerIndex);
+            for (int packageIndex = 0; packageIndex < savedPackagesSize; ++ packageIndex) {
+                int packagePriority = getPackagePriority(packageIndex);
+                int offerPriority = getOfferPriority(offerIndex);
+                this.price += happinessGains(packagePriority, offerPriority);
+            }
+        }
+    }
     
     private boolean canGetAHappinessSolution() {
         ArrayList<Boolean> packagesSaved = new ArrayList<>(Collections.nCopies(sortedPackages.size(),false));
@@ -331,13 +352,13 @@ public class Estado implements Cloneable {
     public void movePackage(int packageIndex1, int offerIndex1, int offerIndex2, int position) {
       
         double packageWeight = getWeight(packageIndex1);
-        System.out.println("SelectedServices: " + this.selectedServices);
-        System.out.println("AvailableWeight: " + this.availableWeight);
-        System.out.println("packageWeight: "+packageWeight);
-        System.out.println("packageIndex1: " + packageIndex1);
-        System.out.println("offerIndex1: " + offerIndex1);
-        System.out.println("offerIndex2: " + offerIndex2);
-        System.out.println("position: " + position);
+//        System.out.println("SelectedServices: " + this.selectedServices);
+//        System.out.println("AvailableWeight: " + this.availableWeight);
+//        System.out.println("packageWeight: "+packageWeight);
+//        System.out.println("packageIndex1: " + packageIndex1);
+//        System.out.println("offerIndex1: " + offerIndex1);
+//        System.out.println("offerIndex2: " + offerIndex2);
+//        System.out.println("position: " + position);
         
         
         
@@ -347,18 +368,21 @@ public class Estado implements Cloneable {
         removeSelectedServices(offerIndex1, position);
         
         this.availableWeight = this.getAvailableWeight();
-        System.out.println("AvailableWeight: " + this.availableWeight);
-        System.out.println("SelectedServices: " + this.selectedServices);
-        System.out.println("_________________");
-        int happinessGains1 = happinessGains(packageIndex1, offerIndex1);
-        int happinessGains2 = happinessGains(packageIndex1, offerIndex2);
-        this.happiness += happinessGains2 - happinessGains1;  
-        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
+//        System.out.println("AvailableWeight: " + this.availableWeight);
+//        System.out.println("SelectedServices: " + this.selectedServices);
+//        System.out.println("_________________");
+        
+        
+                
+//        int happinessGains1 = happinessGains(packageIndex, offerPriority1);
+//        int happinessGains2 = happinessGains(packagePriority, offerPriority2);
+//        this.happiness += happinessGains2 - happinessGains1;  
+//        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
+        
+        
+        updateTotalHappiness();
        
-        double priceGains1 = priceGains(packageIndex1, offerIndex1);
-        double priceGains2 = priceGains(packageIndex1, offerIndex2);
-        price += priceGains2 - priceGains1;
-        if (this.price < 0) System.out.println("Errorako: price < 0");
+        updateTotalPrice();
     }
     
     public void swapPackage(int packageIndex1, int offerIndex1, int packageIndex2, int offerIndex2) {
