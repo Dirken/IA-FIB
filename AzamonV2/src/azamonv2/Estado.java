@@ -12,7 +12,7 @@ import azamonv2.SortedClasses.*;
  *
  * @author Eironeia
  */
-public class Estado {
+public class Estado implements Cloneable {
 
     
     
@@ -24,8 +24,8 @@ public class Estado {
     
     private  ArrayList<ArrayList<Integer>> selectedServices;// resultat
     private  ArrayList<Double> availableWeight;
-    private  ArrayList<PaqueteOrdenado> sortedPackages;
-    private  ArrayList<OfertaOrdenada> sortedOffers;
+    private static ArrayList<PaqueteOrdenado> sortedPackages;
+    private static ArrayList<OfertaOrdenada> sortedOffers;
     
     public double getPrice() {
         return price;
@@ -91,6 +91,7 @@ public class Estado {
     
     
     public Estado(double price, int happiness, ArrayList<ArrayList<Integer>> selectedServices) {
+        
         this.price = price;
         this.happiness = happiness;
         this.selectedServices = selectedServices;
@@ -133,13 +134,15 @@ public class Estado {
     private void fillAvailableWeight() {
        
        ArrayList<Double> weight = new ArrayList<>();
-       
        for (int offerIndex = 0; offerIndex < selectedServices.size(); ++offerIndex) {
-           for (int packageIndex = 0; packageIndex < selectedServices.get(offerIndex).size(); ++packageIndex) {
-               availableWeight.set(offerIndex, getWeight(packageIndex));
+           double currentWeight = 0;
+           for (int position = 0; position < selectedServices.get(offerIndex).size(); ++position) {
+               currentWeight += getWeight(getPackage(offerIndex, position)); 
            }
+           weight.add(offerIndex, currentWeight);
        }
        this.availableWeight = weight;
+       System.out.println(availableWeight);
    }
     private void fillResult() {
         for (int offerIndex = 0; offerIndex < sortedOffers.size(); ++offerIndex) {
@@ -349,6 +352,44 @@ public class Estado {
         if (this.price < 0) System.out.println("Errorako: price < 0");
     }
     
+    public void swapPackage(int packageIndex1, int offerIndex1, int packageIndex2, int offerIndex2) {
+        
+        double packageWeight1 = getWeight(packageIndex1);
+        updateCurrentWeight(-packageWeight1, offerIndex1);
+        updateCurrentWeight(+packageWeight1, offerIndex2);
+        
+        double packageWeight2 = getWeight(packageIndex2);
+        updateCurrentWeight(+packageWeight2, offerIndex1);
+        updateCurrentWeight(-packageWeight2, offerIndex2);
+        
+        removeSelectedServices(packageIndex2, offerIndex2);
+        updateSelectedServices(packageIndex1, offerIndex2);
+        
+        removeSelectedServices(packageIndex1, offerIndex1);
+        updateSelectedServices(packageIndex2, offerIndex1);
+        
+        int happinessGains1_1 = happinessGains(packageIndex1, offerIndex2);
+        int happinessGains1_2 = happinessGains(packageIndex1, offerIndex1);
+        this.happiness += happinessGains1_1 - happinessGains1_2;
+        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
+        
+        int happinessGains2_1 = happinessGains(packageIndex2, offerIndex1);
+        int happinessGains2_2 = happinessGains(packageIndex2, offerIndex2);
+        this.happiness += happinessGains2_1 - happinessGains2_2;
+        if (this.happiness < 0) System.out.println("Erorako: happiness < 0");
+        
+        double priceGains1_2 = priceGains(packageIndex1, offerIndex1);
+        double priceGains1_1 = priceGains(packageIndex1, offerIndex2);
+        price += priceGains1_1 - priceGains1_2;
+        if (this.price < 0) System.out.println("Errorako: price < 0");
+        
+        double priceGains2_2 = priceGains(packageIndex2, offerIndex2);
+        double priceGains2_1 = priceGains(packageIndex2, offerIndex1);
+        price += priceGains2_1 - priceGains2_2;
+        if (this.price < 0) System.out.println("Errorako: price < 0");
+        
+    }
+    
     private void updateSelectedServices(int packageIndex, int offerIndex) {
         ArrayList<Integer> sortedPackages = getSortedPackages(offerIndex);
         sortedPackages.add(packageIndex);
@@ -378,5 +419,10 @@ public class Estado {
             }
         }
         return s;
+    }
+    
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
