@@ -1,6 +1,6 @@
 package azamonv2.Heuristiques;
 
-import azamonv2.*;
+import azamonv2.Estado;
 import aima.search.framework.HeuristicFunction;
 
 public class HeuristicFunctionHappiness implements HeuristicFunction{
@@ -14,6 +14,5 @@ public class HeuristicFunctionHappiness implements HeuristicFunction{
     @Override
     public double getHeuristicValue(Object state) {
         return (-1)*((Estado)state).getHappiness();
-        //return (-1)*Estado.getHappiness ();
     }
 }

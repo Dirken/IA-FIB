@@ -1,6 +1,5 @@
 package azamonv2.Heuristiques;
 
-import azamonv2.*;
 import azamonv2.Estado;
 import aima.search.framework.HeuristicFunction;
 
@@ -15,6 +14,5 @@ public class HeuristicFunctionCost implements HeuristicFunction{
     @Override
     public double getHeuristicValue(Object state) {
         return ((Estado)state).getPrice();
-        //return Estado.getPrice ();
     }
 }

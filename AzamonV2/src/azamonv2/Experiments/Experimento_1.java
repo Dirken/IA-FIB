@@ -1,5 +1,6 @@
-package azamonv2;
+package azamonv2.Experiments;
 
+import azamonv2.*;
 import azamonv2.Heuristiques.*;
 import azamonv2.Generadores.*;
 
@@ -14,7 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main {
+public class Experimento_1 {
     
     static final int semilla = 1234; 
     static int numeroPaquetes = 100;
@@ -24,14 +25,11 @@ public class Main {
         
         long startTimeProgram = System.currentTimeMillis();
         
-        String ruta = "result.txt";
+        String ruta = "Experimento_1.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
-        String  EstadoSimulatedAnneilingCost = null, 
-                EstadoSimulatedAnneilingHappiness = null, 
-                EstadoSimulatedAnneilingCostHappiness = null,
-                EstadoHillClimbingCost = null, 
+        String  EstadoHillClimbingCost = null, 
                 EstadoHillClimbingHappiness = null, 
                 EstadoHillClimbingCostHappiness = null;
         
@@ -43,13 +41,6 @@ public class Main {
         
         GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
         GeneradorSimulatedAnneiling generadorSA = new GeneradorSimulatedAnneiling(semilla);
-        
-        Problem SimulatedAnneilingCost =            
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCost());
-        Problem SimulatedAnneilingHappiness =       
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionHappiness());
-        Problem SimulatedAnneilingCostHappiness =   
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCostHappiness());
         
         Problem HillClimbingCost = 
             new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCost());
@@ -70,21 +61,6 @@ public class Main {
         //###########################HEURISTICO COSTE###########################
         System.out.println("HEURISTICO COSTE:");
         bw.write("\nHEURISTICO COSTE\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
-            long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingCost = "RESULTADO SIMULATED ANNEALING COSTE\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
         System.out.print("Starting Hill Climbing");
         try{
             SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
@@ -104,21 +80,6 @@ public class Main {
         //#########################HEURISTICO FELICIDAD#########################
         System.out.println("\nHEURISTICO FELICIDAD:");
         bw.write("\nHEURISTICO FELICIDAD\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingHappiness, simulatedAnnealingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingHappiness = "RESULTADO SIMULATED ANNEALING FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
         System.out.print("Starting Hill Climbing");
         try{
             SearchAgent agent = new SearchAgent(HillClimbingHappiness, hillClimbingSearch);
@@ -138,21 +99,6 @@ public class Main {
         //#############################HEURISTICO MIXTO#########################
         System.out.println("\nHEURISTICO COSTE-FELICIDAD:");
         bw.write("\nHEURISTICO COSTE-FELICIDAD\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCostHappiness, simulatedAnnealingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingCostHappiness = "RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
         System.out.print("Starting Hill Climbing");
         try{
             SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
@@ -169,11 +115,8 @@ public class Main {
             System.err.println(".........Hill climbing finished with errors.");
         }
         
-        bw.write("\n\n"+ EstadoSimulatedAnneilingCost 
-                +"\n\n"+ EstadoHillClimbingCost  
-                +"\n\n"+ EstadoSimulatedAnneilingHappiness   
+        bw.write("\n\n"+ EstadoHillClimbingCost  
                 +"\n\n"+ EstadoHillClimbingHappiness
-                +"\n\n"+ EstadoSimulatedAnneilingCostHappiness 
                 +"\n\n"+ EstadoHillClimbingCostHappiness);
         
         bw.close();
