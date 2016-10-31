@@ -1,0 +1,398 @@
+ESTADO INICIAL
+Número de ofertas de transporte: 24 || Felicidad: 15 || Precio: 844.0300000000002
+
+HEURISTICO COSTE
+ ★Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 16 || Precio: 120.01000000000002
+
+HEURISTICO FELICIDAD
+ ★Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 200 || Precio: 524.0799999999994
+
+HEURISTICO COSTE-FELICIDAD
+ ★Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 192 || Precio: 408.61999999999944
+
+
+RESULTADO HILL CLIMBING COSTE
+#Ofertas Totales: 24 || Felicidad total: 16 || Precio Total: 120.01000000000002
+#Oferta 0 con peso 6.0/15.0, con dias de entrega 1 y con precio: 3.38:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+	23 #Paquete# peso(8.5) prioridad(0)
+	24 #Paquete# peso(8.5) prioridad(0)
+	25 #Paquete# peso(8.5) prioridad(0)
+	26 #Paquete# peso(8.5) prioridad(0)
+	27 #Paquete# peso(8.5) prioridad(0)
+	28 #Paquete# peso(8.5) prioridad(0)
+	29 #Paquete# peso(8.5) prioridad(0)
+	30 #Paquete# peso(8.5) prioridad(0)
+	31 #Paquete# peso(8.5) prioridad(0)
+	32 #Paquete# peso(8.5) prioridad(0)
+	33 #Paquete# peso(8.5) prioridad(0)
+	34 #Paquete# peso(8.5) prioridad(0)
+	35 #Paquete# peso(8.5) prioridad(0)
+	36 #Paquete# peso(8.5) prioridad(0)
+	37 #Paquete# peso(8.5) prioridad(0)
+	38 #Paquete# peso(8.5) prioridad(0)
+	39 #Paquete# peso(8.5) prioridad(0)
+	40 #Paquete# peso(8.5) prioridad(0)
+	41 #Paquete# peso(8.5) prioridad(0)
+	42 #Paquete# peso(8.5) prioridad(0)
+	43 #Paquete# peso(8.5) prioridad(0)
+	44 #Paquete# peso(8.5) prioridad(0)
+	45 #Paquete# peso(8.5) prioridad(0)
+	46 #Paquete# peso(8.5) prioridad(0)
+	47 #Paquete# peso(8.5) prioridad(0)
+	48 #Paquete# peso(8.5) prioridad(0)
+	49 #Paquete# peso(8.5) prioridad(0)
+	50 #Paquete# peso(8.5) prioridad(0)
+	51 #Paquete# peso(8.5) prioridad(0)
+	52 #Paquete# peso(8.5) prioridad(0)
+	53 #Paquete# peso(8.5) prioridad(0)
+	54 #Paquete# peso(8.5) prioridad(0)
+	55 #Paquete# peso(8.5) prioridad(0)
+	56 #Paquete# peso(8.5) prioridad(0)
+	57 #Paquete# peso(8.5) prioridad(0)
+	58 #Paquete# peso(8.5) prioridad(0)
+	59 #Paquete# peso(8.5) prioridad(0)
+	60 #Paquete# peso(8.5) prioridad(0)
+	61 #Paquete# peso(8.5) prioridad(0)
+	62 #Paquete# peso(8.5) prioridad(0)
+	63 #Paquete# peso(8.5) prioridad(0)
+	64 #Paquete# peso(8.5) prioridad(0)
+	65 #Paquete# peso(8.5) prioridad(0)
+	66 #Paquete# peso(8.5) prioridad(0)
+	67 #Paquete# peso(8.5) prioridad(0)
+	68 #Paquete# peso(8.5) prioridad(0)
+	69 #Paquete# peso(4.0) prioridad(1)
+#Oferta 1 con peso 0.5/5.0, con dias de entrega 1 y con precio: 4.28:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+#Oferta 2 con peso 0.5/25.0, con dias de entrega 1 y con precio: 3.82:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+#Oferta 3 con peso 0.0/40.0, con dias de entrega 1 y con precio: 3.3:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+#Oferta 4 con peso 3.5/30.0, con dias de entrega 1 y con precio: 3.68:
+#Oferta 5 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.85:
+#Oferta 6 con peso 0.0/25.0, con dias de entrega 2 y con precio: 2.21:
+#Oferta 7 con peso 1.0/40.0, con dias de entrega 2 y con precio: 2.06:
+#Oferta 8 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.02:
+#Oferta 9 con peso 1.0/20.0, con dias de entrega 2 y con precio: 2.68:
+#Oferta 10 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.7:
+#Oferta 11 con peso 1.0/20.0, con dias de entrega 2 y con precio: 2.35:
+#Oferta 12 con peso 2.0/35.0, con dias de entrega 2 y con precio: 2.66:
+#Oferta 13 con peso 3.5/45.0, con dias de entrega 3 y con precio: 1.75:
+#Oferta 14 con peso 2.5/25.0, con dias de entrega 3 y con precio: 1.55:
+#Oferta 15 con peso 4.0/25.0, con dias de entrega 3 y con precio: 2.12:
+#Oferta 16 con peso 17.5/30.0, con dias de entrega 3 y con precio: 1.54:
+#Oferta 17 con peso 0.5/30.0, con dias de entrega 4 y con precio: 0.81:
+#Oferta 18 con peso 2.0/40.0, con dias de entrega 4 y con precio: 1.11:
+#Oferta 19 con peso 0.0/5.0, con dias de entrega 4 y con precio: 1.3:
+#Oferta 20 con peso 0.5/15.0, con dias de entrega 5 y con precio: 0.48:
+#Oferta 21 con peso 2.0/25.0, con dias de entrega 5 y con precio: 0.35:
+#Oferta 22 con peso 1.5/15.0, con dias de entrega 5 y con precio: 0.25:
+#Oferta 23 con peso 9.0/30.0, con dias de entrega 5 y con precio: 0.78:
+
+
+RESULTADO HILL CLIMBING FELICIDAD
+#Ofertas Totales: 24 || Felicidad total: 200 || Precio Total: 524.0799999999994
+#Oferta 0 con peso 130.5/15.0, con dias de entrega 1 y con precio: 3.38:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+#Oferta 1 con peso 11.5/5.0, con dias de entrega 1 y con precio: 4.28:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+#Oferta 2 con peso 1.0/25.0, con dias de entrega 1 y con precio: 3.82:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+	23 #Paquete# peso(8.5) prioridad(0)
+	24 #Paquete# peso(8.5) prioridad(0)
+	25 #Paquete# peso(8.5) prioridad(0)
+	26 #Paquete# peso(8.5) prioridad(0)
+	27 #Paquete# peso(8.5) prioridad(0)
+	28 #Paquete# peso(8.5) prioridad(0)
+	29 #Paquete# peso(8.5) prioridad(0)
+	30 #Paquete# peso(8.5) prioridad(0)
+	31 #Paquete# peso(8.5) prioridad(0)
+	32 #Paquete# peso(8.5) prioridad(0)
+	33 #Paquete# peso(8.5) prioridad(0)
+	34 #Paquete# peso(8.5) prioridad(0)
+	35 #Paquete# peso(8.5) prioridad(0)
+	36 #Paquete# peso(8.5) prioridad(0)
+	37 #Paquete# peso(8.5) prioridad(0)
+	38 #Paquete# peso(8.5) prioridad(0)
+	39 #Paquete# peso(8.5) prioridad(0)
+	40 #Paquete# peso(8.5) prioridad(0)
+	41 #Paquete# peso(8.5) prioridad(0)
+	42 #Paquete# peso(8.5) prioridad(0)
+	43 #Paquete# peso(8.5) prioridad(0)
+	44 #Paquete# peso(8.5) prioridad(0)
+	45 #Paquete# peso(8.5) prioridad(0)
+	46 #Paquete# peso(8.5) prioridad(0)
+	47 #Paquete# peso(8.5) prioridad(0)
+	48 #Paquete# peso(8.5) prioridad(0)
+	49 #Paquete# peso(8.5) prioridad(0)
+	50 #Paquete# peso(8.5) prioridad(0)
+	51 #Paquete# peso(8.5) prioridad(0)
+	52 #Paquete# peso(8.5) prioridad(0)
+	53 #Paquete# peso(8.5) prioridad(0)
+	54 #Paquete# peso(8.5) prioridad(0)
+	55 #Paquete# peso(8.5) prioridad(0)
+	56 #Paquete# peso(8.5) prioridad(0)
+	57 #Paquete# peso(8.5) prioridad(0)
+#Oferta 3 con peso 3.5/40.0, con dias de entrega 1 y con precio: 3.3:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+#Oferta 4 con peso 5.0/30.0, con dias de entrega 1 y con precio: 3.68:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+#Oferta 5 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.85:
+#Oferta 6 con peso 0.0/25.0, con dias de entrega 2 y con precio: 2.21:
+#Oferta 7 con peso 0.0/40.0, con dias de entrega 2 y con precio: 2.06:
+#Oferta 8 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.02:
+#Oferta 9 con peso 0.0/20.0, con dias de entrega 2 y con precio: 2.68:
+#Oferta 10 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.7:
+#Oferta 11 con peso 0.0/20.0, con dias de entrega 2 y con precio: 2.35:
+#Oferta 12 con peso 0.0/35.0, con dias de entrega 2 y con precio: 2.66:
+#Oferta 13 con peso 0.0/45.0, con dias de entrega 3 y con precio: 1.75:
+#Oferta 14 con peso 0.0/25.0, con dias de entrega 3 y con precio: 1.55:
+#Oferta 15 con peso 0.0/25.0, con dias de entrega 3 y con precio: 2.12:
+#Oferta 16 con peso 0.0/30.0, con dias de entrega 3 y con precio: 1.54:
+#Oferta 17 con peso 0.0/30.0, con dias de entrega 4 y con precio: 0.81:
+#Oferta 18 con peso 0.0/40.0, con dias de entrega 4 y con precio: 1.11:
+#Oferta 19 con peso 0.0/5.0, con dias de entrega 4 y con precio: 1.3:
+#Oferta 20 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.48:
+#Oferta 21 con peso 0.0/25.0, con dias de entrega 5 y con precio: 0.35:
+#Oferta 22 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.25:
+#Oferta 23 con peso 0.0/30.0, con dias de entrega 5 y con precio: 0.78:
+
+
+RESULTADO HILL CLIMBING COST-FELICIDAD
+#Ofertas Totales: 24 || Felicidad total: 192 || Precio Total: 408.61999999999944
+#Oferta 0 con peso 3.5/15.0, con dias de entrega 1 y con precio: 3.38:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+	23 #Paquete# peso(8.5) prioridad(0)
+	24 #Paquete# peso(8.5) prioridad(0)
+	25 #Paquete# peso(8.5) prioridad(0)
+	26 #Paquete# peso(8.5) prioridad(0)
+	27 #Paquete# peso(8.5) prioridad(0)
+	28 #Paquete# peso(8.5) prioridad(0)
+	29 #Paquete# peso(8.5) prioridad(0)
+	30 #Paquete# peso(8.5) prioridad(0)
+	31 #Paquete# peso(8.5) prioridad(0)
+	32 #Paquete# peso(8.5) prioridad(0)
+	33 #Paquete# peso(8.5) prioridad(0)
+	34 #Paquete# peso(8.5) prioridad(0)
+	35 #Paquete# peso(8.5) prioridad(0)
+	36 #Paquete# peso(8.5) prioridad(0)
+	37 #Paquete# peso(8.5) prioridad(0)
+	38 #Paquete# peso(8.5) prioridad(0)
+	39 #Paquete# peso(8.5) prioridad(0)
+	40 #Paquete# peso(8.5) prioridad(0)
+	41 #Paquete# peso(8.5) prioridad(0)
+	42 #Paquete# peso(8.5) prioridad(0)
+	43 #Paquete# peso(8.5) prioridad(0)
+	44 #Paquete# peso(8.5) prioridad(0)
+	45 #Paquete# peso(8.5) prioridad(0)
+	46 #Paquete# peso(8.5) prioridad(0)
+	47 #Paquete# peso(8.5) prioridad(0)
+	48 #Paquete# peso(8.5) prioridad(0)
+	49 #Paquete# peso(8.5) prioridad(0)
+	50 #Paquete# peso(8.5) prioridad(0)
+	51 #Paquete# peso(8.5) prioridad(0)
+	52 #Paquete# peso(8.5) prioridad(0)
+	53 #Paquete# peso(8.5) prioridad(0)
+	54 #Paquete# peso(8.5) prioridad(0)
+	55 #Paquete# peso(8.5) prioridad(0)
+	56 #Paquete# peso(8.5) prioridad(0)
+#Oferta 1 con peso 1.5/5.0, con dias de entrega 1 y con precio: 4.28:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+	13 #Paquete# peso(8.5) prioridad(0)
+	14 #Paquete# peso(8.5) prioridad(0)
+	15 #Paquete# peso(8.5) prioridad(0)
+	16 #Paquete# peso(8.5) prioridad(0)
+	17 #Paquete# peso(8.5) prioridad(0)
+	18 #Paquete# peso(8.5) prioridad(0)
+	19 #Paquete# peso(8.5) prioridad(0)
+	20 #Paquete# peso(8.5) prioridad(0)
+	21 #Paquete# peso(8.5) prioridad(0)
+	22 #Paquete# peso(8.5) prioridad(0)
+	23 #Paquete# peso(8.5) prioridad(0)
+	24 #Paquete# peso(8.5) prioridad(0)
+	25 #Paquete# peso(8.5) prioridad(0)
+	26 #Paquete# peso(8.5) prioridad(0)
+#Oferta 2 con peso 8.0/25.0, con dias de entrega 1 y con precio: 3.82:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+	2 #Paquete# peso(8.5) prioridad(0)
+	3 #Paquete# peso(8.5) prioridad(0)
+	4 #Paquete# peso(8.5) prioridad(0)
+	5 #Paquete# peso(8.5) prioridad(0)
+	6 #Paquete# peso(8.5) prioridad(0)
+	7 #Paquete# peso(8.5) prioridad(0)
+	8 #Paquete# peso(8.5) prioridad(0)
+	9 #Paquete# peso(8.5) prioridad(0)
+	10 #Paquete# peso(8.5) prioridad(0)
+	11 #Paquete# peso(8.5) prioridad(0)
+	12 #Paquete# peso(8.5) prioridad(0)
+#Oferta 3 con peso 84.5/40.0, con dias de entrega 1 y con precio: 3.3:
+	0 #Paquete# peso(8.5) prioridad(0)
+#Oferta 4 con peso 22.0/30.0, con dias de entrega 1 y con precio: 3.68:
+	0 #Paquete# peso(8.5) prioridad(0)
+	1 #Paquete# peso(8.5) prioridad(0)
+#Oferta 5 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.85:
+#Oferta 6 con peso 0.0/25.0, con dias de entrega 2 y con precio: 2.21:
+#Oferta 7 con peso 0.0/40.0, con dias de entrega 2 y con precio: 2.06:
+#Oferta 8 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.02:
+#Oferta 9 con peso 0.0/20.0, con dias de entrega 2 y con precio: 2.68:
+#Oferta 10 con peso 0.0/5.0, con dias de entrega 2 y con precio: 2.7:
+#Oferta 11 con peso 0.0/20.0, con dias de entrega 2 y con precio: 2.35:
+#Oferta 12 con peso 0.0/35.0, con dias de entrega 2 y con precio: 2.66:
+#Oferta 13 con peso 0.0/45.0, con dias de entrega 3 y con precio: 1.75:
+#Oferta 14 con peso 0.0/25.0, con dias de entrega 3 y con precio: 1.55:
+#Oferta 15 con peso 0.0/25.0, con dias de entrega 3 y con precio: 2.12:
+#Oferta 16 con peso 0.0/30.0, con dias de entrega 3 y con precio: 1.54:
+#Oferta 17 con peso 0.0/30.0, con dias de entrega 4 y con precio: 0.81:
+#Oferta 18 con peso 0.0/40.0, con dias de entrega 4 y con precio: 1.11:
+#Oferta 19 con peso 0.0/5.0, con dias de entrega 4 y con precio: 1.3:
+#Oferta 20 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.48:
+#Oferta 21 con peso 0.0/25.0, con dias de entrega 5 y con precio: 0.35:
+#Oferta 22 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.25:
+#Oferta 23 con peso 0.0/30.0, con dias de entrega 5 y con precio: 0.78:

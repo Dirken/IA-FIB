@@ -398,7 +398,7 @@ public class Estado implements Cloneable {
     public String toString() {
         
         String s = "";
-        s += "#Ofertas Totales: " + offers.size() + " || Felicidad total: " + happiness + " || Precio Total: " + price + "";
+        s += "#Ofertas Totales: " + offers.size() + " || Felicidad total: " + happiness + " || Precio Total: " + price + "\n";
         for (int i = 0; i < availableWeight.size(); ++i) {
             s += "#Oferta " + i + " con peso " + availableWeight.get(i) + "/" + getMaxWeight(i) + ", con dias de entrega " + getOfferPriority(i) +  " y con precio: " + getOfferPrice(i) + ":\n";
             ArrayList<Integer> selectedPackages = selectedServices.get(i);
