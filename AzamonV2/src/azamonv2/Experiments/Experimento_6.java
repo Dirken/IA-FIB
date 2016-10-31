@@ -56,9 +56,9 @@ public class Experimento_6 {
                 SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
                 Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
                 long endTime = System.currentTimeMillis();
-                System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
+                System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
                 bw.write("Hill Climbing"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tPonderación: " +Main.ponderacion+ 
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
@@ -73,7 +73,7 @@ public class Experimento_6 {
         bw.close();
         
         final long endTimeProgram = System.currentTimeMillis();
-        System.out.println("total time: "+ (endTimeProgram - startTimeProgram)/1000.0 + " seconds");
+        System.out.println("total time: "+ (endTimeProgram - startTimeProgram) + " miliseconds");
     }
 }
 

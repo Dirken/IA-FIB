@@ -77,8 +77,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -92,8 +92,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -111,8 +111,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingHappiness, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -126,8 +126,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(HillClimbingHappiness, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -145,8 +145,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCostHappiness, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -160,8 +160,8 @@ public class Main {
             SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -180,7 +180,7 @@ public class Main {
         bw.close();
         
         final long endTimeProgram = System.currentTimeMillis();
-        System.out.println("total time: "+ (endTimeProgram - startTimeProgram)/1000.0 + " seconds");
+        System.out.println("total time: "+ (endTimeProgram - startTimeProgram) + " miliseconds");
     }
 }
 

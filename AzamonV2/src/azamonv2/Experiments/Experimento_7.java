@@ -80,8 +80,8 @@ public class Experimento_7 {
             long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -95,8 +95,8 @@ public class Experimento_7 {
             final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -114,8 +114,8 @@ public class Experimento_7 {
             final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -129,8 +129,8 @@ public class Experimento_7 {
             final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -148,8 +148,8 @@ public class Experimento_7 {
             final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -163,8 +163,8 @@ public class Experimento_7 {
             final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
@@ -185,7 +185,7 @@ public class Experimento_7 {
         bw.close();
         
         final long endTimeProgram = System.currentTimeMillis();
-        System.out.println("total time: "+ (endTimeProgram - startTimeProgram)/1000.0 + " seconds");
+        System.out.println("total time: "+ (endTimeProgram - startTimeProgram) + " miliseconds");
     }
 }
 

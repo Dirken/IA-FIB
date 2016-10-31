@@ -56,9 +56,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -77,9 +77,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -98,9 +98,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -119,9 +119,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -140,9 +140,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -161,9 +161,9 @@ public class Experimento_3 {
             SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
+            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
             bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
-                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\t"+ (endTime - startTime) + " miliseconds"+
                     "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
                     "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
@@ -175,7 +175,7 @@ public class Experimento_3 {
         bw.close();
         
         final long endTimeProgram = System.currentTimeMillis();
-        System.out.println("total time: "+ (endTimeProgram - startTimeProgram)/1000.0 + " seconds");
+        System.out.println("total time: "+ (endTimeProgram - startTimeProgram) + " miliseconds");
     }
 }
 
