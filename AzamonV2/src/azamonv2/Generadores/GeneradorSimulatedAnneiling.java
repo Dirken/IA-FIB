@@ -64,7 +64,12 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                     int packageIndex1 = parent.getPackage(offerIndex1, position1);
                     if(parent.validMovement(packageIndex1, offerIndex2)) {
                         parent.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);   
-                        successors.add(0, new Successor(action, parent));
+                        Estado result = new Estado(
+                                    parent.price, 
+                                    parent.happiness,
+                                    (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
+                                  , (ArrayList<Double>) parent.availableWeight.clone());
+                        successors.add(0, new Successor(action, result));
                         parent.moveBackPackage(packageIndex1, offerIndex1, offerIndex2, position1);
                         found = true;
                     }
@@ -77,7 +82,12 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                         int packageIndex2 = parent.getPackage(offerIndex2, position2);
                         if(parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
                             parent.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
-                            successors.add(0, new Successor(action, parent));
+                            Estado result = new Estado(
+                                    parent.price, 
+                                    parent.happiness,
+                                    (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
+                                  , (ArrayList<Double>) parent.availableWeight.clone());
+                            successors.add(0, new Successor(action, result));
                             parent.swapBackPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
                             found = true;
                         }

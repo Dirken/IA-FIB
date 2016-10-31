@@ -65,9 +65,16 @@ public class GeneradorHillClimbing implements SuccessorFunction{
                        for (int position2 = 0; position2 < parent.selectedServices.get(offerIndex2).size(); ++position2) {
                             int packageIndex2 = parent.getPackage(offerIndex2, position2);
                             if (parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
-                                System.out.println(parent.selectedServices);
+                                
                                 parent.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
-                                successors.add(0, new Successor(action, parent));
+                                
+                                Estado result = new Estado(
+                                    parent.price, 
+                                    parent.happiness,
+                                    (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
+                                  , (ArrayList<Double>) parent.availableWeight.clone());
+                                successors.add(0, new Successor(action, result));
+                                
                                 parent.swapBackPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
                             }
                         }
@@ -84,14 +91,13 @@ public class GeneradorHillClimbing implements SuccessorFunction{
                    if (offerIndex1 != offerIndex2) {
                        if (parent.validMovement(packageIndex1, offerIndex2)) {
                            
-//                            System.out.println(parent.selectedServices);
-                            //print(packageIndex1 + " " + offerIndex1 + " " + offerIndex2 + " " + position1);
-                            //print(newState.selectedServices+"");
                             parent.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);
-//                            System.out.println(parent.selectedServices);
-//                            System.out.println(parent.price);
-////                            System.out.println("--------------------------");
-                            successors.add(0, new Successor(action, parent));
+                            Estado result = new Estado(
+                                    parent.price, 
+                                    parent.happiness,
+                                    (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
+                                  , (ArrayList<Double>) parent.availableWeight.clone());
+                            successors.add(0, new Successor(action, result));
                             parent.moveBackPackage(packageIndex1, offerIndex1, offerIndex2, position1);
                         }
                    }
@@ -99,7 +105,9 @@ public class GeneradorHillClimbing implements SuccessorFunction{
            }
        }
         return successors; 
-    }  
+    }
+    
+    
     
     private void print(String s) {
         System.out.println(s);

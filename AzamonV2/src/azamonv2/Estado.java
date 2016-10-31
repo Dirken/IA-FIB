@@ -116,6 +116,15 @@ public class Estado implements Cloneable {
         }   
     }
 
+    public Estado(double price, int happiness, ArrayList<ArrayList<Integer>> selectedServices, ArrayList<Double> availableWeight) {
+        this.price = price;
+        this.happiness = happiness;
+        this.selectedServices = selectedServices;
+        this.availableWeight = availableWeight;
+    }
+    
+    
+
     private void fillArrays() {
         
         int packageIndex = 0;
