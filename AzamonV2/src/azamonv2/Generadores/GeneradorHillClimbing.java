@@ -60,26 +60,23 @@ public class GeneradorHillClimbing implements SuccessorFunction{
         for (int offerIndex1 = 0; offerIndex1 < parent.selectedServices.size(); ++offerIndex1) {
            for (int position1 = 0; position1 < parent.selectedServices.get(offerIndex1).size(); ++position1) {
                int packageIndex1 = parent.getPackage(offerIndex1, position1);
-               for (int offerIndex2 = 0; offerIndex2 < parent.selectedServices.size(); ++offerIndex2) {
-                   if (offerIndex1 != offerIndex2) {
-                       for (int position2 = 0; position2 < parent.selectedServices.get(offerIndex2).size(); ++position2) {
-                            int packageIndex2 = parent.getPackage(offerIndex2, position2);
-                            if (parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
-                                
-                                parent.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
-                                
-                                Estado result = new Estado(
-                                    parent.price, 
-                                    parent.happiness,
-                                    (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
-                                  , (ArrayList<Double>) parent.availableWeight.clone());
-                                successors.add(0, new Successor(action, result));
-                                
-                                parent.swapBackPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
-                            }
+               for (int offerIndex2 = offerIndex1+1; offerIndex2 < parent.selectedServices.size(); ++offerIndex2) {
+                    for (int position2 = 0; position2 < parent.selectedServices.get(offerIndex2).size(); ++position2) {
+                        int packageIndex2 = parent.getPackage(offerIndex2, position2);
+                        if (parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
+
+                            parent.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
+
+                            Estado result = new Estado(
+                                parent.price, 
+                                parent.happiness,
+                                (ArrayList<ArrayList<Integer>>) parent.selectedServices.clone()
+                              , (ArrayList<Double>) parent.availableWeight.clone());
+                            successors.add(0, new Successor(action, result));
+
+                            parent.swapBackPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
                         }
-                   }
-                   
+                    }                   
                }
            }
        }

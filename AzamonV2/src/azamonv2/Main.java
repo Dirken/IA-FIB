@@ -59,8 +59,8 @@ public class Main {
             new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCostHappiness());
         
         HillClimbingSearch hillClimbingSearch = new HillClimbingSearch();
-        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch();
-        //SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(4000, 20, 5, 0.001); //Semilla?
+        //SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch();
+        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(100, 20, 5, 0.001); //Semilla?
         
         bw.write("ESTADO INICIAL\n"
                 + "Número de ofertas de transporte: " +estadoInicial.getSortedOffers().size()+ 

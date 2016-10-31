@@ -74,7 +74,7 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                         found = true;
                     }
                 }
-                else { //swap
+                else { //swap 
                     if (arePackageInside2) {
                         int position1 = random.nextInt(parent.sSpackagesSize(offerIndex1));
                         int position2 = random.nextInt(parent.sSpackagesSize(offerIndex2));

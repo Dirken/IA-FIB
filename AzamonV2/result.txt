@@ -2,26 +2,26 @@ ESTADO INICIAL
 Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE
- ☆Simulated Annealing (2.676 segundos)
-Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1003.995
- ★Hill Climbing (0.14 segundos)
+ ☆Simulated Annealing (0.237 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1013.3049999999998
+ ★Hill Climbing (0.434 segundos)
 Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1005.6549999999999
 
 HEURISTICO FELICIDAD
- ☆Simulated Annealing (1.383 segundos)
-Número de ofertas de transporte: 24 || Felicidad: 121 || Precio: 1037.5349999999996
- ★Hill Climbing (0.021 segundos)
+ ☆Simulated Annealing (0.05 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 120 || Precio: 1028.8549999999998
+ ★Hill Climbing (0.068 segundos)
 Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE-FELICIDAD
- ☆Simulated Annealing (0.953 segundos)
-Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1007.68
- ★Hill Climbing (0.074 segundos)
+ ☆Simulated Annealing (0.07 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 119 || Precio: 1021.2349999999999
+ ★Hill Climbing (0.07 segundos)
 Número de ofertas de transporte: 24 || Felicidad: 117 || Precio: 1008.7549999999999
 
 
 RESULTADO SIMULATED ANNEALING COSTE
-#Ofertas Totales: 24 || Felicidad total: 116 || Precio Total: 1003.995
+#Ofertas Totales: 24 || Felicidad total: 116 || Precio Total: 1013.3049999999998
 #Oferta 0 con peso 15.0/15.0, con dias de entrega 1 y con precio: 3.38:
 	0 #Paquete# peso(1.5) prioridad(0)
 	1 #Paquete# peso(0.5) prioridad(0)
@@ -51,7 +51,7 @@ RESULTADO SIMULATED ANNEALING COSTE
 	6 #Paquete# peso(1.0) prioridad(1)
 	7 #Paquete# peso(3.5) prioridad(1)
 	8 #Paquete# peso(2.5) prioridad(1)
-#Oferta 4 con peso 20.5/30.0, con dias de entrega 1 y con precio: 3.68:
+#Oferta 4 con peso 30.0/30.0, con dias de entrega 1 y con precio: 3.68:
 	0 #Paquete# peso(9.5) prioridad(1)
 	1 #Paquete# peso(3.5) prioridad(1)
 	2 #Paquete# peso(2.5) prioridad(1)
@@ -117,7 +117,7 @@ RESULTADO SIMULATED ANNEALING COSTE
 	7 #Paquete# peso(2.5) prioridad(2)
 	8 #Paquete# peso(10.0) prioridad(2)
 	9 #Paquete# peso(1.5) prioridad(2)
-#Oferta 14 con peso 34.5/25.0, con dias de entrega 3 y con precio: 1.55:
+#Oferta 14 con peso 16.0/25.0, con dias de entrega 3 y con precio: 1.55:
 	0 #Paquete# peso(5.5) prioridad(2)
 	1 #Paquete# peso(3.0) prioridad(2)
 	2 #Paquete# peso(3.0) prioridad(2)
@@ -143,7 +143,7 @@ RESULTADO SIMULATED ANNEALING COSTE
 #Oferta 18 con peso 0.0/40.0, con dias de entrega 4 y con precio: 1.11:
 #Oferta 19 con peso 0.0/5.0, con dias de entrega 4 y con precio: 1.3:
 #Oferta 20 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.48:
-#Oferta 21 con peso 0.0/25.0, con dias de entrega 5 y con precio: 0.35:
+#Oferta 21 con peso 9.0/25.0, con dias de entrega 5 y con precio: 0.35:
 #Oferta 22 con peso 0.0/15.0, con dias de entrega 5 y con precio: 0.25:
 #Oferta 23 con peso 0.0/30.0, con dias de entrega 5 y con precio: 0.78:
 
@@ -277,7 +277,7 @@ RESULTADO HILL CLIMBING COSTE
 
 
 RESULTADO SIMULATED ANNEALING FELICIDAD
-#Ofertas Totales: 24 || Felicidad total: 121 || Precio Total: 1037.5349999999996
+#Ofertas Totales: 24 || Felicidad total: 120 || Precio Total: 1028.8549999999998
 #Oferta 0 con peso 15.0/15.0, con dias de entrega 1 y con precio: 3.38:
 	0 #Paquete# peso(1.5) prioridad(0)
 	1 #Paquete# peso(0.5) prioridad(0)
@@ -297,7 +297,7 @@ RESULTADO SIMULATED ANNEALING FELICIDAD
 	3 #Paquete# peso(0.5) prioridad(0)
 	4 #Paquete# peso(0.5) prioridad(0)
 	5 #Paquete# peso(0.5) prioridad(1)
-#Oferta 3 con peso 47.0/40.0, con dias de entrega 1 y con precio: 3.3:
+#Oferta 3 con peso 40.0/40.0, con dias de entrega 1 y con precio: 3.3:
 	0 #Paquete# peso(9.5) prioridad(0)
 	1 #Paquete# peso(4.0) prioridad(0)
 	2 #Paquete# peso(2.0) prioridad(0)
@@ -327,7 +327,7 @@ RESULTADO SIMULATED ANNEALING FELICIDAD
 	4 #Paquete# peso(1.5) prioridad(1)
 	5 #Paquete# peso(0.5) prioridad(1)
 	6 #Paquete# peso(0.5) prioridad(1)
-#Oferta 7 con peso 40.0/40.0, con dias de entrega 2 y con precio: 2.06:
+#Oferta 7 con peso 47.0/40.0, con dias de entrega 2 y con precio: 2.06:
 	0 #Paquete# peso(8.0) prioridad(1)
 	1 #Paquete# peso(4.5) prioridad(1)
 	2 #Paquete# peso(5.5) prioridad(1)
@@ -533,7 +533,7 @@ RESULTADO HILL CLIMBING FELICIDAD
 
 
 RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD
-#Ofertas Totales: 24 || Felicidad total: 118 || Precio Total: 1007.68
+#Ofertas Totales: 24 || Felicidad total: 119 || Precio Total: 1021.2349999999999
 #Oferta 0 con peso 15.0/15.0, con dias de entrega 1 y con precio: 3.38:
 	0 #Paquete# peso(1.5) prioridad(0)
 	1 #Paquete# peso(0.5) prioridad(0)
@@ -563,7 +563,7 @@ RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD
 	6 #Paquete# peso(1.0) prioridad(1)
 	7 #Paquete# peso(3.5) prioridad(1)
 	8 #Paquete# peso(2.5) prioridad(1)
-#Oferta 4 con peso 22.5/30.0, con dias de entrega 1 y con precio: 3.68:
+#Oferta 4 con peso 30.0/30.0, con dias de entrega 1 y con precio: 3.68:
 	0 #Paquete# peso(9.5) prioridad(1)
 	1 #Paquete# peso(3.5) prioridad(1)
 	2 #Paquete# peso(2.5) prioridad(1)
@@ -583,7 +583,7 @@ RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD
 	4 #Paquete# peso(1.5) prioridad(1)
 	5 #Paquete# peso(0.5) prioridad(1)
 	6 #Paquete# peso(0.5) prioridad(1)
-#Oferta 7 con peso 40.0/40.0, con dias de entrega 2 y con precio: 2.06:
+#Oferta 7 con peso 42.0/40.0, con dias de entrega 2 y con precio: 2.06:
 	0 #Paquete# peso(8.0) prioridad(1)
 	1 #Paquete# peso(4.5) prioridad(1)
 	2 #Paquete# peso(5.5) prioridad(1)
@@ -635,7 +635,7 @@ RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD
 	2 #Paquete# peso(3.0) prioridad(2)
 	3 #Paquete# peso(9.0) prioridad(2)
 	4 #Paquete# peso(4.5) prioridad(2)
-#Oferta 15 con peso 23.5/25.0, con dias de entrega 3 y con precio: 2.12:
+#Oferta 15 con peso 21.5/25.0, con dias de entrega 3 y con precio: 2.12:
 	0 #Paquete# peso(2.0) prioridad(2)
 	1 #Paquete# peso(10.0) prioridad(2)
 	2 #Paquete# peso(1.5) prioridad(2)
@@ -643,7 +643,7 @@ RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD
 	4 #Paquete# peso(2.0) prioridad(2)
 	5 #Paquete# peso(1.5) prioridad(2)
 	6 #Paquete# peso(2.0) prioridad(2)
-#Oferta 16 con peso 33.5/30.0, con dias de entrega 3 y con precio: 1.54:
+#Oferta 16 con peso 26.0/30.0, con dias de entrega 3 y con precio: 1.54:
 	0 #Paquete# peso(9.5) prioridad(2)
 	1 #Paquete# peso(2.5) prioridad(2)
 	2 #Paquete# peso(7.5) prioridad(2)
