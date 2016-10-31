@@ -27,8 +27,7 @@ import java.util.Random;
 
 
 public class GeneradorSimulatedAnneiling implements SuccessorFunction{
-
-    Estado parent;
+    
     Random random;
     
     public GeneradorSimulatedAnneiling(int seed) {
@@ -38,7 +37,14 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
     @Override
     public List getSuccessors(Object state) {
         //data structures needed in the function:
-        parent = (Estado)state; //?????
+        Estado oldState = (Estado)state; //?????
+        Estado parent;
+        parent = new Estado();
+        parent.selectedServices = (ArrayList<ArrayList<Integer>>)oldState.selectedServices.clone();
+        parent.availableWeight = ( ArrayList<Double>) oldState.getAvailableWeight().clone();
+        parent.happiness = oldState.happiness;
+        parent.price = oldState.price;
+        
 
         LinkedList<Successor> successors = new LinkedList<>();
         String action = "";
@@ -57,15 +63,9 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                     int position1 = random.nextInt(parent.sSpackagesSize(offerIndex1));
                     int packageIndex1 = parent.getPackage(offerIndex1, position1);
                     if(parent.validMovement(packageIndex1, offerIndex2)) {
-                        
-                        Estado newState = new Estado();
-                        newState.selectedServices = (ArrayList<ArrayList<Integer>>)parent.selectedServices.clone();
-                        newState.availableWeight = ( ArrayList<Double>) parent.getAvailableWeight();
-                        newState.happiness = parent.happiness;
-                        newState.price = parent.price;
-                        newState.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);
-
-                        successors.add(0, new Successor(action, newState));
+                        parent.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);   
+                        successors.add(0, new Successor(action, parent));
+                        parent.moveBackPackage(packageIndex1, offerIndex1, offerIndex2, position1);
                         found = true;
                     }
                 }
@@ -76,14 +76,9 @@ public class GeneradorSimulatedAnneiling implements SuccessorFunction{
                         int packageIndex1 = parent.getPackage(offerIndex1, position1);
                         int packageIndex2 = parent.getPackage(offerIndex2, position2);
                         if(parent.validSwap(packageIndex1, offerIndex1, packageIndex2, offerIndex2)) {
-                            Estado newState = new Estado();
-                            newState.selectedServices = (ArrayList<ArrayList<Integer>>)parent.selectedServices.clone();
-                            newState.availableWeight = ( ArrayList<Double>) parent.getAvailableWeight();
-                            newState.happiness = parent.happiness;
-                            newState.price = parent.price;
-                            newState.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
-
-                            successors.add(0, new Successor(action, newState));
+                            parent.swapPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
+                            successors.add(0, new Successor(action, parent));
+                            parent.swapBackPackage(packageIndex1, offerIndex1, packageIndex2, offerIndex2, position1, position2);
                             found = true;
                         }
                     }
