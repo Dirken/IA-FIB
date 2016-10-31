@@ -30,31 +30,13 @@ public class GeneradorHillClimbing implements SuccessorFunction{
         //data structures needed in the function:
         Estado oldState = (Estado)state; //?????
         Estado parent;
-        parent = new Estado();
+        parent = new Estado(); 
         parent.selectedServices = (ArrayList<ArrayList<Integer>>)oldState.selectedServices.clone();
         parent.availableWeight = ( ArrayList<Double>) oldState.getAvailableWeight().clone();
         parent.happiness = oldState.happiness;
         parent.price = oldState.price;
         
         
-//        System.out.println("**********");
-//        System.out.println("oldState");
-//        System.out.println(oldState.selectedServices);
-//        System.out.println("parent");
-//        System.out.println(parent.selectedServices);
-//        System.out.println("_______________________");
-//        ArrayList<Integer> abc = new ArrayList<>();
-//        abc.add(1234);
-//        parent.selectedServices.set(0, abc);
-//        System.out.println("oldState");
-//        System.out.println(oldState.selectedServices);
-//        System.out.println("parent");
-//        System.out.println(parent.selectedServices);
-//        System.out.println(oldState);
-//
-//        print(parent.selectedServices.size()+"");
-//        print(parent.availableWeight+"");
-//        System.out.println(parent);
         LinkedList<Successor> successors = new LinkedList<>();
         String action = "";
         for (int offerIndex1 = 0; offerIndex1 < parent.selectedServices.size(); ++offerIndex1) {
@@ -80,14 +62,13 @@ public class GeneradorHillClimbing implements SuccessorFunction{
                }
            }
        }
-       print("ENTER");
+       
        for (int offerIndex1 = 0; offerIndex1 < parent.selectedServices.size(); ++offerIndex1) {
            for (int position1 = 0; position1 < parent.selectedServices.get(offerIndex1).size(); ++position1) {
                int packageIndex1 = parent.getPackage(offerIndex1, position1);
                for (int offerIndex2 = 0; offerIndex2 < parent.selectedServices.size(); ++offerIndex2) {
                    if (offerIndex1 != offerIndex2) {
                        if (parent.validMovement(packageIndex1, offerIndex2)) {
-                           
                             parent.movePackage(packageIndex1, offerIndex1, offerIndex2, position1);
                             Estado result = new Estado(
                                     parent.price, 
