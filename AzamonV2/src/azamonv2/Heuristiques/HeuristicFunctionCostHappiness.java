@@ -1,6 +1,6 @@
 package azamonv2.Heuristiques;
 
-import azamonv2.*;
+import azamonv2.Estado;
 import aima.search.framework.HeuristicFunction;
 
 public class HeuristicFunctionCostHappiness implements HeuristicFunction{
