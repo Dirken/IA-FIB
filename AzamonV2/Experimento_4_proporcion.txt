@@ -1,0 +1,17 @@
+EXPERIMENTO 4: Estudiar como evoluciona el tiempo de ejecución para hallar la solución en función la proporción de peso transportable.
+
+
+HEURISTICO COSTE
+ ★Hill Climbing (0.367 segundos, paquetes: 100, proporción: 1.2)
+ ★Hill Climbing (0.256 segundos, paquetes: 100, proporción: 1.4)
+ ★Hill Climbing (0.298 segundos, paquetes: 100, proporción: 1.6)
+ ★Hill Climbing (0.314 segundos, paquetes: 100, proporción: 1.8)
+ ★Hill Climbing (0.547 segundos, paquetes: 100, proporción: 2.0)
+ ★Hill Climbing (0.429 segundos, paquetes: 100, proporción: 2.2)
+ ★Hill Climbing (0.402 segundos, paquetes: 100, proporción: 2.4)
+ ★Hill Climbing (0.416 segundos, paquetes: 100, proporción: 2.6)
+ ★Hill Climbing (0.44 segundos, paquetes: 100, proporción: 2.8)
+ ★Hill Climbing (0.447 segundos, paquetes: 100, proporción: 3.0)
+
+
+RESULTADO: .

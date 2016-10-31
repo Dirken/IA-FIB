@@ -1,4 +1,4 @@
-EXPERIMENTO 1: Determinar qué conjunto de operadores da mejores resultados.
+EXPERIMENTO 2: Determinar qué estrategia de generación de la solución inicial da mejores resultados.
 
 
 ESTADO INICIAL
@@ -9,7 +9,7 @@ HEURISTICO COSTE
 Número de ofertas de transporte: 24 || Felicidad: 16 || Precio: 120.01000000000002
 
 
-RESULTADO: Necesitariamos tener implementados mas operadores, aunque podemos decir perfectamente que nos quedamos move como operador simple y swicht ya qu enos permite mover paquetes de ofertas que ya tienen cupo de peso o que directamente no cabrían con un move normal.
+RESULTADO: Esto no se contestarlo. ¿Por que la estrategia de generación de la solución inicial ha sido la que tenemos actualmente? ¿Es muy rápida y sencilla? ¿Nos da ventajas respecto a otras a la hora de empezar a calcular? ¿Una convinación de las dos? o por el contrario, ¿Otras nos penalizarían más por tiempo o a la hora de colocar el problema de cierta manera?.
 
 
 RESULTADO HILL CLIMBING COSTE

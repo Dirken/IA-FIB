@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Experimento_1 {
+public class Experimento_2 {
     
     static final int semilla = 1234; 
     static int numeroPaquetes = 100;
@@ -25,12 +25,12 @@ public class Experimento_1 {
         
         long startTimeProgram = System.currentTimeMillis();
         
-        String ruta = "Experimento_1.txt";
+        String ruta = "Experimento_2.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
         
-        bw.write("EXPERIMENTO 1: Determinar qué conjunto de operadores da mejores resultados.\n\n\n");
+        bw.write("EXPERIMENTO 2: Determinar qué estrategia de generación de la solución inicial da mejores resultados.\n\n\n");
         
         String  EstadoHillClimbingCost = null;
         
@@ -71,9 +71,9 @@ public class Experimento_1 {
             EstadoHillClimbingCost = "RESULTADO HILL CLIMBING COSTE\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
-        }        
-          
-        bw.write("\n\nRESULTADO: Necesitariamos tener implementados mas operadores, aunque podemos decir perfectamente que nos quedamos move como operador simple y swicht ya qu enos permite mover paquetes de ofertas que ya tienen cupo de peso o que directamente no cabrían con un move normal.\n");
+        }
+        
+        bw.write("\n\nRESULTADO: Esto no se contestarlo. ¿Por que la estrategia de generación de la solución inicial ha sido la que tenemos actualmente? ¿Es muy rápida y sencilla? ¿Nos da ventajas respecto a otras a la hora de empezar a calcular? ¿Una convinación de las dos? o por el contrario, ¿Otras nos penalizarían más por tiempo o a la hora de colocar el problema de cierta manera?.\n");
         
         bw.write("\n\n"+ EstadoHillClimbingCost);
         

@@ -1,5 +1,6 @@
-package azamonv2;
+package azamonv2.Experiments;
 
+import azamonv2.*;
 import azamonv2.Heuristiques.*;
 import azamonv2.Generadores.*;
 
@@ -14,7 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main {
+public class Experimento_6 {
     
     static final int semilla = 1234; 
     static int numeroPaquetes = 100;
@@ -24,11 +25,14 @@ public class Main {
         
         long startTimeProgram = System.currentTimeMillis();
         
-        String ruta = "result.txt";
+        String ruta = "Experimento_6.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
-        String  EstadoSimulatedAnneilingCost = null, 
+        
+        bw.write("EXPERIMENTO 6: Estimad como varían los costes de transporte y almacenamiento y el tiempo de ejecución para hallar la solución cambiando la ponderación que se da a a la felicidad en la función heurística.\n\n\n");
+        
+                String  EstadoSimulatedAnneilingCost = null, 
                 EstadoSimulatedAnneilingHappiness = null, 
                 EstadoSimulatedAnneilingCostHappiness = null,
                 EstadoHillClimbingCost = null, 
@@ -90,7 +94,7 @@ public class Main {
             long startTime = System.currentTimeMillis();
             SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            long endTime = System.currentTimeMillis();
+            final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
             bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
@@ -168,6 +172,8 @@ public class Main {
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
         }
+        
+        bw.write("\n\nRESULTADO: .\n");
         
         bw.write("\n\n"+ EstadoSimulatedAnneilingCost 
                 +"\n\n"+ EstadoHillClimbingCost  

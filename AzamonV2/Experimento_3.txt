@@ -1,0 +1,32 @@
+EXPERIMENTO 3: Determinar los parámetros que dan mejor resultado para el Simulated Annealing.
+
+
+ESTADO INICIAL
+Número de ofertas de transporte: 24 || Felicidad: 15 || Precio: 844.0300000000002
+
+HEURISTICO COSTE
+ ☆Simulated Annealing () (0.5 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 12 || Precio: 125.74000000000004
+
+HEURISTICO COSTE
+ ☆Simulated Annealing (Iteraciones: 1K | Iteraciones por paso: 10 | Parámetros k, λ: 1 y 0.001) (0.036 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 98 || Precio: 165.58
+
+HEURISTICO COSTE
+ ☆Simulated Annealing (Iteraciones: 10K | Iteraciones por paso: 100 | Parámetros k, λ: 1 y 0.001) (0.333 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 98 || Precio: 164.54000000000016
+
+HEURISTICO COSTE
+ ☆Simulated Annealing (Iteraciones: 100K | Iteraciones por paso: 1000 | Parámetros k, λ: 1 y 0.01) (2.789 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 91 || Precio: 147.24000000000024
+
+HEURISTICO COSTE
+ ☆Simulated Annealing (Iteraciones: 5K | Iteraciones por paso: 10 | Parámetros k, λ: 5 y 0.001) (0.16 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 97 || Precio: 168.1500000000001
+
+HEURISTICO COSTE
+ ☆Simulated Annealing (Iteraciones: 100K | Iteraciones por paso: 100 | Parámetros k, λ: 5 y 0.01) (2.537 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 107 || Precio: 178.61500000000015
+
+
+RESULTADO: Hasta cierto momento, al augmentar el nº de iteraciones el resultado va mejorando, pero a la vez que augmentamos las iteraciones por paso no profundizamos tanto en el espacio de soluciones en altura En las tiradas con muchas iteraciones pero pocas iteraciones por pasos al no profundizar en lo ancho, la calidad de la solución disminuye. Los parámetros de la función de temperatura los fijaremos en 10 y 0.001

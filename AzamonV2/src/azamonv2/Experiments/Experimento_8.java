@@ -1,5 +1,6 @@
-package azamonv2;
+package azamonv2.Experiments;
 
+import azamonv2.*;
 import azamonv2.Heuristiques.*;
 import azamonv2.Generadores.*;
 
@@ -14,7 +15,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main {
+public class Experimento_8 {
     
     static final int semilla = 1234; 
     static int numeroPaquetes = 100;
@@ -24,10 +25,13 @@ public class Main {
         
         long startTimeProgram = System.currentTimeMillis();
         
-        String ruta = "result.txt";
+        String ruta = "Experimento_8.txt";
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
+        
+        bw.write("EXPERIMENTO 8: Hemos asumido un coste de almacenamiento fijo diario de 0,25 euros por kilo. Sin hacer ningún experimento ¿como cambiarían las soluciones si variamos este precio al alza o a la baja?\n\n\n");
+        
         String  EstadoSimulatedAnneilingCost = null, 
                 EstadoSimulatedAnneilingHappiness = null, 
                 EstadoSimulatedAnneilingCostHappiness = null,
@@ -90,7 +94,7 @@ public class Main {
             long startTime = System.currentTimeMillis();
             SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            long endTime = System.currentTimeMillis();
+            final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
             bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
@@ -168,6 +172,8 @@ public class Main {
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
         }
+        
+        bw.write("\n\nRESULTADO: .\n");
         
         bw.write("\n\n"+ EstadoSimulatedAnneilingCost 
                 +"\n\n"+ EstadoHillClimbingCost  

@@ -1,0 +1,17 @@
+EXPERIMENTO 4: Estudiar como evoluciona el tiempo de ejecución para hallar la solución en función del número paquetes.
+
+
+HEURISTICO COSTE
+ ★Hill Climbing (0.359 segundos, paquetes: 100, proporción: 1.2)
+ ★Hill Climbing (1.526 segundos, paquetes: 150, proporción: 1.2)
+ ★Hill Climbing (4.392 segundos, paquetes: 200, proporción: 1.2)
+ ★Hill Climbing (12.1 segundos, paquetes: 250, proporción: 1.2)
+ ★Hill Climbing (25.453 segundos, paquetes: 300, proporción: 1.2)
+ ★Hill Climbing (42.721 segundos, paquetes: 350, proporción: 1.2)
+ ★Hill Climbing (66.642 segundos, paquetes: 400, proporción: 1.2)
+ ★Hill Climbing (136.196 segundos, paquetes: 450, proporción: 1.2)
+ ★Hill Climbing (250.143 segundos, paquetes: 500, proporción: 1.2)
+ ★Hill Climbing (466.287 segundos, paquetes: 550, proporción: 1.2)
+
+
+RESULTADO: .
