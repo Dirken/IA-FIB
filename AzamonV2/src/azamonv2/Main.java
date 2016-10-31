@@ -28,6 +28,8 @@ public class Main {
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
+        String EstadoSimulatedAnneilingCost = null, EstadoSimulatedAnneilingHappiness = null, EstadoSimulatedAnneilingCostHappiness = null,
+                EstadoHillClimbingCost = null, EstadoHillClimbingHappiness = null, EstadoHillClimbingCostHappiness = null;
         
         Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
         Estado.setPackages(paquetes);
@@ -71,11 +73,11 @@ public class Main {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Simulated Annealing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoSimulatedAnneilingCost = "RESULTADO SIMULATED ANNEALING COSTE\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -86,11 +88,11 @@ public class Main {
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoHillClimbingCost = "RESULTADO HILL CLIMBING COSTE\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
         }
@@ -105,11 +107,11 @@ public class Main {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Simulated Annealing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoSimulatedAnneilingHappiness = "RESULTADO SIMULATED ANNEALING FELICIDAD\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -120,11 +122,11 @@ public class Main {
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoHillClimbingHappiness = "RESULTADO HILL CLIMBING FELICIDAD\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
         }
@@ -139,11 +141,11 @@ public class Main {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Simulated Annealing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoSimulatedAnneilingCostHappiness = "RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -154,14 +156,16 @@ public class Main {
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
-            //System.out.println("Hill climbing: felicidad: " + estadoFinal.getHappiness() + ", precio: " + estadoFinal.getPrice());
+            EstadoHillClimbingCostHappiness = "RESULTADO HILL CLIMBING COST-FELICIDAD\n" + estadoFinal.toString();
         } catch(Exception e){
             System.err.println(".........Hill climbing finished with errors.");
         }
+        
+        bw.write("\n\n"+EstadoSimulatedAnneilingCost +"\n\n"+ EstadoSimulatedAnneilingHappiness +"\n\n"+ EstadoSimulatedAnneilingCostHappiness +"\n\n"+ EstadoHillClimbingCost +"\n\n"+ EstadoHillClimbingHappiness +"\n\n"+ EstadoHillClimbingCostHappiness);
         
         bw.close();
         
