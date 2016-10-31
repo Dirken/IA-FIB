@@ -1,0 +1,20 @@
+ESTADO INICIAL
+Número de ofertas de transporte: 24 || Felicidad: 15 || Precio: 844.0300000000002
+
+HEURISTICO COSTE
+ Simulated Annealing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 12 || Precio: 125.74000000000004
+ Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 125 || Precio: 222.52000000000007
+
+HEURISTICO FELICIDAD
+ Simulated Annealing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 198 || Precio: 707.7899999999998
+ Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 201 || Precio: 501.41499999999996
+
+HEURISTICO COSTE-FELICIDAD
+ Simulated Annealing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 197 || Precio: 619.4449999999988
+ Hill Climbing (0.0 segundos)
+Número de ofertas de transporte: 24 || Felicidad: 201 || Precio: 501.41499999999996
