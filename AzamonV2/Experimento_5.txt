@@ -2,16 +2,16 @@ EXPERIMENTO 5: Analizando los resultados del experimento en el que se aumenta la
 
 
 HEURISTICO COSTE
-Hill Climbing	||	0.461 segundos	||	Paquetes: 100	||	Proporción: 1.2	||	Felicidad: 16	||	Número de ofertas: 24	||	Precio: 120.01000000000002
-Hill Climbing	||	0.31 segundos	||	Paquetes: 100	||	Proporción: 1.4	||	Felicidad: 10	||	Número de ofertas: 26	||	Precio: 120.47000000000007
-Hill Climbing	||	0.361 segundos	||	Paquetes: 100	||	Proporción: 1.6	||	Felicidad: 10	||	Número de ofertas: 29	||	Precio: 113.26999999999997
-Hill Climbing	||	0.379 segundos	||	Paquetes: 100	||	Proporción: 1.8	||	Felicidad: 5	||	Número de ofertas: 33	||	Precio: 102.395
-Hill Climbing	||	0.431 segundos	||	Paquetes: 100	||	Proporción: 2.0	||	Felicidad: 7	||	Número de ofertas: 39	||	Precio: 126.22000000000017
-Hill Climbing	||	0.449 segundos	||	Paquetes: 100	||	Proporción: 2.2	||	Felicidad: 4	||	Número de ofertas: 40	||	Precio: 119.26499999999992
-Hill Climbing	||	0.505 segundos	||	Paquetes: 100	||	Proporción: 2.4	||	Felicidad: 2	||	Número de ofertas: 46	||	Precio: 106.31999999999994
-Hill Climbing	||	0.536 segundos	||	Paquetes: 100	||	Proporción: 2.6	||	Felicidad: 6	||	Número de ofertas: 47	||	Precio: 123.41500000000003
-Hill Climbing	||	0.56 segundos	||	Paquetes: 100	||	Proporción: 2.8	||	Felicidad: 6	||	Número de ofertas: 50	||	Precio: 114.44999999999999
-Hill Climbing	||	0.574 segundos	||	Paquetes: 100	||	Proporción: 3.0	||	Felicidad: 6	||	Número de ofertas: 53	||	Precio: 133.57499999999993
+Hill Climbing	||	100 miliseconds	||	Paquetes: 100	||	Proporción: 1.2	||	Felicidad: 116	||	Número de ofertas: 24	||	Precio: 1005.6549999999999
+Hill Climbing	||	32 miliseconds	||	Paquetes: 100	||	Proporción: 1.4	||	Felicidad: 117	||	Número de ofertas: 26	||	Precio: 1010.165
+Hill Climbing	||	34 miliseconds	||	Paquetes: 100	||	Proporción: 1.6	||	Felicidad: 135	||	Número de ofertas: 29	||	Precio: 1061.285
+Hill Climbing	||	38 miliseconds	||	Paquetes: 100	||	Proporción: 1.8	||	Felicidad: 140	||	Número de ofertas: 33	||	Precio: 1067.465
+Hill Climbing	||	41 miliseconds	||	Paquetes: 100	||	Proporción: 2.0	||	Felicidad: 161	||	Número de ofertas: 39	||	Precio: 1123.75
+Hill Climbing	||	39 miliseconds	||	Paquetes: 100	||	Proporción: 2.2	||	Felicidad: 162	||	Número de ofertas: 40	||	Precio: 1125.71
+Hill Climbing	||	49 miliseconds	||	Paquetes: 100	||	Proporción: 2.4	||	Felicidad: 164	||	Número de ofertas: 46	||	Precio: 1130.2099999999998
+Hill Climbing	||	56 miliseconds	||	Paquetes: 100	||	Proporción: 2.6	||	Felicidad: 170	||	Número de ofertas: 47	||	Precio: 1159.14
+Hill Climbing	||	67 miliseconds	||	Paquetes: 100	||	Proporción: 2.8	||	Felicidad: 175	||	Número de ofertas: 50	||	Precio: 1191.16
+Hill Climbing	||	91 miliseconds	||	Paquetes: 100	||	Proporción: 3.0	||	Felicidad: 176	||	Número de ofertas: 53	||	Precio: 1191.2700000000002
 
 
 RESULTADO: El coste se mantiene bastante igual, no varía excesivamente. No tiene sentido aumentar el numero de ofertas de transporte ya que el número de paquetes será el mismo i no ayudará a la solución final.

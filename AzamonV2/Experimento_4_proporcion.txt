@@ -2,16 +2,16 @@ EXPERIMENTO 4: Estudiar como evoluciona el tiempo de ejecución para hallar la s
 
 
 HEURISTICO COSTE
- ★Hill Climbing (0.52 segundos, paquetes: 100, proporción: 1.2)
- ★Hill Climbing (0.321 segundos, paquetes: 100, proporción: 1.4)
- ★Hill Climbing (0.373 segundos, paquetes: 100, proporción: 1.6)
- ★Hill Climbing (0.393 segundos, paquetes: 100, proporción: 1.8)
- ★Hill Climbing (0.462 segundos, paquetes: 100, proporción: 2.0)
- ★Hill Climbing (0.457 segundos, paquetes: 100, proporción: 2.2)
- ★Hill Climbing (0.517 segundos, paquetes: 100, proporción: 2.4)
- ★Hill Climbing (0.583 segundos, paquetes: 100, proporción: 2.6)
- ★Hill Climbing (0.563 segundos, paquetes: 100, proporción: 2.8)
- ★Hill Climbing (0.56 segundos, paquetes: 100, proporción: 3.0)
+Hill Climbing (77 miliseconds, paquetes: 100, proporción: 1.2)
+Hill Climbing (26 miliseconds, paquetes: 100, proporción: 1.4)
+Hill Climbing (33 miliseconds, paquetes: 100, proporción: 1.6)
+Hill Climbing (52 miliseconds, paquetes: 100, proporción: 1.8)
+Hill Climbing (43 miliseconds, paquetes: 100, proporción: 2.0)
+Hill Climbing (39 miliseconds, paquetes: 100, proporción: 2.2)
+Hill Climbing (59 miliseconds, paquetes: 100, proporción: 2.4)
+Hill Climbing (54 miliseconds, paquetes: 100, proporción: 2.6)
+Hill Climbing (60 miliseconds, paquetes: 100, proporción: 2.8)
+Hill Climbing (72 miliseconds, paquetes: 100, proporción: 3.0)
 
 
 RESULTADO: La proporción no augmenta ni disminuye el tiempo puesto que al iterar se hace sobre el volumen de ofertas y paquetes.

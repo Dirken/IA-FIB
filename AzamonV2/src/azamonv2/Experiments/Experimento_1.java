@@ -59,8 +59,8 @@ public class Experimento_1 {
         bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Hill Climbing");
         try{
-            SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
             final long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");

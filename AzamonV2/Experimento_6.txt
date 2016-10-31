@@ -2,16 +2,16 @@ EXPERIMENTO 6: Estimad como varían los costes de transporte y almacenamiento y 
 
 
 HEURISTICO COSTE+FELICIDAD
-Hill Climbing	||	0.482 segundos	||	Ponderación: 0	||	Felicidad: 16	||	Precio: 120.01000000000002
-Hill Climbing	||	2.278 segundos	||	Ponderación: 2	||	Felicidad: 165	||	Precio: 319.8699999999996
-Hill Climbing	||	1.573 segundos	||	Ponderación: 4	||	Felicidad: 163	||	Precio: 316.7249999999995
-Hill Climbing	||	0.982 segundos	||	Ponderación: 6	||	Felicidad: 192	||	Precio: 444.97999999999985
-Hill Climbing	||	1.08 segundos	||	Ponderación: 8	||	Felicidad: 201	||	Precio: 501.41499999999996
-Hill Climbing	||	1.183 segundos	||	Ponderación: 10	||	Felicidad: 201	||	Precio: 501.41499999999996
-Hill Climbing	||	1.171 segundos	||	Ponderación: 12	||	Felicidad: 201	||	Precio: 501.41499999999996
-Hill Climbing	||	1.179 segundos	||	Ponderación: 14	||	Felicidad: 201	||	Precio: 501.41499999999996
-Hill Climbing	||	1.186 segundos	||	Ponderación: 16	||	Felicidad: 201	||	Precio: 501.41499999999996
-Hill Climbing	||	1.092 segundos	||	Ponderación: 18	||	Felicidad: 201	||	Precio: 501.41499999999996
+Hill Climbing	||	88 miliseconds	||	Ponderación: 0	||	Felicidad: 116	||	Precio: 1005.6549999999999
+Hill Climbing	||	21 miliseconds	||	Ponderación: 2	||	Felicidad: 116	||	Precio: 1005.6549999999999
+Hill Climbing	||	24 miliseconds	||	Ponderación: 4	||	Felicidad: 117	||	Precio: 1008.7549999999999
+Hill Climbing	||	25 miliseconds	||	Ponderación: 6	||	Felicidad: 117	||	Precio: 1008.7549999999999
+Hill Climbing	||	20 miliseconds	||	Ponderación: 8	||	Felicidad: 117	||	Precio: 1008.7549999999999
+Hill Climbing	||	20 miliseconds	||	Ponderación: 10	||	Felicidad: 118	||	Precio: 1017.925
+Hill Climbing	||	22 miliseconds	||	Ponderación: 12	||	Felicidad: 118	||	Precio: 1017.925
+Hill Climbing	||	21 miliseconds	||	Ponderación: 14	||	Felicidad: 118	||	Precio: 1017.925
+Hill Climbing	||	24 miliseconds	||	Ponderación: 16	||	Felicidad: 118	||	Precio: 1017.925
+Hill Climbing	||	16 miliseconds	||	Ponderación: 18	||	Felicidad: 118	||	Precio: 1017.925
 
 
 RESULTADO: Con una pobnderación de 0, la heurística se comporta como la heurística por precio, ya que el valor de este no se ve afectado por la felicidad y se busca minimizar el precio. A medida que aumentamos la felicidad, el valor del heurístico va disminuyendo, de tal manera que se acerca al heurístico por felicidad que es un valor totalmente negativo. Podemos observar tambien que a partir de cierto valor, la felicidad supera al precio y se acaba comportando como el heurístico de la felicidad.

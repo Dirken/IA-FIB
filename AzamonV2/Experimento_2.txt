@@ -5,7 +5,7 @@ ESTADO INICIAL
 Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE
-Hill Climbing (0 miliseconds)
+Hill Climbing (93 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1005.6549999999999
 
 

@@ -56,7 +56,7 @@ public class Experimento_4_proporcion {
                 Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
                 final long endTime = System.currentTimeMillis();
                 System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
-                bw.write(" ★Hill Climbing ("+ (endTime - startTime) + " miliseconds, paquetes: "+ numeroPaquetes +", proporción: "+ proporcion +")\n");
+                bw.write("Hill Climbing ("+ (endTime - startTime) + " miliseconds, paquetes: "+ numeroPaquetes +", proporción: "+ proporcion +")\n");
             } catch(Exception e){
                 System.err.println(".........Hill climbing finished with errors.");
             }

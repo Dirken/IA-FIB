@@ -76,8 +76,8 @@ public class Experimento_7 {
         bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
@@ -91,8 +91,8 @@ public class Experimento_7 {
         }
         System.out.print("Starting Hill Climbing");
         try{
+            long startTime = System.currentTimeMillis();
             SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
-            final long startTime = System.currentTimeMillis();
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
@@ -110,8 +110,8 @@ public class Experimento_7 {
         bw.write("\nHEURISTICO FELICIDAD\n");
         System.out.print("Starting Simulated Annealing");
         try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingHappiness, simulatedAnnealingSearch);
             final long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(SimulatedAnneilingHappiness, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
@@ -125,8 +125,8 @@ public class Experimento_7 {
         }
         System.out.print("Starting Hill Climbing");
         try{
-            SearchAgent agent = new SearchAgent(HillClimbingHappiness, hillClimbingSearch);
             final long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(HillClimbingHappiness, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");
@@ -144,8 +144,8 @@ public class Experimento_7 {
         bw.write("\nHEURISTICO COSTE-FELICIDAD\n");
         System.out.print("Starting Simulated Annealing");
         try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCostHappiness, simulatedAnnealingSearch);
             final long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(SimulatedAnneilingCostHappiness, simulatedAnnealingSearch);
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime) + " miliseconds)");
@@ -159,8 +159,8 @@ public class Experimento_7 {
         }
         System.out.print("Starting Hill Climbing");
         try{
-            SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
             final long startTime = System.currentTimeMillis();
+            SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime) + " miliseconds)");

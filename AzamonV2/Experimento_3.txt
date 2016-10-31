@@ -5,12 +5,12 @@ ESTADO INICIAL
 Número de ofertas: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE
-Simulated Annealing	||	836 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
-Simulated Annealing	(Iteraciones: 1K 	|	 Iteraciones por paso: 10	|	Parámetros k, λ: 1 y 0.001)	||	49 miliseconds	||	Felicidad: 116	||	Precio: 1007.9549999999998
-Simulated Annealing	(Iteraciones: 10K 	|	 Iteraciones por paso: 100	|	Parámetros k, λ: 1 y 0.001)	||	497 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
-Simulated Annealing	(Iteraciones: 100K 	|	 Iteraciones por paso: 1000	|	Parámetros k, λ: 1 y 0.01)	||	4404 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
-Simulated Annealing	(Iteraciones: 5K 	|	 Iteraciones por paso: 10	|	Parámetros k, λ: 5 y 0.001)	||	240 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
-Simulated Annealing	(Iteraciones: 100K 	|	 Iteraciones por paso: 100	|	Parámetros k, λ: 5 y 0.01)	||	3968 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
+Simulated Annealing	||	637 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
+Simulated Annealing	(Iteraciones: 1K 	|	 Iteraciones por paso: 10	|	Parámetros k, λ: 1 y 0.001)	||	44 miliseconds	||	Felicidad: 116	||	Precio: 1007.9549999999998
+Simulated Annealing	(Iteraciones: 10K 	|	 Iteraciones por paso: 100	|	Parámetros k, λ: 1 y 0.001)	||	550 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
+Simulated Annealing	(Iteraciones: 100K 	|	 Iteraciones por paso: 1000	|	Parámetros k, λ: 1 y 0.01)	||	3482 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
+Simulated Annealing	(Iteraciones: 5K 	|	 Iteraciones por paso: 10	|	Parámetros k, λ: 5 y 0.001)	||	218 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
+Simulated Annealing	(Iteraciones: 100K 	|	 Iteraciones por paso: 100	|	Parámetros k, λ: 5 y 0.01)	||	3270 miliseconds	||	Felicidad: 116	||	Precio: 1003.995
 
 
 RESULTADO: Hasta cierto momento, al augmentar el nº de iteraciones el resultado va mejorando, pero a la vez que augmentamos las iteraciones por paso no profundizamos tanto en el espacio de soluciones en altura En las tiradas con muchas iteraciones pero pocas iteraciones por pasos al no profundizar en lo ancho, la calidad de la solución disminuye. Los parámetros de la función de temperatura los fijaremos en 10 y 0.001

@@ -2,19 +2,19 @@ ESTADO INICIAL
 Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE
- ☆Simulated Annealing (49 miliseconds)
+ ☆Simulated Annealing (44 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1013.3049999999998
- ★Hill Climbing (103 miliseconds)
+ ★Hill Climbing (94 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 116 || Precio: 1005.6549999999999
 
 HEURISTICO FELICIDAD
- ☆Simulated Annealing (30 miliseconds)
+ ☆Simulated Annealing (20 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 120 || Precio: 1028.8549999999998
- ★Hill Climbing (12 miliseconds)
+ ★Hill Climbing (8 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 118 || Precio: 1021.8549999999999
 
 HEURISTICO COSTE-FELICIDAD
- ☆Simulated Annealing (33 miliseconds)
+ ☆Simulated Annealing (19 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 119 || Precio: 1021.2349999999999
  ★Hill Climbing (14 miliseconds)
 Número de ofertas de transporte: 24 || Felicidad: 117 || Precio: 1008.7549999999999
