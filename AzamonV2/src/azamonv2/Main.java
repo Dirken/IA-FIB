@@ -28,8 +28,12 @@ public class Main {
         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
-        String EstadoSimulatedAnneilingCost = null, EstadoSimulatedAnneilingHappiness = null, EstadoSimulatedAnneilingCostHappiness = null,
-                EstadoHillClimbingCost = null, EstadoHillClimbingHappiness = null, EstadoHillClimbingCostHappiness = null;
+        String  EstadoSimulatedAnneilingCost = null, 
+                EstadoSimulatedAnneilingHappiness = null, 
+                EstadoSimulatedAnneilingCostHappiness = null,
+                EstadoHillClimbingCost = null, 
+                EstadoHillClimbingHappiness = null, 
+                EstadoHillClimbingCostHappiness = null;
         
         Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
         Estado.setPackages(paquetes);
@@ -165,7 +169,12 @@ public class Main {
             System.err.println(".........Hill climbing finished with errors.");
         }
         
-        bw.write("\n\n"+EstadoSimulatedAnneilingCost +"\n\n"+ EstadoSimulatedAnneilingHappiness +"\n\n"+ EstadoSimulatedAnneilingCostHappiness +"\n\n"+ EstadoHillClimbingCost +"\n\n"+ EstadoHillClimbingHappiness +"\n\n"+ EstadoHillClimbingCostHappiness);
+        bw.write("\n\n"+ EstadoSimulatedAnneilingCost 
+                +"\n\n"+ EstadoHillClimbingCost  
+                +"\n\n"+ EstadoSimulatedAnneilingHappiness   
+                +"\n\n"+ EstadoHillClimbingHappiness
+                +"\n\n"+ EstadoSimulatedAnneilingCostHappiness 
+                +"\n\n"+ EstadoHillClimbingCostHappiness);
         
         bw.close();
         
