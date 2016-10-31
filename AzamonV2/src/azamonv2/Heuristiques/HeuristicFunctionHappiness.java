@@ -14,6 +14,5 @@ public class HeuristicFunctionHappiness implements HeuristicFunction{
     @Override
     public double getHeuristicValue(Object state) {
         return (-1)*((Estado)state).getHappiness();
-        //return (-1)*Estado.getHappiness ();
     }
 }
