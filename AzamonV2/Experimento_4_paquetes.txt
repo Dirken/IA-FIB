@@ -2,16 +2,16 @@ EXPERIMENTO 4: Estudiar como evoluciona el tiempo de ejecución para hallar la s
 
 
 HEURISTICO COSTE
- ★Hill Climbing (0.359 segundos, paquetes: 100, proporción: 1.2)
- ★Hill Climbing (1.526 segundos, paquetes: 150, proporción: 1.2)
- ★Hill Climbing (4.392 segundos, paquetes: 200, proporción: 1.2)
- ★Hill Climbing (12.1 segundos, paquetes: 250, proporción: 1.2)
- ★Hill Climbing (25.453 segundos, paquetes: 300, proporción: 1.2)
- ★Hill Climbing (42.721 segundos, paquetes: 350, proporción: 1.2)
- ★Hill Climbing (66.642 segundos, paquetes: 400, proporción: 1.2)
- ★Hill Climbing (136.196 segundos, paquetes: 450, proporción: 1.2)
- ★Hill Climbing (250.143 segundos, paquetes: 500, proporción: 1.2)
- ★Hill Climbing (466.287 segundos, paquetes: 550, proporción: 1.2)
+ ★Hill Climbing (0.513 segundos, paquetes: 100, proporción: 1.2)
+ ★Hill Climbing (2.027 segundos, paquetes: 150, proporción: 1.2)
+ ★Hill Climbing (5.573 segundos, paquetes: 200, proporción: 1.2)
+ ★Hill Climbing (13.976 segundos, paquetes: 250, proporción: 1.2)
+ ★Hill Climbing (30.074 segundos, paquetes: 300, proporción: 1.2)
+ ★Hill Climbing (50.545 segundos, paquetes: 350, proporción: 1.2)
+ ★Hill Climbing (85.358 segundos, paquetes: 400, proporción: 1.2)
+ ★Hill Climbing (144.601 segundos, paquetes: 450, proporción: 1.2)
+ ★Hill Climbing (217.712 segundos, paquetes: 500, proporción: 1.2)
+ ★Hill Climbing (354.454 segundos, paquetes: 550, proporción: 1.2)
 
 
-RESULTADO: .
+RESULTADO: Al augmentar el número de packetes augmentamos considerablemente el tiempo de ejecución ya que siempre iteramos sobre nuestro numero de paquetes y ofertas.

@@ -9,7 +9,6 @@ import IA.Azamon.Transporte;
 import aima.search.framework.Problem;
 import aima.search.framework.SearchAgent;
 import aima.search.informed.HillClimbingSearch;
-import aima.search.informed.SimulatedAnnealingSearch;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -26,161 +25,57 @@ public class Experimento_5 {
         long startTimeProgram = System.currentTimeMillis();
         
         String ruta = "Experimento_5.txt";
-        File archivo = new File(ruta);
+         File archivo = new File(ruta);
         BufferedWriter bw;
         bw = new BufferedWriter(new FileWriter(archivo));
         
-        bw.write("EXPERIMENTO 5: ¿cual es el comportamiento del coste de transporte y almacenamiento? ¿merece la pena ir aumentando el número de ofertas?\n\n\n");
+        bw.write("EXPERIMENTO 5: Analizando los resultados del experimento en el que se aumenta la proporción de las ofertas ¿cual es el comportamiento del coste de transporte y almacenamiento? ¿merece la pena ir aumentando el número de ofertas?\n\n");
         
-        String  EstadoSimulatedAnneilingCost = null, 
-                EstadoSimulatedAnneilingHappiness = null, 
-                EstadoSimulatedAnneilingCostHappiness = null,
-                EstadoHillClimbingCost = null, 
-                EstadoHillClimbingHappiness = null, 
-                EstadoHillClimbingCostHappiness = null;
+        int numeroPaquetes = 100;
+        double proporcion = 1.2;
         
-        Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
-        Estado.setPackages(paquetes);
-        Transporte transporte = new Transporte(paquetes, proporcion , semilla);
-        Estado.setOffers(transporte);
-        Estado estadoInicial = new Estado();
-        
-        GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
-        GeneradorSimulatedAnneiling generadorSA = new GeneradorSimulatedAnneiling(semilla);
-        
-        Problem SimulatedAnneilingCost =            
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCost());
-        Problem SimulatedAnneilingHappiness =       
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionHappiness());
-        Problem SimulatedAnneilingCostHappiness =   
-            new Problem(estadoInicial, generadorSA, state -> true, new HeuristicFunctionCostHappiness());
-        
-        Problem HillClimbingCost = 
-            new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCost());
-        Problem HillClimbingHappiness =
-            new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionHappiness());
-        Problem HillClimbingCostHappiness = 
-            new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCostHappiness());
-        
-        HillClimbingSearch hillClimbingSearch = new HillClimbingSearch();
-        SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch();
-        //SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch(4000, 20, 5, 0.001); //Semilla?
-        
-        bw.write("ESTADO INICIAL\n"
-                + "Número de ofertas de transporte: " +estadoInicial.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoInicial.getHappiness()+ 
-                " || Precio: " +estadoInicial.getPrice()+ "\n");
-        
-        //###########################HEURISTICO COSTE###########################
-        System.out.println("HEURISTICO COSTE:");
         bw.write("\nHEURISTICO COSTE\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCost, simulatedAnnealingSearch);
-            long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingCost = "RESULTADO SIMULATED ANNEALING COSTE\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
-        System.out.print("Starting Hill Climbing");
-        try{
-            SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoHillClimbingCost = "RESULTADO HILL CLIMBING COSTE\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println(".........Hill climbing finished with errors.");
+        
+        for (int i = 0; i<10; i++){
+        
+            Paquetes paquetes = new Paquetes(numeroPaquetes,semilla);
+            Estado.setPackages(paquetes);
+            Transporte transporte = new Transporte(paquetes, proporcion , semilla);
+            Estado.setOffers(transporte);
+            Estado estadoInicial = new Estado();
+
+            GeneradorHillClimbing generadorHC = new GeneradorHillClimbing();
+
+            Problem HillClimbingCost = 
+            new Problem(estadoInicial, generadorHC, state -> true, new HeuristicFunctionCost());
+
+            HillClimbingSearch hillClimbingSearch = new HillClimbingSearch();
+        
+            System.out.print("Starting Hill Climbing");
+            try{
+                long startTime = System.currentTimeMillis();
+                SearchAgent agent = new SearchAgent(HillClimbingCost, hillClimbingSearch);
+                Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
+                final long endTime = System.currentTimeMillis();
+                System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
+                bw.write("Hill Climbing"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tPaquetes: "+numeroPaquetes+
+                    "\t||\tProporción: "+proporcion+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tNúmero de ofertas: " +estadoFinal.getSortedOffers().size()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+"\n");
+            } catch(Exception e){
+                System.err.println(".........Hill climbing finished with errors.");
+            }
+
+            numeroPaquetes = 100;
+            proporcion = Math.round((proporcion + 0.2) * 100.0) / 100.0;;
+            
+        
         }
         
-        //#########################HEURISTICO FELICIDAD#########################
-        System.out.println("\nHEURISTICO FELICIDAD:");
-        bw.write("\nHEURISTICO FELICIDAD\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingHappiness, simulatedAnnealingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingHappiness = "RESULTADO SIMULATED ANNEALING FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
-        System.out.print("Starting Hill Climbing");
-        try{
-            SearchAgent agent = new SearchAgent(HillClimbingHappiness, hillClimbingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoHillClimbingHappiness = "RESULTADO HILL CLIMBING FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println(".........Hill climbing finished with errors.");
-        }
-        
-        //#############################HEURISTICO MIXTO#########################
-        System.out.println("\nHEURISTICO COSTE-FELICIDAD:");
-        bw.write("\nHEURISTICO COSTE-FELICIDAD\n");
-        System.out.print("Starting Simulated Annealing");
-        try{
-            SearchAgent agent = new SearchAgent(SimulatedAnneilingCostHappiness, simulatedAnnealingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoSimulatedAnneilingCostHappiness = "RESULTADO SIMULATED ANNEALING COSTE-FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println("...Simulated Annealing finished with errors.");
-        }
-        System.out.print("Starting Hill Climbing");
-        try{
-            SearchAgent agent = new SearchAgent(HillClimbingCostHappiness, hillClimbingSearch);
-            final long startTime = System.currentTimeMillis();
-            Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
-            final long endTime = System.currentTimeMillis();
-            System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
-            EstadoHillClimbingCostHappiness = "RESULTADO HILL CLIMBING COST-FELICIDAD\n" + estadoFinal.toString();
-        } catch(Exception e){
-            System.err.println(".........Hill climbing finished with errors.");
-        }
-        
-        bw.write("\n\nRESULTADO: .\n");
-        
-        bw.write("\n\n"+ EstadoSimulatedAnneilingCost 
-                +"\n\n"+ EstadoHillClimbingCost  
-                +"\n\n"+ EstadoSimulatedAnneilingHappiness   
-                +"\n\n"+ EstadoHillClimbingHappiness
-                +"\n\n"+ EstadoSimulatedAnneilingCostHappiness 
-                +"\n\n"+ EstadoHillClimbingCostHappiness);
+        bw.write("\n\nRESULTADO: El coste se mantiene bastante igual, no varía excesivamente. No tiene sentido aumentar el numero de ofertas de transporte ya que el número de paquetes será el mismo i no ayudará a la solución final.\n");
         
         bw.close();
         
@@ -188,4 +83,3 @@ public class Experimento_5 {
         System.out.println("total time: "+ (endTimeProgram - startTimeProgram)/1000.0 + " seconds");
     }
 }
-

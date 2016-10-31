@@ -19,6 +19,7 @@ public class Main {
     static final int semilla = 1234; 
     static int numeroPaquetes = 100;
     static double proporcion = 1.2;
+    public static int ponderacion = 5;
     
     public static void main(String[] argv) throws IOException {
         

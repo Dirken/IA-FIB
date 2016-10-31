@@ -45,7 +45,7 @@ public class Experimento_3 {
         SimulatedAnnealingSearch simulatedAnnealingSearch = new SimulatedAnnealingSearch();
         
         bw.write("ESTADO INICIAL\n"
-                + "Número de ofertas de transporte: " +estadoInicial.getSortedOffers().size()+ 
+                + "Número de ofertas: " +estadoInicial.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoInicial.getHappiness()+ 
                 " || Precio: " +estadoInicial.getPrice()+ "\n");
 
@@ -57,10 +57,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing () ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -71,7 +71,6 @@ public class Experimento_3 {
         double  D = 0.001;
         simulatedAnnealingSearch = new SimulatedAnnealingSearch(A, B, C, D);
 
-        bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
             long startTime = System.currentTimeMillis();
@@ -79,10 +78,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing (Iteraciones: "+A/1000+"K | Iteraciones por paso: "+B+" | Parámetros k, λ: "+C+" y "+D+") ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -93,7 +92,6 @@ public class Experimento_3 {
         D = 0.001;
         simulatedAnnealingSearch = new SimulatedAnnealingSearch(A, B, C, D);
         
-        bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
             long startTime = System.currentTimeMillis();
@@ -101,10 +99,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing (Iteraciones: "+A/1000+"K | Iteraciones por paso: "+B+" | Parámetros k, λ: "+C+" y "+D+") ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -115,7 +113,6 @@ public class Experimento_3 {
         D = 0.01;
         simulatedAnnealingSearch = new SimulatedAnnealingSearch(A, B, C, D);
         
-        bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
             long startTime = System.currentTimeMillis();
@@ -123,10 +120,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing (Iteraciones: "+A/1000+"K | Iteraciones por paso: "+B+" | Parámetros k, λ: "+C+" y "+D+") ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -137,7 +134,6 @@ public class Experimento_3 {
         D = 0.001;        
         simulatedAnnealingSearch = new SimulatedAnnealingSearch(A, B, C, D);
 
-        bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
             long startTime = System.currentTimeMillis();
@@ -145,10 +141,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing (Iteraciones: "+A/1000+"K | Iteraciones por paso: "+B+" | Parámetros k, λ: "+C+" y "+D+") ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }
@@ -159,7 +155,6 @@ public class Experimento_3 {
         D = 0.01;
         simulatedAnnealingSearch = new SimulatedAnnealingSearch(A, B, C, D);
 
-        bw.write("\nHEURISTICO COSTE\n");
         System.out.print("Starting Simulated Annealing");
         try{
             long startTime = System.currentTimeMillis();
@@ -167,10 +162,10 @@ public class Experimento_3 {
             Estado estadoFinal = (Estado)simulatedAnnealingSearch.getGoalState();
             long endTime = System.currentTimeMillis();
             System.out.println("...finished Simulated Annealing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ☆Simulated Annealing (Iteraciones: "+A/1000+"K | Iteraciones por paso: "+B+" | Parámetros k, λ: "+C+" y "+D+") ("+ (endTime - startTime)/1000.0 + " segundos)\n"
-                + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
-                " || Felicidad: " +estadoFinal.getHappiness()+ 
-                " || Precio: " +estadoFinal.getPrice()+ "\n");
+            bw.write("Simulated Annealing\t(Iteraciones: "+A/1000+"K \t|\t Iteraciones por paso: "+B+"\t|\tParámetros k, λ: "+C+" y "+D+")"+
+                    "\t||\t"+ (endTime - startTime)/1000.0 + " segundos"+
+                    "\t||\tFelicidad: " +estadoFinal.getHappiness()+ 
+                    "\t||\tPrecio: " +estadoFinal.getPrice()+ "\n");
         } catch(Exception e){
             System.err.println("...Simulated Annealing finished with errors.");
         }

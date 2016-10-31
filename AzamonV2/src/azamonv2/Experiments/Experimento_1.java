@@ -64,7 +64,7 @@ public class Experimento_1 {
             Estado estadoFinal = (Estado)hillClimbingSearch.getGoalState();
             final long endTime = System.currentTimeMillis();
             System.out.println(".........finished Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)");
-            bw.write(" ★Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
+            bw.write("Hill Climbing ("+ (endTime - startTime)/1000.0 + " segundos)\n"
                 + "Número de ofertas de transporte: " +estadoFinal.getSortedOffers().size()+ 
                 " || Felicidad: " +estadoFinal.getHappiness()+ 
                 " || Precio: " +estadoFinal.getPrice()+ "\n");
